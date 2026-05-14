@@ -20,8 +20,8 @@ type Props = {
 export default function ProductSubNav({ active, appStoreHref = "#ios" }: Props) {
   return (
     <header className="bg-background/85 backdrop-blur">
-      <div className="mx-auto flex h-14 w-full max-w-7xl items-center gap-4 px-5 sm:px-8 lg:px-12">
-        <nav aria-label="Breadcrumb" className="shrink-0">
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-start gap-3 px-5 py-3 sm:h-14 sm:flex-row sm:items-center sm:gap-4 sm:px-8 sm:py-0 lg:px-12">
+        <nav aria-label="Breadcrumb" className="min-w-0 shrink-0">
           <ol className="flex items-center gap-2 text-[13.5px] font-medium text-ink-soft">
             <li className="flex items-center">
               <Link
@@ -34,7 +34,7 @@ export default function ProductSubNav({ active, appStoreHref = "#ios" }: Props) 
             </li>
             <li aria-hidden className="text-muted">/</li>
             <li>
-              <Link href="/#products" className="transition-colors hover:text-ink">
+              <Link href="/#suite" className="transition-colors hover:text-ink">
                 Products
               </Link>
             </li>
@@ -45,10 +45,13 @@ export default function ProductSubNav({ active, appStoreHref = "#ios" }: Props) 
           </ol>
         </nav>
 
-        <span aria-hidden className="h-px flex-1 bg-line" />
+        <span aria-hidden className="hidden h-px flex-1 bg-line sm:block" />
 
-        <nav aria-label="Products" className="shrink-0">
-          <ul className="flex items-center gap-1 rounded-full border border-line bg-surface/80 p-1 shadow-[0_1px_0_rgba(15,23,42,0.02)]">
+        <nav
+          aria-label="Products"
+          className="hidden sm:mx-0 sm:flex sm:w-auto sm:shrink-0 sm:justify-center sm:overflow-visible sm:px-0"
+        >
+          <ul className="inline-flex items-center gap-1 rounded-full border border-line bg-surface/80 p-1 shadow-[0_1px_0_rgba(15,23,42,0.02)]">
             {PRODUCTS.map((p) => {
               const isActive = p.name === active;
               return (
@@ -56,7 +59,7 @@ export default function ProductSubNav({ active, appStoreHref = "#ios" }: Props) 
                   <Link
                     href={p.href}
                     aria-current={isActive ? "page" : undefined}
-                    className={`group inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[13px] font-medium transition-colors ${
+                    className={`group inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] font-medium transition-colors ${
                       isActive
                         ? "bg-ink text-white"
                         : "text-ink-soft hover:bg-background hover:text-ink"
@@ -81,9 +84,9 @@ export default function ProductSubNav({ active, appStoreHref = "#ios" }: Props) 
           </ul>
         </nav>
 
-        <span aria-hidden className="h-px flex-1 bg-line" />
+        <span aria-hidden className="hidden h-px flex-1 bg-line sm:block" />
 
-        <div className="shrink-0">
+        <div className="hidden shrink-0 sm:block">
           <a
             href={appStoreHref}
             className="inline-flex items-center gap-1.5 text-[13.5px] font-medium text-brand transition-colors hover:text-[#1f3ce8]"

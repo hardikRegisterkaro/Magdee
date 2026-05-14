@@ -162,7 +162,7 @@ function VOChefCard() {
           pace, and what you actually crave.
         </p>
         <a
-          href="#vochef"
+          href="/vochef"
           className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[13.5px] font-medium text-ink transition-colors hover:bg-white/90"
         >
           Try VOChef on iOS

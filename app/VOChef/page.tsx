@@ -3,6 +3,12 @@ import dynamic from "next/dynamic";
 
 const ProductSubNav = dynamic(() => import("../components/ProductSubNav"));
 const Hero = dynamic(() => import("../components/VOChef/Hero"));
+const PantryScanner = dynamic(() => import("../components/VOChef/PantryScanner"));
+const VoiceListening = dynamic(() => import("../components/VOChef/VoiceListening"));
+const HowItWorks = dynamic(() => import("../components/VOChef/HowItWorks"));
+const Pricing = dynamic(() => import("../components/VOChef/Pricing"));
+const FinalCTA = dynamic(() => import("../components/VOChef/FinalCTA"));
+const FoundersPromise = dynamic(() => import("../components/VOChef/FoundersPromise"));
 const Features = dynamic(() => import("../components/VOChef/Features"));
 
 export const metadata: Metadata = {
@@ -17,6 +23,12 @@ export default function VOChefPage() {
       <ProductSubNav active="VOChef" />
       <Hero />
       <Features />
+      <PantryScanner />
+      <VoiceListening />
+      <HowItWorks />
+      <Pricing />
+      <FinalCTA />
+      <FoundersPromise />
     </>
   );
 }

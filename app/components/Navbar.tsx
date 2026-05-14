@@ -4,7 +4,7 @@ import { useState } from "react";
 import MagDeeLogo from "./MagDeeLogo";
 
 const NAV_LINKS = [
-  { label: "Products", href: "#products" },
+  { label: "Products", href: "#suite" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Vision", href: "#vision" },
   { label: "Roadmap", href: "#roadmap" },

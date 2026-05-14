@@ -50,13 +50,13 @@ export default function VOChefHero() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href="#ios"
-                className="inline-flex items-center justify-center gap-2 bg-ink px-5 py-3 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black"
+                className="inline-flex items-center rounded-lg justify-center gap-2 bg-ink px-5 py-3 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black"
               >
                 <AppleIcon /> Download on iOS
               </a>
               <a
                 href="#demo"
-                className="inline-flex items-center justify-center gap-2 border border-line bg-surface px-5 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-background"
+                className="inline-flex items-center rounded-lg justify-center gap-2 border border-line bg-surface px-5 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-background"
               >
                 <PlayIcon /> Watch 90-sec demo
               </a>

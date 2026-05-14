@@ -7,7 +7,7 @@
   --color-ink-soft: #4b5468;
   --color-muted: #8a92a6;
   --color-line: #e6e8ef;
-  --color-brand: #2a4bff;
+  --color-brand: #1E40AF;
   --color-brand-soft: #6a73ff;
   --color-accent: #ff6a3d;
   --color-warm: #f7e6cf;
@@ -17,6 +17,11 @@
 
 :root {
   color-scheme: light only;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 html,
@@ -46,6 +51,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .marquee-track { animation: none; }
 }
 
