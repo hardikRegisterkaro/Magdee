@@ -1,4 +1,5 @@
 import type { ServicePageData } from "@/app/lib/fetchServicePage";
+import Image from "next/image";
 
 type Props = { data: ServicePageData["heroSection"] };
 
@@ -104,10 +105,13 @@ export default function DynamicHero({ data }: Props) {
 
           {data.phoneMockupImageUrl && (
             <div className="order-1 flex justify-center lg:order-2 lg:justify-end">
-              <img
+              <Image
                 src={data.phoneMockupImageUrl}
                 alt="App screenshot"
-                className="w-full max-w-[340px] lg:max-w-[420px] object-contain drop-shadow-2xl"
+                width={420}
+                height={840}
+                unoptimized
+                className="h-auto w-full max-w-[340px] lg:max-w-[420px] object-contain drop-shadow-2xl"
               />
             </div>
           )}
