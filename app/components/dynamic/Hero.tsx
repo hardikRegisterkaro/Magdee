@@ -33,7 +33,7 @@ export default function DynamicHero({ data }: Props) {
       />
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 items-start gap-10 pb-12 pt-12 sm:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-20 lg:pt-20">
-          <div className="order-2 lg:order-1">
+          <div className="lg:order-1">
             {data.versionTag && (
               <span className="inline-flex items-center gap-2 rounded-full border border-[#bfe6cd] bg-[#e8f7ee] px-3 py-1.5 text-[11.5px] font-medium uppercase tracking-[0.14em] text-[#176c3a]">
                 <span className="relative inline-flex h-1.5 w-1.5">
@@ -104,7 +104,7 @@ export default function DynamicHero({ data }: Props) {
           </div>
 
           {data.phoneMockupImageUrl && (
-            <div className="order-1 flex justify-center lg:order-2 lg:justify-end">
+            <div className="flex justify-center lg:order-2 lg:justify-end">
               <Image
                 src={data.phoneMockupImageUrl}
                 alt="App screenshot"
