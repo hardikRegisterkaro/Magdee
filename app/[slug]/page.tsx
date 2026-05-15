@@ -56,7 +56,7 @@ export default async function ServiceSlugPage({ params }: Props) {
       )}
 
        <FinalCTA />
-//     <FoundersPromise />
+       <FoundersPromise />
     </>
   );
 }
