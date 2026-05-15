@@ -8,7 +8,7 @@ function AccentHeading({ text }: { text: string }) {
     <>
       {parts.map((part, i) =>
         part.startsWith("*") && part.endsWith("*") ? (
-          <em key={i} className="not-italic text-accent">
+          <em key={i} className="italic text-brand">
             {part.slice(1, -1)}
           </em>
         ) : (
@@ -58,49 +58,45 @@ export default function DynamicHero({ data }: Props) {
 
             {data.heading && (
               <h2 className="mt-8 font-display text-[32px] font-semibold leading-[1.05] tracking-[-0.015em] text-ink sm:text-[40px] lg:text-[44px]">
-                {data.heading}
+                <AccentHeading text={data.heading} />
               </h2>
             )}
 
             {data.description && (
-              <p className="mt-5 max-w-[44ch] text-[16px] leading-[1.65] text-ink-soft sm:text-[17px]">
+              <p className="mt-6 max-w-[34rem] text-[16px] leading-[1.6] text-ink-soft sm:text-[17px]">
                 {data.description}
               </p>
             )}
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               {data.ctaPrimaryText && (
                 <a
                   href={data.ctaPrimaryUrl || "#"}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3.5 text-[15px] font-medium text-surface shadow-[0_14px_30px_-14px_rgba(0,0,0,0.5)] transition-colors hover:bg-ink/90"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-3 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black"
                 >
+                  <AppleIcon />
                   {data.ctaPrimaryText}
                 </a>
               )}
               {data.ctaSecondaryText && (
                 <a
                   href={data.ctaSecondaryUrl || "#"}
-                  className="inline-flex items-center gap-2 px-2 py-3.5 text-[15px] font-medium text-ink-soft transition-colors hover:text-ink"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-5 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-background"
                 >
+                  <PlayIcon />
                   {data.ctaSecondaryText}
                 </a>
               )}
             </div>
 
             {(data.ratingScore || data.ratingCount) && (
-              <div className="mt-8 flex items-center gap-2.5">
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <svg key={s} className="h-4 w-4 fill-[#f5a623]" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
+              <div className="mt-7 flex items-center gap-3">
+                <Stars rating={Number(data.ratingScore) || 5} />
                 {data.ratingScore && (
-                  <span className="text-[13.5px] font-semibold text-ink">{data.ratingScore}</span>
+                  <span className="text-[14px] font-semibold text-ink">{data.ratingScore}</span>
                 )}
                 {data.ratingCount && (
-                  <span className="text-[13px] text-ink-soft">{data.ratingCount}</span>
+                  <span className="text-[13.5px] text-ink-soft">· {data.ratingCount}</span>
                 )}
               </div>
             )}
@@ -118,5 +114,62 @@ export default function DynamicHero({ data }: Props) {
         </div>
       </div>
     </section>
+  );
+}
+
+function Stars({ rating }: { rating: number }) {
+  const full = Math.floor(rating);
+  const hasHalf = rating - full >= 0.5;
+  return (
+    <span className="inline-flex items-center gap-0.5" aria-label={`${rating} out of 5 stars`}>
+      {Array.from({ length: 5 }).map((_, i) => {
+        const fillType = i < full ? "full" : i === full && hasHalf ? "half" : "empty";
+        return <Star key={i} fill={fillType} />;
+      })}
+    </span>
+  );
+}
+
+function Star({ fill }: { fill: "full" | "half" | "empty" }) {
+  const color = fill === "empty" ? "#e6e8ef" : "#f5a524";
+  if (fill === "half") {
+    return (
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
+        <defs>
+          <linearGradient id="half">
+            <stop offset="50%" stopColor="#f5a524" />
+            <stop offset="50%" stopColor="#e6e8ef" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M8 1.5 9.9 5.6l4.6.6-3.3 3.2.8 4.5L8 11.8 3.9 14l.8-4.5L1.4 6.2l4.6-.6L8 1.5Z"
+          fill="url(#half)"
+        />
+      </svg>
+    );
+  }
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
+      <path
+        d="M8 1.5 9.9 5.6l4.6.6-3.3 3.2.8 4.5L8 11.8 3.9 14l.8-4.5L1.4 6.2l4.6-.6L8 1.5Z"
+        fill={color}
+      />
+    </svg>
+  );
+}
+
+function AppleIcon() {
+  return (
+    <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor" aria-hidden>
+      <path d="M11.4 8.5c0-1.9 1.6-2.8 1.6-2.8-.9-1.3-2.3-1.5-2.8-1.5-1.2-.1-2.3.7-2.9.7-.6 0-1.5-.7-2.5-.7-1.3 0-2.5.7-3.1 1.9-1.4 2.3-.4 5.8 1 7.7.7.9 1.5 2 2.5 1.9 1 0 1.4-.6 2.6-.6s1.6.6 2.6.6c1.1 0 1.8-.9 2.4-1.9.8-1.1 1.1-2.2 1.2-2.2-.1 0-2.4-.9-2.6-3.1ZM9.5 2.9c.5-.6.9-1.5.8-2.4-.7 0-1.6.5-2.1 1.1-.5.5-.9 1.4-.8 2.3.8.1 1.6-.4 2.1-1Z" />
+    </svg>
+  );
+}
+
+function PlayIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
+      <path d="M3 2.5v7l6-3.5-6-3.5Z" fill="currentColor" />
+    </svg>
   );
 }

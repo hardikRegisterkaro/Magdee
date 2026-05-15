@@ -114,7 +114,7 @@ function MeeToryCard() {
         </ul>
 
         <a
-          href="#meetory"
+          href="/mee-tory"
           className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[14px] font-medium text-ink transition-colors hover:bg-white/90"
         >
           Request beta access
@@ -214,7 +214,7 @@ function EllamlyCard() {
           errands, EMIs — in your language, on your terms.
         </p>
         <a
-          href="#ellamly"
+          href="/ellamly"
           className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[13.5px] font-medium text-ink transition-colors hover:bg-white/90"
         >
           Get notified at launch

@@ -1,5 +1,5 @@
 const CMS_BASE_URL =
-  process.env.NEXT_PUBLIC_CMS_URL || "http://localhost:3000";
+  process.env.BACKEND_API_URL || "http://localhost:3000";
 
 export interface VoiceStat {
   value: string;

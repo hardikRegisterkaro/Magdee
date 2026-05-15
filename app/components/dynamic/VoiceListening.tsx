@@ -2,6 +2,23 @@ import type { ServicePageData } from "@/app/lib/fetchServicePage";
 
 type Props = { data: NonNullable<ServicePageData["voiceListeningSection"]> };
 
+function AccentHeading({ text }: { text: string }) {
+  const parts = text.split(/(\*[^*]+\*)/g);
+  return (
+    <>
+      {parts.map((part, i) =>
+        part.startsWith("*") && part.endsWith("*") ? (
+          <em key={i} className="italic text-brand">
+            {part.slice(1, -1)}
+          </em>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  );
+}
+
 export default function DynamicVoiceListening({ data }: Props) {
   return (
     <section className="relative">
@@ -36,35 +53,46 @@ export default function DynamicVoiceListening({ data }: Props) {
           {/* Copy */}
           <div className="order-1 lg:order-2">
             {data.tagText && (
-              <div className="flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
+              <div className="flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-brand">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
                 {data.tagText}
               </div>
             )}
-            <h2 className="mt-6 font-display text-[36px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[44px] lg:text-[52px]">
-              {data.heading}
-            </h2>
+
+            {data.heading && (
+              <h2 className="mt-5 font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[48px] lg:text-[56px]">
+                <AccentHeading text={data.heading} />
+              </h2>
+            )}
+
             {data.subHeading && (
-              <p className="mt-5 max-w-[44ch] text-[16px] leading-[1.65] text-ink-soft">
+              <p className="mt-6 max-w-[34rem] text-[15.5px] leading-[1.65] text-ink-soft sm:text-[16.5px]">
                 {data.subHeading}
               </p>
             )}
+
             {data.stats?.length > 0 && (
-              <dl className="mt-8 grid grid-cols-3 gap-4">
+              <ul className="mt-7 grid max-w-[26rem] grid-cols-3 gap-3">
                 {data.stats.map((stat, i) => (
-                  <div key={i}>
-                    <dt className="text-[28px] font-semibold tracking-[-0.02em] text-ink">
+                  <li
+                    key={i}
+                    className="rounded-xl border border-line bg-surface px-3.5 py-3"
+                  >
+                    <p className="font-display text-[20px] font-semibold tracking-[-0.01em] text-ink sm:text-[22px]">
                       {stat.value}
-                    </dt>
-                    <dd className="mt-0.5 text-[13px] text-ink-soft">{stat.label}</dd>
-                  </div>
+                    </p>
+                    <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.14em] text-muted">
+                      {stat.label}
+                    </p>
+                  </li>
                 ))}
-              </dl>
+              </ul>
             )}
+
             {data.ctaText && (
               <a
                 href={data.ctaHref || "#"}
-                className="mt-7 inline-flex items-center text-[14px] font-medium text-accent hover:underline"
+                className="mt-8 inline-flex items-center gap-1.5 text-[14.5px] font-medium text-brand transition-colors hover:text-[#1f3ce8]"
               >
                 {data.ctaText}
               </a>

@@ -18,7 +18,7 @@ export default function FinalCTA() {
           </span>
 
           <h2 className="mt-7 max-w-[20ch] font-display text-[44px] font-semibold leading-[1.02] tracking-[-0.02em] text-white sm:text-[60px] lg:text-[72px]">
-            Get a <span className="italic text-[#8AB1FF]">patient</span> kitchen
+            Get a <span className="italic text-white/55">patient</span> kitchen
             <br className="hidden sm:block" />{" "}
             in your pocket.
           </h2>
