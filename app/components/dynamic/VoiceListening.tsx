@@ -24,30 +24,38 @@ export default function DynamicVoiceListening({ data }: Props) {
     <section className="relative">
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          {/* Demo card */}
+          {/* Demo card / image */}
           <div className="order-2 lg:order-1">
-            <div
-              className="relative overflow-hidden rounded-2xl p-6 sm:p-8"
-              style={{
-                background:
-                  "linear-gradient(135deg, #0A192F 14.29%, #1E3A8A 50%, #3B5BDB 85.71%)",
-              }}
-            >
-              {data.languageTag && (
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10.5px] font-medium uppercase tracking-[0.16em] text-white backdrop-blur">
-                  <span className="relative inline-flex h-1.5 w-1.5">
-                    <span className="absolute inset-0 animate-ping rounded-full bg-[#3bd28a] opacity-60" />
-                    <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-[#3bd28a]" />
+            {data.imageUrl ? (
+              <img
+                src={data.imageUrl}
+                alt="Voice Listening UI"
+                className="w-full h-full object-contain rounded-xl"
+              />
+            ) : (
+              <div
+                className="relative overflow-hidden rounded-2xl p-6 sm:p-8"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #0A192F 14.29%, #1E3A8A 50%, #3B5BDB 85.71%)",
+                }}
+              >
+                {data.languageTag && (
+                  <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10.5px] font-medium uppercase tracking-[0.16em] text-white backdrop-blur">
+                    <span className="relative inline-flex h-1.5 w-1.5">
+                      <span className="absolute inset-0 animate-ping rounded-full bg-[#3bd28a] opacity-60" />
+                      <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-[#3bd28a]" />
+                    </span>
+                    Listening · {data.languageTag}
                   </span>
-                  Listening · {data.languageTag}
-                </span>
-              )}
-              {data.sampleQuote && (
-                <p className="mt-7 font-display text-[20px] font-semibold italic leading-[1.35] text-white sm:text-[22px]">
-                  &ldquo;{data.sampleQuote}&rdquo;
-                </p>
-              )}
-            </div>
+                )}
+                {data.sampleQuote && (
+                  <p className="mt-7 font-display text-[20px] font-semibold italic leading-[1.35] text-white sm:text-[22px]">
+                    &ldquo;{data.sampleQuote}&rdquo;
+                  </p>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Copy */}

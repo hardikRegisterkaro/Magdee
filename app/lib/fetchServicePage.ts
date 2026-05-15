@@ -47,6 +47,7 @@ export interface ServicePageData {
     bullets: string[];
     ctaText: string;
     ctaHref: string;
+    imageUrl?: string;
   };
   voiceListeningSection?: {
     tagText: string;
@@ -57,6 +58,7 @@ export interface ServicePageData {
     stats: VoiceStat[];
     ctaText: string;
     ctaHref: string;
+    imageUrl?: string;
   };
   howItWorksSection?: {
     heading: string;
