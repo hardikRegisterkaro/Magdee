@@ -1,23 +1,21 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import ProductSubNav from "../components/ProductSubNav";
-
-const Hero = dynamic(() => import("../components/VOChef/Hero"));
-const PantryScanner = dynamic(() => import("../components/VOChef/PantryScanner"));
-const VoiceListening = dynamic(() => import("../components/VOChef/VoiceListening"));
-const HowItWorks = dynamic(() => import("../components/VOChef/HowItWorks"));
-const Pricing = dynamic(() => import("../components/VOChef/Pricing"));
-const FinalCTA = dynamic(() => import("../components/VOChef/FinalCTA"));
-const FoundersPromise = dynamic(() => import("../components/VOChef/FoundersPromise"));
-const Features = dynamic(() => import("../components/VOChef/Features"));
+import Hero from "../components/VOChef/Hero";
+import Features from "../components/VOChef/Features";
+import PantryScanner from "../components/VOChef/PantryScanner";
+import VoiceListening from "../components/VOChef/VoiceListening";
+import HowItWorks from "../components/VOChef/HowItWorks";
+import Pricing from "../components/VOChef/Pricing";
+import FinalCTA from "../components/VOChef/FinalCTA";
+import FoundersPromise from "../components/VOChef/FoundersPromise";
 
 export const metadata: Metadata = {
-  title: "VOChef — The kitchen finally answers back · MagDee",
+  title: "Ellamly — Your everyday AI companion · MagDee",
   description:
-    "A voice-first cooking companion that adapts to your pantry, your pace, and what you actually crave. Hands stay on the spoon. The screen stays clean.",
+    "Ambient intelligence for the small, daily decisions — weather, errands, EMIs — in your language, on your terms.",
 };
 
-export default function VOChefPage() {
+export default function EllamlyPage() {
   return (
     <>
       <ProductSubNav />
