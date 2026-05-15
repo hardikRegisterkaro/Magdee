@@ -51,6 +51,10 @@ export default function EarlyAccessForm() {
         className="mt-4 flex flex-col gap-3 sm:flex-row"
         onSubmit={(e) => {
           e.preventDefault();
+          const products = Array.from(selected).join(", ");
+          const subject = encodeURIComponent(`Early Access Request — ${products}`);
+          const body = encodeURIComponent(`Hi MagDee,\n\nI'd like early access to: ${products}.\n\nPlease reach me at: ${email}`);
+          window.location.href = `mailto:hello@magdee.in?subject=${subject}&body=${body}`;
         }}
       >
         <label className="relative flex-1">
