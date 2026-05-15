@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { fetchServicePage } from "@/app/lib/fetchServicePage";
 import ProductSubNav from "@/app/components/ProductSubNav";
@@ -8,6 +9,8 @@ import DynamicPantryScanner from "@/app/components/dynamic/PantryScanner";
 import DynamicVoiceListening from "@/app/components/dynamic/VoiceListening";
 import DynamicHowItWorks from "@/app/components/dynamic/HowItWorks";
 import DynamicPricing from "@/app/components/dynamic/Pricing";
+const FinalCTA = dynamic(() => import("../components/VOChef/FinalCTA"));
+const FoundersPromise = dynamic(() => import("../components/VOChef/FoundersPromise"));
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -51,6 +54,9 @@ export default async function ServiceSlugPage({ params }: Props) {
       {page.pricingSection && (
         <DynamicPricing data={page.pricingSection} />
       )}
+
+       <FinalCTA />
+//     <FoundersPromise />
     </>
   );
 }

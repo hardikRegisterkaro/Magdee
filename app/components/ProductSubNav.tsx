@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client";
+
+import { usePathname } from "next/navigation";
 
 type Product = {
   name: string;
@@ -7,40 +9,45 @@ type Product = {
 };
 
 const PRODUCTS: Product[] = [
-  { name: "VOChef", href: "/VOChef", status: "LIVE" },
-  { name: "Mee Tory", href: "/MeeTory", status: "BETA" },
-  { name: "Ellamly", href: "/Ellamly", status: "SOON" },
+  { name: "VOChef", href: "/vochef", status: "LIVE" },
+  { name: "Mee Tory", href: "/mee-tory", status: "BETA" },
+  { name: "Ellamly", href: "/ellamly", status: "SOON" },
 ];
 
 type Props = {
-  active: Product["name"];
+  active?: Product["name"];
   appStoreHref?: string;
 };
 
 export default function ProductSubNav({ active, appStoreHref = "#ios" }: Props) {
+  const pathname = usePathname();
+  const activeName =
+    active ??
+    PRODUCTS.find((p) => p.href.toLowerCase() === pathname?.toLowerCase())?.name ??
+    PRODUCTS[0].name;
   return (
     <header className="bg-background/85 backdrop-blur">
       <div className="mx-auto flex w-full max-w-7xl flex-col items-start gap-3 px-5 py-3 sm:h-14 sm:flex-row sm:items-center sm:gap-4 sm:px-8 sm:py-0 lg:px-12">
         <nav aria-label="Breadcrumb" className="min-w-0 shrink-0">
           <ol className="flex items-center gap-2 text-[13.5px] font-medium text-ink-soft">
             <li className="flex items-center">
-              <Link
+              <a
                 href="/"
                 className="inline-flex items-center gap-1.5 rounded-md text-ink-soft transition-colors hover:text-ink"
               >
                 <BackArrow />
                 MagDee
-              </Link>
+              </a>
             </li>
             <li aria-hidden className="text-muted">/</li>
             <li>
-              <Link href="/#suite" className="transition-colors hover:text-ink">
+              <a href="/#suite" className="transition-colors hover:text-ink">
                 Products
-              </Link>
+              </a>
             </li>
             <li aria-hidden className="text-muted">/</li>
             <li aria-current="page" className="truncate font-semibold text-ink">
-              {active}
+              {activeName}
             </li>
           </ol>
         </nav>
@@ -53,10 +60,10 @@ export default function ProductSubNav({ active, appStoreHref = "#ios" }: Props) 
         >
           <ul className="inline-flex items-center gap-1 rounded-full border border-line bg-surface/80 p-1 shadow-[0_1px_0_rgba(15,23,42,0.02)]">
             {PRODUCTS.map((p) => {
-              const isActive = p.name === active;
+              const isActive = p.name === activeName;
               return (
                 <li key={p.name}>
-                  <Link
+                  <a
                     href={p.href}
                     aria-current={isActive ? "page" : undefined}
                     className={`group inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] font-medium transition-colors ${
@@ -77,7 +84,7 @@ export default function ProductSubNav({ active, appStoreHref = "#ios" }: Props) 
                     >
                       {p.status}
                     </span>
-                  </Link>
+                  </a>
                 </li>
               );
             })}

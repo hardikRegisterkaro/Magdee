@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import "./globals.css";
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans-display",
   subsets: ["latin"],
   display: "swap",
@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full bg-background text-ink">
+    <html lang="en" className={`${plusJakartaSans.variable} h-full antialiased`}>
+      <body className="min-h-full bg-background text-ink" suppressHydrationWarning>
         <Navbar />
         {children}
         <Footer />

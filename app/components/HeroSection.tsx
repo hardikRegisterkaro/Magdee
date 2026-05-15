@@ -54,11 +54,11 @@ export default function HeroSection() {
               01 <span className="text-muted">/ 3 — Your AI chef assistant</span>
             </div>
 
-            <h1 className="mt-5 font-display text-[44px] font-semibold leading-[1.02] tracking-[-0.02em] text-ink sm:text-[58px] lg:text-[72px]">
-              The kitchen{" "}
-              <span className="italic text-brand-soft">
-                finally answers
-              </span>{" "}
+            <h1 className="mt-5 font-display text-[44px] font-bold leading-[1.02] tracking-[-0.02em] text-ink sm:text-[58px] lg:text-[72px]">
+              The kitchen
+              <br />
+              <span className="italic text-brand">finally answers</span>
+              <br />
               back.
             </h1>
 
@@ -70,14 +70,14 @@ export default function HeroSection() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href="#ios"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(42,75,255,0.7)] transition-colors hover:bg-[#1f3ce8]"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(42,75,255,0.7)] transition-colors hover:bg-[#1f3ce8]"
               >
                 Try VOChef on iOS
                 <ArrowIcon />
               </a>
               <a
                 href="#demo"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-line bg-surface px-5 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-background"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-surface px-5 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-background"
               >
                 <PlayIcon /> Watch 90-sec demo
               </a>

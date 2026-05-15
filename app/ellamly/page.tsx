@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import ProductSubNav from "../components/ProductSubNav";
 
-const ProductSubNav = dynamic(() => import("../components/ProductSubNav"));
 const Hero = dynamic(() => import("../components/VOChef/Hero"));
 const PantryScanner = dynamic(() => import("../components/VOChef/PantryScanner"));
 const VoiceListening = dynamic(() => import("../components/VOChef/VoiceListening"));
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function VOChefPage() {
   return (
     <>
-      <ProductSubNav active="VOChef" />
+      <ProductSubNav />
       <Hero />
       <Features />
       <PantryScanner />
