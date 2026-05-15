@@ -24,8 +24,8 @@ export default function AboutHero() {
               <br />
               Careful.
               <br />
-              <em className="italic text-brand not-italic">Quietly</em>{" "}
-              <span className="not-italic">strong.</span>
+              <em className="italic text-brand">Quietly</em>{" "}
+              <span>strong.</span>
             </h1>
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -105,11 +105,11 @@ export default function AboutHero() {
                     />
                   </defs>
                   <text
-                    font-family="monospace"
-                    font-size="7.5"
-                    font-weight="500"
+                    fontFamily="monospace"
+                    fontSize="7.5"
+                    fontWeight="500"
                     fill="#1E40AF"
-                    letter-spacing="2"
+                    letterSpacing="2"
                   >
                     <textPath href="#circle-text-path" startOffset="0%">
                       2025 · PATIENT · TAMIL ·
