@@ -2,6 +2,23 @@ import type { ServicePageData } from "@/app/lib/fetchServicePage";
 
 type Props = { data: ServicePageData["heroSection"] };
 
+function AccentHeading({ text }: { text: string }) {
+  const parts = text.split(/(\*[^*]+\*)/g);
+  return (
+    <>
+      {parts.map((part, i) =>
+        part.startsWith("*") && part.endsWith("*") ? (
+          <em key={i} className="not-italic text-accent">
+            {part.slice(1, -1)}
+          </em>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  );
+}
+
 export default function DynamicHero({ data }: Props) {
   return (
     <section className="relative overflow-hidden">
@@ -33,13 +50,15 @@ export default function DynamicHero({ data }: Props) {
               </div>
             )}
 
-            <h1 className="mt-5 font-display text-[64px] font-semibold leading-[0.95] tracking-[-0.02em] text-ink sm:text-[88px] lg:text-[112px]">
-              {data.heading.split(" ")[0]}
-            </h1>
+            {data.title && (
+              <h1 className="mt-5 font-display text-[64px] font-semibold leading-[0.95] tracking-[-0.02em] text-ink sm:text-[88px] lg:text-[112px]">
+                {data.title}
+              </h1>
+            )}
 
-            {data.heading.split(" ").length > 1 && (
+            {data.heading && (
               <h2 className="mt-8 font-display text-[32px] font-semibold leading-[1.05] tracking-[-0.015em] text-ink sm:text-[40px] lg:text-[44px]">
-                {data.heading.split(" ").slice(1).join(" ")}
+                {data.heading}
               </h2>
             )}
 

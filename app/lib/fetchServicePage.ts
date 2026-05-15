@@ -25,6 +25,7 @@ export interface ServicePageData {
   metaDescription?: string;
   heroSection: {
     versionTag: string;
+    title: string;
     heading: string;
     subHeading: string;
     description: string;
