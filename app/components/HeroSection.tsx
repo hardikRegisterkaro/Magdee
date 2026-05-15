@@ -48,7 +48,7 @@ export default function HeroSection() {
         </div>
 
         <div className="grid grid-cols-1 items-start gap-10 pb-12 pt-8 sm:pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-20 lg:pt-16">
-          <div className="order-2 lg:order-1">
+          <div className="lg:order-1">
             <div className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
               <span className="h-px w-8 bg-accent" />
               01 <span className="text-muted">/ 3 — Your AI chef assistant</span>
@@ -112,7 +112,7 @@ export default function HeroSection() {
             </div>
           </div>
 
-          <div className="order-1 lg:order-2">
+          <div className="lg:order-2">
             <PhoneMockup />
           </div>
         </div>
