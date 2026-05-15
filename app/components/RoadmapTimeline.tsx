@@ -111,7 +111,14 @@ export default function RoadmapTimeline() {
   useEffect(() => {
     if (!started) return;
     const id = setInterval(() => {
-      setActiveIndex((i) => (i + 1) % MILESTONES.length);
+      setActiveIndex((i) => {
+        const next = i + 1;
+        if (next >= MILESTONES.length) {
+          clearInterval(id);
+          return MILESTONES.length - 1;
+        }
+        return next;
+      });
     }, STEP_MS);
     return () => clearInterval(id);
   }, [started]);

@@ -1,11 +1,9 @@
-import dynamic from "next/dynamic";
-
-const HeroSection = dynamic(() => import("./components/HeroSection"));
-const PrinciplesSection = dynamic(() => import("./components/PrinciplesSection"));
-const SuiteSection = dynamic(() => import("./components/SuiteSection"));
-const HowItWorksSection = dynamic(() => import("./components/HowItWorksSection"));
-const RootedSection = dynamic(() => import("./components/RootedSection"));
-const RoadmapSection = dynamic(() => import("./components/RoadmapSection"));
+import HeroSection from "./components/HeroSection";
+import PrinciplesSection from "./components/PrinciplesSection";
+import SuiteSection from "./components/SuiteSection";
+import HowItWorksSection from "./components/HowItWorksSection";
+import RootedSection from "./components/RootedSection";
+import RoadmapSection from "./components/RoadmapSection";
 
 export default function Home() {
   return (
