@@ -4,6 +4,7 @@ type Props = { heroSection?: AboutPageData["heroSection"] };
 
 export default function AboutHero({ heroSection }: Props) {
   const badge = heroSection?.heroBadgeTitle || "Our Philosophy";
+  const imgUrl = heroSection?.heroImgUrl;
 
   return (
     <section className="relative overflow-hidden">
@@ -52,64 +53,72 @@ export default function AboutHero({ heroSection }: Props) {
             </div>
           </div>
 
-          {/* Right — Brand Mark card */}
+          {/* Right — CMS image or Brand Mark card fallback */}
           <div className="flex justify-center lg:justify-end">
-            <div className="relative">
-              <div className="relative z-10 w-[300px] rounded-3xl border border-line bg-white px-10 pb-14 pt-10 shadow-[0_24px_64px_-20px_rgba(15,23,42,0.18)] sm:w-[340px]">
-                <div className="flex flex-col items-center">
-                  <svg viewBox="0 0 80 36" width="120" height="56" className="text-ink" aria-hidden>
+            {imgUrl ? (
+              <img
+                src={imgUrl}
+                alt="Hero"
+                className="w-full max-w-115 rounded-3xl object-cover p-3"
+              />
+            ) : (
+              <div className="relative">
+                <div className="relative z-10 w-75 rounded-3xl border border-line bg-white px-10 pb-14 pt-10 shadow-[0_24px_64px_-20px_rgba(15,23,42,0.18)] sm:w-85">
+                  <div className="flex flex-col items-center">
+                    <svg viewBox="0 0 80 36" width="120" height="56" className="text-ink" aria-hidden>
+                      <path
+                        d="M4 28 C 12 8, 24 8, 32 24 S 52 32, 60 12 S 76 12, 76 28"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+
+                    <div className="mt-6 flex w-full flex-col gap-2 border-t border-line pt-5">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+                          — The Mark
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+                          Est. 2025
+                        </span>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+                          No. 001
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Circular seal */}
+                <div className="absolute -bottom-8 -right-8 z-20 flex h-24 w-24 items-center justify-center rounded-full border-2 border-dashed border-brand/30 bg-white shadow-[0_8px_24px_-8px_rgba(30,64,175,0.2)]">
+                  <svg viewBox="0 0 96 96" width="96" height="96" className="absolute inset-0" aria-hidden>
+                    <defs>
+                      <path id="circle-text-path" d="M 48,48 m -32,0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0" />
+                    </defs>
+                    <text fontFamily="monospace" fontSize="7.5" fontWeight="500" fill="#1E40AF" letterSpacing="2">
+                      <textPath href="#circle-text-path" startOffset="0%">
+                        2025 · PATIENT · TAMIL ·
+                      </textPath>
+                    </text>
+                  </svg>
+                  <svg viewBox="0 0 80 36" width="32" height="14" className="relative z-10 text-brand" aria-hidden>
                     <path
                       d="M4 28 C 12 8, 24 8, 32 24 S 52 32, 60 12 S 76 12, 76 28"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="4"
+                      strokeWidth="5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
                   </svg>
-
-                  <div className="mt-6 flex w-full flex-col gap-2 border-t border-line pt-5">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-                        — The Mark
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-                        Est. 2025
-                      </span>
-                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-                        No. 001
-                      </span>
-                    </div>
-                  </div>
                 </div>
               </div>
-
-              {/* Circular seal */}
-              <div className="absolute -bottom-8 -right-8 z-20 flex h-[96px] w-[96px] items-center justify-center rounded-full border-2 border-dashed border-brand/30 bg-white shadow-[0_8px_24px_-8px_rgba(30,64,175,0.2)]">
-                <svg viewBox="0 0 96 96" width="96" height="96" className="absolute inset-0" aria-hidden>
-                  <defs>
-                    <path id="circle-text-path" d="M 48,48 m -32,0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0" />
-                  </defs>
-                  <text fontFamily="monospace" fontSize="7.5" fontWeight="500" fill="#1E40AF" letterSpacing="2">
-                    <textPath href="#circle-text-path" startOffset="0%">
-                      2025 · PATIENT · TAMIL ·
-                    </textPath>
-                  </text>
-                </svg>
-                <svg viewBox="0 0 80 36" width="32" height="14" className="relative z-10 text-brand" aria-hidden>
-                  <path
-                    d="M4 28 C 12 8, 24 8, 32 24 S 52 32, 60 12 S 76 12, 76 28"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

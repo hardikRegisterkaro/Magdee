@@ -76,15 +76,25 @@ export default function HeadquartersSection({ aboutSection }: Props) {
           </div>
 
           {/* Right — image or placeholder */}
-          <div className="flex items-center justify-center rounded-3xl border-2 border-dashed border-line bg-surface lg:h-[420px]">
-            <div className="flex flex-col items-center gap-3 py-16 text-center lg:py-0">
-              <ImagePlaceholderIcon />
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-                Image placeholder
-              </p>
-              <p className="text-[13px] text-muted">Postcard card goes here</p>
+          {aboutSection?.aboutImgUrl ? (
+            <div className="overflow-hidden rounded-3xl lg:h-[420px]">
+              <img
+                src={aboutSection.aboutImgUrl}
+                alt="Headquarters"
+                className="h-full w-full object-cover"
+              />
             </div>
-          </div>
+          ) : (
+            <div className="flex items-center justify-center rounded-3xl border-2 border-dashed border-line bg-surface lg:h-[420px]">
+              <div className="flex flex-col items-center gap-3 py-16 text-center lg:py-0">
+                <ImagePlaceholderIcon />
+                <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                  Image placeholder
+                </p>
+                <p className="text-[13px] text-muted">Postcard card goes here</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

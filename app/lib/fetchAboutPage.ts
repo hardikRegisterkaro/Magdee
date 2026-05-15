@@ -33,6 +33,7 @@ export interface AboutPageData {
     aboutBadgeTitle: string;
     aboutHeading: string;
     aboutDescription: string;
+    aboutImgUrl?: string;
     aboutStats: AboutStat[];
   };
   approachSection?: {
@@ -57,8 +58,7 @@ export const fetchAboutPage = cache(async (): Promise<AboutPageData | null> => {
 
   try {
     const res = await fetch(`${API_URL}/api/about`, {
-      cache: "force-cache",
-      next: { tags: ["about-page"] },
+      next: { tags: ["about-page"], revalidate: 3600 },
     });
 
     if (!res.ok) return null;
