@@ -1,4 +1,10 @@
-export default function AboutHero() {
+import type { AboutPageData } from "@/app/lib/fetchAboutPage";
+
+type Props = { heroSection?: AboutPageData["heroSection"] };
+
+export default function AboutHero({ heroSection }: Props) {
+  const badge = heroSection?.heroBadgeTitle || "Our Philosophy";
+
   return (
     <section className="relative overflow-hidden">
       <div
@@ -16,7 +22,7 @@ export default function AboutHero() {
           <div>
             <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
-              Our Philosophy
+              {badge}
             </div>
 
             <h1 className="mt-8 font-display text-[64px] font-semibold leading-[0.93] tracking-[-0.025em] text-ink sm:text-[80px] lg:text-[96px]">
@@ -49,17 +55,9 @@ export default function AboutHero() {
           {/* Right — Brand Mark card */}
           <div className="flex justify-center lg:justify-end">
             <div className="relative">
-              {/* Card */}
               <div className="relative z-10 w-[300px] rounded-3xl border border-line bg-white px-10 pb-14 pt-10 shadow-[0_24px_64px_-20px_rgba(15,23,42,0.18)] sm:w-[340px]">
-                {/* Mark glyph */}
                 <div className="flex flex-col items-center">
-                  <svg
-                    viewBox="0 0 80 36"
-                    width="120"
-                    height="56"
-                    className="text-ink"
-                    aria-hidden
-                  >
+                  <svg viewBox="0 0 80 36" width="120" height="56" className="text-ink" aria-hidden>
                     <path
                       d="M4 28 C 12 8, 24 8, 32 24 S 52 32, 60 12 S 76 12, 76 28"
                       fill="none"
@@ -88,42 +86,19 @@ export default function AboutHero() {
                 </div>
               </div>
 
-              {/* Circular seal — overlapping bottom-right */}
+              {/* Circular seal */}
               <div className="absolute -bottom-8 -right-8 z-20 flex h-[96px] w-[96px] items-center justify-center rounded-full border-2 border-dashed border-brand/30 bg-white shadow-[0_8px_24px_-8px_rgba(30,64,175,0.2)]">
-                {/* Circular text */}
-                <svg
-                  viewBox="0 0 96 96"
-                  width="96"
-                  height="96"
-                  className="absolute inset-0"
-                  aria-hidden
-                >
+                <svg viewBox="0 0 96 96" width="96" height="96" className="absolute inset-0" aria-hidden>
                   <defs>
-                    <path
-                      id="circle-text-path"
-                      d="M 48,48 m -32,0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0"
-                    />
+                    <path id="circle-text-path" d="M 48,48 m -32,0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0" />
                   </defs>
-                  <text
-                    fontFamily="monospace"
-                    fontSize="7.5"
-                    fontWeight="500"
-                    fill="#1E40AF"
-                    letterSpacing="2"
-                  >
+                  <text fontFamily="monospace" fontSize="7.5" fontWeight="500" fill="#1E40AF" letterSpacing="2">
                     <textPath href="#circle-text-path" startOffset="0%">
                       2025 · PATIENT · TAMIL ·
                     </textPath>
                   </text>
                 </svg>
-                {/* Center elephant mark */}
-                <svg
-                  viewBox="0 0 80 36"
-                  width="32"
-                  height="14"
-                  className="relative z-10 text-brand"
-                  aria-hidden
-                >
+                <svg viewBox="0 0 80 36" width="32" height="14" className="relative z-10 text-brand" aria-hidden>
                   <path
                     d="M4 28 C 12 8, 24 8, 32 24 S 52 32, 60 12 S 76 12, 76 28"
                     fill="none"
@@ -145,13 +120,7 @@ export default function AboutHero() {
 function ArrowIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
-      <path
-        d="M2.5 7h9M8 3.5 11.5 7 8 10.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

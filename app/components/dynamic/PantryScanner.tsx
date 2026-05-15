@@ -67,8 +67,16 @@ export default function DynamicPantryScanner({ data }: Props) {
             )}
           </div>
 
-          <div className="flex items-center justify-center rounded-2xl border border-line bg-surface p-8">
-            <p className="text-sm text-ink-soft text-center">[ Pantry Scanner UI ]</p>
+          <div className="flex items-center justify-center rounded-2xlp-8">
+            {data.imageUrl ? (
+              <img
+                src={data.imageUrl}
+                alt="Pantry Scanner UI"
+                className="w-full h-full object-contain rounded-xl"
+              />
+            ) : (
+              <p className="text-sm text-ink-soft text-center">[ Pantry Scanner UI ]</p>
+            )}
           </div>
         </div>
       </div>
