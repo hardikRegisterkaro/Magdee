@@ -88,10 +88,10 @@ export default function NavbarClient({ menu }: { menu: MainMenuItem[] }) {
 
         <div className="flex items-center gap-2">
           <a
-            href="#waitlist"
+            href="/contact-us"
             className="hidden md:inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-[14px] font-medium text-white shadow-[0_8px_24px_-12px_rgba(42,75,255,0.7)] transition-colors hover:bg-[#1f3ce8]"
           >
-            Join waitlist
+            Contact Us
             <ArrowIcon />
           </a>
 
@@ -148,11 +148,11 @@ export default function NavbarClient({ menu }: { menu: MainMenuItem[] }) {
             ))}
             <li className="pt-2">
               <a
-                href="#waitlist"
+                href="/contact-us"
                 onClick={() => setOpen(false)}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-4 py-3 text-[15px] font-medium text-white"
               >
-                Join waitlist
+                Contact Us
                 <ArrowIcon />
               </a>
             </li>

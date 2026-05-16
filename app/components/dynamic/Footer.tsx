@@ -1,5 +1,6 @@
 import { getFooterMenu } from "@/app/lib/footer-menu";
 import type { ContactSubChild } from "@/app/lib/footer-menu";
+import Image from "next/image";
 
 export default async function DynamicFooter() {
   const data = await getFooterMenu();
@@ -22,16 +23,24 @@ export default async function DynamicFooter() {
           {/* Brand column */}
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
             <div className="flex items-center gap-2.5">
-              <span
+              {/* <span
                 aria-hidden
                 className="inline-block h-8 w-8 rounded-lg"
                 style={{
                   background: "linear-gradient(135deg, #2a4bff 0%, #7c5cff 100%)",
                 }}
-              />
-              <span className="font-display text-[20px] font-semibold tracking-tight text-ink">
+              /> */}
+              {/* <span className="font-display text-[20px] font-semibold tracking-tight text-ink">
                 MagDee
-              </span>
+              </span> */}
+              <Image
+                          src="/logo.png"
+                          alt="MagDee"
+                          width={120}
+                          height={36}
+                          priority
+                          className="h-8 w-auto"
+                        />
             </div>
 
             {address?.value && (

@@ -1,11 +1,48 @@
-const DETAILS = [
-  { icon: <PhoneIcon />, label: "Phone", value: "+91 422 4567 890" },
-  { icon: <ClockIcon />, label: "Hours", value: "Mon-Fri · 9-7 IST" },
-  { icon: <PinIcon />, label: "Lat", value: "11.0168° N" },
-  { icon: <GlobeIcon />, label: "Long", value: "76.9558° E" },
-];
+interface HQData {
+  badge?: string;
+  companyName?: string;
+  address?: string;
+  mapsUrl?: string;
+  phone?: string;
+  hours?: string;
+  lat?: string;
+  long?: string;
+  neighborhoodHeading?: string;
+  neighborhoodDescription?: string;
+  mapImgUrl?: string;
+}
 
-export default function HeadquartersSection() {
+interface Props {
+  data?: HQData;
+}
+
+function renderNeighborhoodHeading(text: string) {
+  const parts = text.split(/\*([^*]+)\*/g);
+  return parts.map((part, i) =>
+    i % 2 === 1 ? <em key={i} className="italic text-brand">{part}</em> : part
+  );
+}
+
+export default function HeadquartersSection({ data }: Props) {
+  const badge = data?.badge || "03 — Headquarters";
+  const companyName = data?.companyName || "MagDee Technologies Pvt. Ltd.";
+  const address = data?.address || "Floor 2, No. 47, Race Course Road\nRS Puram, Coimbatore — 641 002\nTamil Nadu, India";
+  const mapsUrl = data?.mapsUrl || "https://maps.google.com/?q=11.0168,76.9558";
+  const phone = data?.phone || "+91 422 4567 890";
+  const officeHours = data?.hours || "Mon-Fri · 9-7 IST";
+  const lat = data?.lat || "11.0168° N";
+  const long = data?.long || "76.9558° E";
+  const neighborhoodHeading = data?.neighborhoodHeading || "Above the *filter coffee* shop.";
+  const neighborhoodDescription = data?.neighborhoodDescription || "Race Course Road is one of the older streets in town — wide, tree-lined, never in a hurry. We're on the second floor, behind a heavy teak door, two doors down from a 40-year-old filter coffee shop. You'll smell us before you see us.";
+  const mapImgUrl = data?.mapImgUrl || "";
+
+  const details = [
+    { icon: <PhoneIcon />, label: "Phone", value: phone },
+    { icon: <ClockIcon />, label: "Hours", value: officeHours },
+    { icon: <PinIcon />, label: "Lat", value: lat },
+    { icon: <GlobeIcon />, label: "Long", value: long },
+  ];
+
   return (
     <section className="relative bg-background">
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
@@ -13,32 +50,32 @@ export default function HeadquartersSection() {
           {/* Left — HQ card */}
           <div className="relative">
             <div className="overflow-hidden rounded-3xl border border-line bg-white shadow-[0_4px_40px_-16px_rgba(15,23,42,0.1)]">
-              <div className="h-[3px] w-full bg-brand" />
+              <div className="h-0.75 w-full bg-brand" />
 
               <div className="px-7 py-8 sm:px-9 sm:py-10">
                 <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
-                  03 — Headquarters
+                  {badge}
                 </div>
 
-                <h2 className="mt-5 font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[48px]">
+                <h2 className="mt-5 font-display text-[40px] font-semibold leading-[1.05] tracking-tight text-ink sm:text-[48px]">
                   Find us in
                   <br />
                   Coimbatore.
                 </h2>
 
                 <address className="mt-6 not-italic text-[14px] leading-[1.7] text-ink-soft">
-                  MagDee Technologies Pvt. Ltd.
-                  <br />
-                  Floor 2, No. 47, Race Course Road
-                  <br />
-                  RS Puram, Coimbatore — 641 002
-                  <br />
-                  Tamil Nadu, India
+                  {companyName}
+                  {address.split("\n").map((line, i) => (
+                    <span key={i}>
+                      <br />
+                      {line}
+                    </span>
+                  ))}
                 </address>
 
                 <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  {DETAILS.map((d, i) => (
+                  {details.map((d, i) => (
                     <div
                       key={i}
                       className="rounded-xl border border-line bg-surface px-4 py-3"
@@ -56,7 +93,7 @@ export default function HeadquartersSection() {
 
                 <div className="mt-7 flex flex-col gap-2.5 sm:flex-row">
                   <a
-                    href="https://maps.google.com/?q=11.0168,76.9558"
+                    href={mapsUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-3 text-[14px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black"
@@ -76,36 +113,38 @@ export default function HeadquartersSection() {
             </div>
           </div>
 
-          {/* Right — neighborhood + map placeholder */}
+          {/* Right — neighborhood + map */}
           <div>
             <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
               The Neighborhood
             </div>
 
-            <h2 className="mt-5 font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[52px] lg:text-[60px]">
-              Above the
-              <br />
-              <em className="italic text-brand">filter coffee</em> shop.
+            <h2 className="mt-5 font-display text-[40px] font-semibold leading-[1.05] tracking-tight text-ink sm:text-[52px] lg:text-[60px]">
+              {renderNeighborhoodHeading(neighborhoodHeading)}
             </h2>
 
-            <p className="mt-5 max-w-[34rem] text-[15px] leading-[1.7] text-ink-soft">
-              Race Course Road is one of the older streets in town — wide,
-              tree-lined, never in a hurry. We&apos;re on the second floor,
-              behind a heavy teak door, two doors down from a 40-year-old filter
-              coffee shop. You&apos;ll smell us before you see us.
+            <p className="mt-5 max-w-136 text-[15px] leading-[1.7] text-ink-soft">
+              {neighborhoodDescription}
             </p>
 
-            {/* Map placeholder */}
-            <div className="mt-7 flex items-center justify-center rounded-3xl border-2 border-dashed border-line bg-surface lg:h-[320px]">
-              <div className="flex flex-col items-center gap-3 py-16 text-center lg:py-0">
-                <ImagePlaceholderIcon />
-                <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-                  Image placeholder
-                </p>
-                <p className="text-[13px] text-muted">Map illustration goes here</p>
+            {mapImgUrl ? (
+              <img
+                src={mapImgUrl}
+                alt="Map"
+                className="mt-7 w-full rounded-3xl  object-cover lg:h-80"
+              />
+            ) : (
+              <div className="mt-7 flex items-center justify-center rounded-3xl border-2 border-dashed border-line bg-surface lg:h-80">
+                <div className="flex flex-col items-center gap-3 py-16 text-center lg:py-0">
+                  <ImagePlaceholderIcon />
+                  <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                    Image placeholder
+                  </p>
+                  <p className="text-[13px] text-muted">Map illustration goes here</p>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -160,30 +199,14 @@ function MapIcon() {
 function ArrowIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
-      <path
-        d="M2.5 7h9M8 3.5 11.5 7 8 10.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
 function ImagePlaceholderIcon() {
   return (
-    <svg
-      width="36"
-      height="36"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="#c8ccd8"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#c8ccd8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <rect x="3" y="3" width="18" height="18" rx="3" />
       <circle cx="8.5" cy="8.5" r="1.5" />
       <path d="M21 15l-5-5L5 21" />

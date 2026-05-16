@@ -1,33 +1,26 @@
 import ContactForm from "./ContactForm";
+import type { ContactCard } from "@/app/lib/fetchContactPage";
 
-const CONTACT_CARDS = [
-  {
-    icon: <MailIcon />,
-    label: "Email Us",
-    value: "hello@magdee.in",
-    detail: "One of us within 24 hrs",
-  },
-  {
-    icon: <PinIcon />,
-    label: "Visit Us",
-    value: "Coimbatore HQ",
-    detail: "By appointment only",
-  },
-  {
-    icon: <SpeechIcon />,
-    label: "Or in Tamil",
-    value: "வணக்கம்",
-    detail: "vanakkam@magdee.in",
-  },
-  {
-    icon: <PressIcon />,
-    label: "Press Inbox",
-    value: "press@magdee.in",
-    detail: "Embargoed inquiries welcome",
-  },
+const DEFAULT_CARDS: ContactCard[] = [
+  { label: "Email Us", value: "hello@magdee.in", detail: "One of us within 24 hrs" },
+  { label: "Visit Us", value: "Coimbatore HQ", detail: "By appointment only" },
+  { label: "Or in Tamil", value: "வணக்கம்", detail: "vanakkam@magdee.in" },
+  { label: "Press Inbox", value: "press@magdee.in", detail: "Embargoed inquiries welcome" },
 ];
 
-export default function ContactHero() {
+interface Props {
+  data?: {
+    badge?: string;
+    hours?: string;
+    contactCards?: ContactCard[];
+  };
+}
+
+export default function ContactHero({ data }: Props) {
+  const badge = data?.badge || "Get in touch";
+  const hours = data?.hours || "Mon-Fri · 09:00-19:00 IST";
+  const cards = data?.contactCards?.length ? data.contactCards : DEFAULT_CARDS;
+
   return (
     <section className="relative overflow-hidden">
       <div
@@ -45,10 +38,10 @@ export default function ContactHero() {
           <div>
             <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
-              Get in touch
+              {badge}
             </div>
 
-            <h1 className="mt-7 font-display text-[56px] font-semibold leading-[0.98] tracking-[-0.025em] text-ink sm:text-[72px] lg:text-[88px]">
+            <h1 className="mt-7 font-display text-[56px] font-semibold leading-[0.98] tracking-tight text-ink sm:text-[72px] lg:text-[88px]">
               Say <em className="italic text-brand">hi</em>.
               <br />
               One of us
@@ -56,7 +49,7 @@ export default function ContactHero() {
               reads it.
             </h1>
 
-            <p className="mt-7 max-w-[34rem] text-[15px] leading-[1.7] text-ink-soft sm:text-[16px]">
+            <p className="mt-7 max-w-136 text-[15px] leading-[1.7] text-ink-soft sm:text-[16px]">
               There&apos;s no support queue, no ticketing system, no chatbot.
               Three founders and a small team handle every email — usually
               within a working day.
@@ -71,18 +64,18 @@ export default function ContactHero() {
                 Open now
               </span>
               <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted">
-                Mon-Fri · 09:00-19:00 IST
+                {hours}
               </span>
             </div>
 
             <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {CONTACT_CARDS.map((card, i) => (
+              {cards.map((card, i) => (
                 <div
                   key={i}
                   className="flex items-start gap-3 rounded-2xl border border-line bg-white px-4 py-3.5"
                 >
                   <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#f0f2f7] text-ink-soft">
-                    {card.icon}
+                    <CardIcon index={i} />
                   </span>
                   <div className="min-w-0">
                     <p className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-muted">
@@ -108,6 +101,13 @@ export default function ContactHero() {
       </div>
     </section>
   );
+}
+
+function CardIcon({ index }: { index: number }) {
+  if (index === 0) return <MailIcon />;
+  if (index === 1) return <PinIcon />;
+  if (index === 2) return <SpeechIcon />;
+  return <PressIcon />;
 }
 
 function MailIcon() {
@@ -144,4 +144,3 @@ function PressIcon() {
     </svg>
   );
 }
-

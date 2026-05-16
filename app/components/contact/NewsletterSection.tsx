@@ -2,16 +2,30 @@
 
 import { useState } from "react";
 
-export default function NewsletterSection() {
+interface Props {
+  data?: {
+    badge?: string;
+    heading?: string;
+    description?: string;
+    email?: string;
+  };
+}
+
+export default function NewsletterSection({ data }: Props) {
+  const badge = data?.badge || "Stay quietly informed";
+  const heading = data?.heading || "We email about once a quarter.";
+  const description = data?.description || "No drip campaigns, no 'thought leadership', no marketing automation. Just a short note when something genuine has shipped or changed.";
+  const mailTo = data?.email || "hello@magdee.in";
+
   const [email, setEmail] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     const subject = encodeURIComponent("Quarterly note, please");
     const body = encodeURIComponent(
       `Hi MagDee,\n\nPlease add me to the quarterly note.\n\nEmail: ${email}`
     );
-    window.location.href = `mailto:hello@magdee.in?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${mailTo}?subject=${subject}&body=${body}`;
   }
 
   return (
@@ -28,19 +42,15 @@ export default function NewsletterSection() {
             {/* Left */}
             <div>
               <p className="font-mono text-[10.5px] font-medium uppercase tracking-[0.18em] text-white/55">
-                — Stay quietly informed
+                — {badge}
               </p>
 
-              <h2 className="mt-5 font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.025em] text-white sm:text-[48px] lg:text-[52px]">
-                We email about
-                <br />
-                once a quarter.
+              <h2 className="mt-5 font-display text-[40px] font-semibold leading-[1.05] tracking-tight text-white sm:text-[48px] lg:text-[52px]">
+                {heading}
               </h2>
 
               <p className="mt-5 max-w-[38ch] text-[14.5px] leading-[1.7] text-white/65">
-                No drip campaigns, no &lsquo;thought leadership&rsquo;, no
-                marketing automation. Just a short note when something genuine
-                has shipped or changed.
+                {description}
               </p>
             </div>
 

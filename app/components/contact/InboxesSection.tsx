@@ -1,55 +1,32 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { Inbox } from "@/app/lib/fetchContactPage";
 
-const INBOXES = [
-  {
-    icon: <GridIcon />,
-    label: "Product",
-    email: "product@magdee.in",
-    detail: "VOChef, Mee Tory, Ellamly — feedback, bugs, feature requests",
-    person: { initial: "A", color: "#3B4ED8", name: "Arjun" },
-  },
-  {
-    icon: <MegaphoneIcon />,
-    label: "Press",
-    email: "press@magdee.in",
-    detail: "Interviews, embargoed news, press kit downloads",
-    person: { initial: "S", color: "#3B4ED8", name: "Saanvi" },
-  },
-  {
-    icon: <InfinityIcon />,
-    label: "Partnerships",
-    email: "partners@magdee.in",
-    detail: "Integrations, distribution, enterprise inquiries",
-    person: { initial: "A", color: "#3B4ED8", name: "Arjun" },
-  },
-  {
-    icon: <BriefcaseIcon />,
-    label: "Careers",
-    email: "careers@magdee.in",
-    detail: "Job applications, internships, contract work",
-    person: { initial: "V", color: "#3B4ED8", name: "Vikram" },
-  },
-  {
-    icon: <LifeBuoyIcon />,
-    label: "Support",
-    email: "support@magdee.in",
-    detail: "Help with the apps, billing questions, account issues",
-    person: { initial: "S", color: "#3B4ED8", name: "Saanvi" },
-  },
-  {
-    icon: <SmileIcon />,
-    label: "Just Hello",
-    email: "hello@magdee.in",
-    detail: "Anything else — in Tamil, English, or Hindi",
-    person: { initial: "A", color: "#3B4ED8", name: "Arjun" },
-  },
+const DEFAULT_INBOXES: Inbox[] = [
+  { label: "Product", email: "product@magdee.in", detail: "VOChef, Mee Tory, Ellamly — feedback, bugs, feature requests", personName: "Arjun", personInitial: "A" },
+  { label: "Press", email: "press@magdee.in", detail: "Interviews, embargoed news, press kit downloads", personName: "Saanvi", personInitial: "S" },
+  { label: "Partnerships", email: "partners@magdee.in", detail: "Integrations, distribution, enterprise inquiries", personName: "Arjun", personInitial: "A" },
+  { label: "Careers", email: "careers@magdee.in", detail: "Job applications, internships, contract work", personName: "Vikram", personInitial: "V" },
+  { label: "Support", email: "support@magdee.in", detail: "Help with the apps, billing questions, account issues", personName: "Saanvi", personInitial: "S" },
+  { label: "Just Hello", email: "hello@magdee.in", detail: "Anything else — in Tamil, English, or Hindi", personName: "Arjun", personInitial: "A" },
 ];
 
 const GAP_PX = 16;
 
-export default function InboxesSection() {
+interface Props {
+  data?: {
+    badge?: string;
+    description?: string;
+    inboxes?: Inbox[];
+  };
+}
+
+export default function InboxesSection({ data }: Props) {
+  const badge = data?.badge || "02 — Pick the right door";
+  const description = data?.description || "We split mail by topic, not by tier — there's no 'premium' address. Whichever you write to, a real person responds within a working day.";
+  const INBOXES = data?.inboxes?.length ? data.inboxes : DEFAULT_INBOXES;
+
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeDot, setActiveDot] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -79,7 +56,7 @@ export default function InboxesSection() {
       track.removeEventListener("scroll", recalc);
       window.removeEventListener("resize", recalc);
     };
-  }, []);
+  }, [INBOXES.length]);
 
   useEffect(() => {
     if (paused) return;
@@ -101,7 +78,7 @@ export default function InboxesSection() {
       }
     }, 3000);
     return () => clearInterval(id);
-  }, [paused]);
+  }, [paused, INBOXES.length]);
 
   function scrollToCard(i: number) {
     const track = trackRef.current;
@@ -118,10 +95,10 @@ export default function InboxesSection() {
           <div>
             <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
-              02 — Pick the right door
+              {badge}
             </div>
 
-            <h2 className="mt-6 font-display text-[48px] font-semibold leading-[1.02] tracking-[-0.025em] text-ink sm:text-[60px] lg:text-[72px]">
+            <h2 className="mt-6 font-display text-[48px] font-semibold leading-[1.02] tracking-tight text-ink sm:text-[60px] lg:text-[72px]">
               Six inboxes.
               <br />
               <em className="italic text-brand">One small team</em>.
@@ -129,10 +106,8 @@ export default function InboxesSection() {
           </div>
 
           <div className="flex items-center lg:justify-end">
-            <p className="max-w-[34rem] text-[15px] leading-[1.7] text-ink-soft lg:text-[16px]">
-              We split mail by topic, not by tier — there&apos;s no
-              &lsquo;premium&rsquo; address. Whichever you write to, a real
-              person responds within a working day.
+            <p className="max-w-136 text-[15px] leading-[1.7] text-ink-soft lg:text-[16px]">
+              {description}
             </p>
           </div>
         </div>
@@ -145,7 +120,7 @@ export default function InboxesSection() {
             onMouseLeave={() => setPaused(false)}
             onTouchStart={() => setPaused(true)}
             onTouchEnd={() => setPaused(false)}
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 scrollbar-none"
           >
             {[...INBOXES, ...INBOXES].map((inbox, i) => (
               <a
@@ -155,7 +130,7 @@ export default function InboxesSection() {
               >
                 <div className="flex items-center justify-between">
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#f0f2f7] text-ink-soft">
-                    {inbox.icon}
+                    <InboxIcon />
                   </span>
                   <span className="font-mono text-[11px] tracking-[0.06em] text-muted">
                     {String((i % INBOXES.length) + 1).padStart(2, "0")} / {String(INBOXES.length).padStart(2, "0")}
@@ -180,12 +155,12 @@ export default function InboxesSection() {
                   <div className="flex items-center gap-2">
                     <span
                       className="inline-flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold text-white"
-                      style={{ backgroundColor: inbox.person.color }}
+                      style={{ backgroundColor: "#3B4ED8" }}
                     >
-                      {inbox.person.initial}
+                      {inbox.personInitial}
                     </span>
                     <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-soft">
-                      {inbox.person.name} Answers
+                      {inbox.personName} Answers
                     </span>
                   </div>
                   <ArrowUpRightIcon />
@@ -215,58 +190,11 @@ export default function InboxesSection() {
   );
 }
 
-function GridIcon() {
+function InboxIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <rect x="3" y="3" width="7" height="7" rx="1" />
-      <rect x="14" y="3" width="7" height="7" rx="1" />
-      <rect x="3" y="14" width="7" height="7" rx="1" />
-      <rect x="14" y="14" width="7" height="7" rx="1" />
-    </svg>
-  );
-}
-
-function MegaphoneIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z" />
-      <path d="M16 8a4 4 0 0 1 0 8" />
-    </svg>
-  );
-}
-
-function InfinityIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M6 12c0-3 2-5 5-5s3 2 5 5 2 5 5 5-5 0-5-5-2-5-5-5-5 2-5 5z" />
-    </svg>
-  );
-}
-
-function BriefcaseIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <rect x="2" y="7" width="20" height="14" rx="2" />
-      <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-    </svg>
-  );
-}
-
-function LifeBuoyIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <circle cx="12" cy="12" r="10" />
-      <circle cx="12" cy="12" r="4" />
-      <path d="M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M14.83 9.17l4.24-4.24M14.83 9.17l3.53-3.54M4.93 19.07l4.24-4.24" />
-    </svg>
-  );
-}
-
-function SmileIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <circle cx="12" cy="12" r="10" />
-      <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" />
+      <rect x="2" y="4" width="20" height="16" rx="3" />
+      <path d="M2 7l10 7 10-7" />
     </svg>
   );
 }
