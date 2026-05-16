@@ -1,36 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import type { FAQ } from "@/app/lib/fetchContactPage";
 
-const FAQS = [
-  {
-    question: "How fast do you actually reply?",
-    answer:
-      "Within one working day, usually faster. We don't use auto-responders, ticketing systems, or 'Your call is important to us' anything. A real person reads every email, and the same person writes back.",
-  },
-  {
-    question: "Do you offer enterprise pricing?",
-    answer:
-      "Yes — for teams above 25 seats. Write to partners@magdee.in with a rough headcount and use case. We'll send a quote within a working day, no demo gauntlet required.",
-  },
-  {
-    question: "Can I visit the Coimbatore office?",
-    answer:
-      "Absolutely — we love visitors. Mail hello@magdee.in with a date, and we'll either confirm or suggest one that works. Filter coffee on us.",
-  },
-  {
-    question: "Are you hiring?",
-    answer:
-      "Quietly, always. If you're a builder who values craft over churn, send a note and a portfolio (or a project, or a thing you wrote) to careers@magdee.in. We read every one.",
-  },
-  {
-    question: "Will you ship to my country / language?",
-    answer:
-      "Today: India + iOS + Tamil/English/Hindi. On the roadmap: more languages first, more platforms second. Tell us where you are — we keep a quiet list and write to people in the order they asked.",
-  },
+const DEFAULT_FAQS: FAQ[] = [
+  { question: "How fast do you actually reply?", answer: "Within one working day, usually faster. We don't use auto-responders, ticketing systems, or 'Your call is important to us' anything. A real person reads every email, and the same person writes back." },
+  { question: "Do you offer enterprise pricing?", answer: "Yes — for teams above 25 seats. Write to partners@magdee.in with a rough headcount and use case. We'll send a quote within a working day, no demo gauntlet required." },
+  { question: "Can I visit the Coimbatore office?", answer: "Absolutely — we love visitors. Mail hello@magdee.in with a date, and we'll either confirm or suggest one that works. Filter coffee on us." },
+  { question: "Are you hiring?", answer: "Quietly, always. If you're a builder who values craft over churn, send a note and a portfolio (or a project, or a thing you wrote) to careers@magdee.in. We read every one." },
+  { question: "Will you ship to my country / language?", answer: "Today: India + iOS + Tamil/English/Hindi. On the roadmap: more languages first, more platforms second. Tell us where you are — we keep a quiet list and write to people in the order they asked." },
 ];
 
-export default function FAQSection() {
+interface Props {
+  data?: {
+    badge?: string;
+    description?: string;
+    faqs?: FAQ[];
+  };
+}
+
+export default function FAQSection({ data }: Props) {
+  const badge = data?.badge || "04 — Before You Write";
+  const description = data?.description || "Most questions we get are these five. If yours isn't, write anyway — we'd genuinely rather hear from you.";
+  const FAQS = data?.faqs?.length ? data.faqs : DEFAULT_FAQS;
+
   const [openIndex, setOpenIndex] = useState<number>(0);
 
   return (
@@ -41,18 +34,17 @@ export default function FAQSection() {
           <div className="lg:sticky lg:top-24">
             <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
-              04 — Before You Write
+              {badge}
             </div>
 
-            <h2 className="mt-6 font-display text-[48px] font-semibold leading-[1.02] tracking-[-0.025em] text-ink sm:text-[60px] lg:text-[72px]">
+            <h2 className="mt-6 font-display text-[48px] font-semibold leading-[1.02] tracking-tight text-ink sm:text-[60px] lg:text-[72px]">
               Quick
               <br />
               <em className="italic text-brand">answers</em>.
             </h2>
 
-            <p className="mt-6 max-w-[30rem] text-[15px] leading-[1.7] text-ink-soft">
-              Most questions we get are these five. If yours isn&apos;t, write
-              anyway — we&apos;d genuinely rather hear from you.
+            <p className="mt-6 max-w-120 text-[15px] leading-[1.7] text-ink-soft">
+              {description}
             </p>
           </div>
 
@@ -61,10 +53,7 @@ export default function FAQSection() {
             {FAQS.map((faq, i) => {
               const isOpen = openIndex === i;
               return (
-                <li
-                  key={i}
-                  className="rounded-2xl border border-line bg-white"
-                >
+                <li key={i} className="rounded-2xl border border-line bg-white">
                   <button
                     type="button"
                     onClick={() => setOpenIndex(isOpen ? -1 : i)}
@@ -89,7 +78,7 @@ export default function FAQSection() {
 
                   {isOpen && (
                     <div className="px-6 pb-6">
-                      <div className="pl-[34px] text-[14.5px] leading-[1.7] text-ink-soft">
+                      <div className="pl-8.5 text-[14.5px] leading-[1.7] text-ink-soft">
                         {faq.answer}
                       </div>
                     </div>
