@@ -159,3 +159,263 @@ body {
     animation: none;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   Article body — renders any TipTap HTML output
+   ══════════════════════════════════════════════════════════════════════ */
+
+.article-body {
+  color: #1e3a5f;
+  font-size: 15.5px;
+  line-height: 26px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Block spacing */
+.article-body > * { margin-top: 0; margin-bottom: 0; }
+.article-body > * + * { margin-top: 14px; }
+
+/* ── Headings ── */
+.article-body h1,
+.article-body h2,
+.article-body h3,
+.article-body h4,
+.article-body h5,
+.article-body h6 {
+  font-weight: 700;
+  color: #0a192f;
+  line-height: 1.25;
+}
+
+.article-body h1 { font-size: 36px; letter-spacing: -0.9px; margin-top: 48px; }
+
+.article-body h2 {
+  font-size: 30px;
+  line-height: 38px;
+  letter-spacing: -0.8px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid #e2e8f0;
+}
+.article-body h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.article-body h3 { font-size: 21px; line-height: 28px; letter-spacing: -0.4px; margin-top: 28px; }
+.article-body h4 { font-size: 18px; margin-top: 24px; }
+.article-body h5,
+.article-body h6 { font-size: 15.5px; margin-top: 20px; }
+
+/* TipTap wraps headings in <strong> — don't double-bold */
+.article-body h1 strong, .article-body h2 strong,
+.article-body h3 strong, .article-body h4 strong,
+.article-body h5 strong, .article-body h6 strong {
+  font-weight: inherit;
+  color: inherit;
+}
+
+/* ── Paragraphs ── */
+.article-body p { font-size: 15.5px; line-height: 26px; color: #1e3a5f; }
+
+/* ── Inline styles ── */
+.article-body strong { font-weight: 700; color: #0a192f; }
+.article-body em     { font-style: italic; }
+.article-body u      { text-decoration: underline; text-underline-offset: 2px; }
+.article-body s      { text-decoration: line-through; opacity: 0.55; }
+.article-body mark   { background: #fef08a; padding: 1px 3px; border-radius: 2px; color: #713f12; }
+.article-body sub    { vertical-align: sub; font-size: 0.78em; }
+.article-body sup    { vertical-align: super; font-size: 0.78em; }
+
+/* ── Links ── */
+.article-body a { color: #1e40af; font-weight: 600; text-decoration: none; }
+.article-body a:hover { text-decoration: underline; }
+
+/* ── Horizontal rule ── */
+.article-body hr { border: none; border-top: 1px solid #e2e8f0; margin: 32px 0; }
+
+/* ── Code blocks ── */
+.article-body pre {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.article-body pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  line-height: 21px;
+  color: #0a192f;
+  white-space: pre;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+.article-body code:not(pre code) {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.875em;
+  color: #be123c;
+}
+
+/* ── Blockquote ── */
+.article-body blockquote {
+  position: relative;
+  padding: 8px 0 8px 28px;
+  margin: 28px 0;
+  border: none;
+}
+/* Blue vertical bar — avoids Tailwind border-width reset */
+.article-body blockquote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #1e40af;
+  border-radius: 2px;
+}
+.article-body blockquote > * + * { margin-top: 8px; }
+.article-body blockquote > p,
+.article-body blockquote p {
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 32px;
+  letter-spacing: -0.4px;
+  color: #0a192f;
+}
+
+/* ── Unordered list ── */
+.article-body ul:not([data-type="taskList"]) {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.article-body ul:not([data-type="taskList"]) > li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  line-height: 26px;
+  color: #1e3a5f;
+}
+.article-body ul:not([data-type="taskList"]) > li::before {
+  content: "—";
+  color: #718096;
+  flex-shrink: 0;
+  line-height: 26px;
+}
+
+/* ── Ordered list ── */
+.article-body ol { padding-left: 24px; display: flex; flex-direction: column; gap: 10px; }
+.article-body ol > li { list-style: decimal; line-height: 26px; color: #1e3a5f; }
+
+/* ── Task list (TipTap checklist) ── */
+.article-body ul[data-type="taskList"] {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.article-body ul[data-type="taskList"] > li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 26px;
+}
+.article-body ul[data-type="taskList"] > li > label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: default;
+  user-select: none;
+}
+.article-body ul[data-type="taskList"] input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 5px;
+  flex-shrink: 0;
+  accent-color: #1e40af;
+  cursor: default;
+}
+.article-body ul[data-type="taskList"] li[data-checked="true"] p,
+.article-body ul[data-type="taskList"] li[data-checked="true"] > div {
+  text-decoration: line-through;
+  color: #718096;
+}
+
+/* ── Images ── */
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  display: block;
+}
+.article-body figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.article-body figcaption {
+  font-size: 13px;
+  color: #718096;
+  text-align: center;
+}
+
+/* ── Tables ── */
+.article-body .table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+  line-height: 22px;
+}
+.article-body thead { background: #f8fafc; }
+.article-body th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: #4a5568;
+  border-bottom: 2px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+.article-body td {
+  padding: 10px 14px;
+  color: #1e3a5f;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+.article-body th:last-child,
+.article-body td:last-child { border-right: none; }
+.article-body tr:last-child td { border-bottom: none; }
+.article-body tr:nth-child(even) td { background: #f8fafc; }
+.article-body td p, .article-body th p { margin: 0; font-size: inherit; line-height: inherit; }
+
+/* ── Nested list / paragraph cleanup ── */
+.article-body li > p { margin: 0; }
+.article-body li > p + p { margin-top: 6px; }
