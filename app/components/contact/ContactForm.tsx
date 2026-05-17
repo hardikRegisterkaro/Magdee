@@ -11,37 +11,57 @@ const CATEGORIES = [
   { label: "Just hello", email: "hello@magdee.in", person: "Arjun" },
 ];
 
+type Status = "idle" | "loading" | "success" | "error";
+
 export default function ContactForm() {
   const [category, setCategory] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const active = CATEGORIES[category];
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
-    const subject = encodeURIComponent(`[${active.label}] Note from ${name || "MagDee.in"}`);
-    const lines = [
-      `Hi MagDee,`,
-      ``,
-      message,
-      ``,
-      `—`,
-      `Name: ${name}`,
-      `Email: ${email}`,
-      company ? `Company / Role: ${company}` : "",
-      `Topic: ${active.label}`,
-    ].filter(Boolean);
-    const body = encodeURIComponent(lines.join("\n"));
-    window.location.href = `mailto:${active.email}?subject=${subject}&body=${body}`;
+    setStatus("loading");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          companyName: company.trim() || undefined,
+          message: message.trim(),
+          serviceSelected: active.label,
+          phoneNo: "Not provided",
+          region: "India",
+          leadSource: "Contact Form",
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+        setName(""); setEmail(""); setCompany(""); setMessage(""); setCategory(0);
+      } else {
+        setStatus("error");
+        setErrorMsg(data.message || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Please try again.");
+    }
   }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative w-full max-w-[560px] rounded-3xl border border-line bg-white px-6 py-7 shadow-[0_24px_64px_-20px_rgba(15,23,42,0.18)] sm:px-7 sm:py-7"
+      className="relative w-full max-w-140 rounded-3xl border border-line bg-white px-6 py-7 shadow-[0_24px_64px_-20px_rgba(15,23,42,0.18)] sm:px-7 sm:py-7"
     >
       {/* Header */}
       <div className="flex items-start justify-between">
@@ -137,7 +157,18 @@ export default function ContactForm() {
       </div>
 
       {/* Privacy notice */}
-      <div className="mt-4 flex items-start gap-2 rounded-lg border border-line bg-surface px-3 py-2.5 text-[12.5px] leading-[1.5] text-ink-soft">
+      {status === "error" && errorMsg && (
+        <p className="mt-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-[12.5px] leading-normal text-red-600">
+          {errorMsg}
+        </p>
+      )}
+      {status === "success" && (
+        <p className="mt-3 rounded-lg border border-[#bfe6cd] bg-[#e8f7ee] px-3 py-2 text-[12.5px] leading-normal text-[#176c3a]">
+          Message sent! {active.person} will reply within one working day.
+        </p>
+      )}
+
+      <div className="mt-4 flex items-start gap-2 rounded-lg border border-line bg-surface px-3 py-2.5 text-[12.5px] leading-normal text-ink-soft">
         <InfoIcon />
         <p>
           Your email goes to{" "}
@@ -154,10 +185,11 @@ export default function ContactForm() {
         </p>
         <button
           type="submit"
-          className="inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-[13px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black"
+          disabled={status === "loading"}
+          className="inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-[13px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black disabled:opacity-60"
         >
-          Send message
-          <SendIcon />
+          {status === "loading" ? "Sending…" : "Send message"}
+          {status !== "loading" && <SendIcon />}
         </button>
       </div>
     </form>
