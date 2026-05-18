@@ -1,4 +1,5 @@
 import { Check, Map } from "lucide-react";
+import Reveal from "./Reveal";
 
 const HQ_FACTS = [
   "03 languages spoken daily",
@@ -10,41 +11,51 @@ export default function RootedSection() {
   return (
     <section id="rooted" className="relative">
       <div className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-28">
-        <div className="flex justify-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-ink-soft shadow-[0_1px_0_rgba(15,23,42,0.04)]">
-            <span aria-hidden className="text-[13px] leading-none">
-              🇮🇳
+        <Reveal>
+          <div className="flex justify-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-ink-soft shadow-[0_1px_0_rgba(15,23,42,0.04)]">
+              <span aria-hidden className="text-[13px] leading-none">
+                🇮🇳
+              </span>
+              Rooted in India · Tamil Nadu
             </span>
-            Rooted in India · Tamil Nadu
-          </span>
-        </div>
+          </div>
+        </Reveal>
 
-        <h2 className="mx-auto mt-8 max-w-4xl text-center font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[56px] lg:text-[72px]">
-          Rooted in India.
-          <br />
-          <span
-            className="italic bg-clip-text text-transparent"
-            style={{
-              backgroundImage:
-                "linear-gradient(135deg, #0053D0 14.29%, #1651A9 50%, #0A3465 85.71%)",
-              paddingRight: "0.08em",
-            }}
-          >
-            Built for
-          </span>{" "}
-          the world.
-        </h2>
+        <Reveal delay={80}>
+          <h2 className="mx-auto mt-8 max-w-4xl text-center font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[56px] lg:text-[72px]">
+            Rooted in India.
+            <br />
+            <span
+              className="italic bg-clip-text text-transparent"
+              style={{
+                backgroundImage:
+                  "linear-gradient(135deg, #0053D0 14.29%, #1651A9 50%, #0A3465 85.71%)",
+                paddingRight: "0.08em",
+              }}
+            >
+              Built for
+            </span>{" "}
+            the world.
+          </h2>
+        </Reveal>
 
-        <p className="mx-auto mt-6 max-w-2xl text-center text-[15px] leading-[1.6] text-ink-soft sm:text-[16px]">
-          We&apos;re a small team in Coimbatore writing software that takes its
-          time. India taught us to live among many languages, many constraints,
-          many ways of doing the same thing — and to make beautiful things
-          inside them.
-        </p>
+        <Reveal delay={160}>
+          <p className="mx-auto mt-6 max-w-2xl text-center text-[15px] leading-[1.6] text-ink-soft sm:text-[16px]">
+            We&apos;re a small team in Coimbatore writing software that takes its
+            time. India taught us to live among many languages, many constraints,
+            many ways of doing the same thing — and to make beautiful things
+            inside them.
+          </p>
+        </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10">
-          <HeadquartersCard />
-          <FoundersCard />
+          <Reveal delay={120}>
+            <HeadquartersCard />
+          </Reveal>
+          <Reveal delay={200}>
+            <FoundersCard />
+          </Reveal>
         </div>
       </div>
     </section>
@@ -54,7 +65,7 @@ export default function RootedSection() {
 function HeadquartersCard() {
   return (
     <article
-      className="relative flex flex-col justify-between overflow-hidden rounded-3xl p-7 text-white sm:p-8"
+      className="transition-transform duration-300 hover:-translate-y-1 relative flex flex-col justify-between overflow-hidden rounded-3xl p-7 text-white sm:p-8"
       style={{
         background:
           "linear-gradient(135deg, #0053D0 14.29%, #1651A9 50%, #0A3465 85.71%)",
@@ -106,7 +117,7 @@ function HeadquartersCard() {
 
 function FoundersCard() {
   return (
-    <article className="flex flex-col justify-between rounded-3xl border border-line bg-surface p-7 sm:p-9">
+    <article className="transition-transform duration-300 hover:-translate-y-1 flex flex-col justify-between rounded-3xl border border-line bg-surface p-7 sm:p-9">
       <div>
         <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
           Founders&apos; note · 2025

@@ -1,4 +1,5 @@
 import { ArrowRight, Brain, Check, Mic } from "lucide-react";
+import Reveal from "./Reveal";
 
 const OUTPUT_ITEMS = [
   { label: "Decision", body: "Ship v0.4 Fri", dot: "#16a34a" },
@@ -10,22 +11,32 @@ export default function HowItWorksSection() {
   return (
     <section id="how-it-works" className="relative">
       <div className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-28">
-        <div className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.18em] text-brand">
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
-          03 — How it works
-        </div>
+        <Reveal>
+          <div className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.18em] text-brand">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
+            03 — How it works
+          </div>
+        </Reveal>
 
-        <h2 className="mt-5 max-w-4xl font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[52px] lg:text-[64px]">
-          From <span className="italic text-brand">noise</span> to a next step,
-          in one calm breath.
-        </h2>
+        <Reveal delay={80}>
+          <h2 className="mt-5 max-w-4xl font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[52px] lg:text-[64px]">
+            From <span className="italic text-brand">noise</span> to a next step,
+            in one calm breath.
+          </h2>
+        </Reveal>
 
         <div className="mt-12 grid grid-cols-1 items-stretch gap-5 lg:mt-16 lg:grid-cols-[1fr_auto_1.05fr_auto_1fr] lg:gap-3">
-          <InputCard />
+          <Reveal delay={150} className="h-full">
+            <InputCard />
+          </Reveal>
           <Connector />
-          <CoreCard />
+          <Reveal delay={300} className="h-full">
+            <CoreCard />
+          </Reveal>
           <Connector />
-          <OutputCard />
+          <Reveal delay={460} className="h-full">
+            <OutputCard />
+          </Reveal>
         </div>
       </div>
     </section>
@@ -34,7 +45,7 @@ export default function HowItWorksSection() {
 
 function Connector() {
   return (
-    <div className="flex items-center justify-center lg:px-1">
+    <div className="flex h-full items-center justify-center lg:px-1">
       <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface text-ink shadow-[0_1px_0_rgba(15,23,42,0.04)] lg:h-11 lg:w-11">
         <ArrowRight size={16} className="lg:rotate-0 rotate-90" />
       </span>
@@ -44,7 +55,7 @@ function Connector() {
 
 function InputCard() {
   return (
-    <article className="flex flex-col rounded-3xl border border-line bg-surface p-6 sm:p-7">
+    <article className="transition-transform duration-300 hover:-translate-y-1 flex flex-col rounded-3xl border border-line bg-surface p-6 sm:p-7">
       <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#e0524e]">
         Input
       </p>
@@ -101,7 +112,7 @@ function FilePill({
 function CoreCard() {
   return (
     <article
-      className="relative flex aspect-square flex-col items-center justify-between overflow-hidden rounded-3xl p-7 text-white sm:p-8"
+      className="transition-transform duration-300 hover:-translate-y-1 relative flex aspect-square flex-col items-center justify-between overflow-hidden rounded-3xl p-7 text-white sm:p-8"
       style={{
         background:
           "linear-gradient(135deg, #0053D0 14.29%, #1651A9 50%, #0A3465 85.71%)",
@@ -157,7 +168,7 @@ function CoreCard() {
 
 function OutputCard() {
   return (
-    <article className="flex flex-col rounded-3xl border border-line bg-surface p-6 sm:p-7">
+    <article className="transition-transform duration-300 hover:-translate-y-1 flex flex-col rounded-3xl border border-line bg-surface p-6 sm:p-7">
       <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#0f9d6e]">
         Output
       </p>

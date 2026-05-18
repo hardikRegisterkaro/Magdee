@@ -6,6 +6,7 @@ import {
   Shield,
   Sparkles,
 } from "lucide-react";
+import Reveal from "./Reveal";
 
 const MEETORY_FEATURES = [
   "Voice-first hands-free",
@@ -20,35 +21,53 @@ export default function SuiteSection() {
   return (
     <section id="suite" className="relative">
       <div className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-28">
-        <div className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.18em] text-brand">
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
-          02 — The suite
-        </div>
+        <Reveal>
+          <div className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.18em] text-brand">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
+            02 — The suite
+          </div>
+        </Reveal>
 
         <div className="mt-5 grid grid-cols-1 items-end gap-6 lg:grid-cols-2 lg:gap-10">
-          <h2 className="font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[52px] lg:text-[60px]">
-            Three products,{" "}
-            <span className="italic text-brand">one quiet</span> mind.
-          </h2>
-          <p className="max-w-md text-[15px] leading-[1.6] text-ink-soft lg:justify-self-end">
-            Built on a shared foundation — voice, memory, restraint. Each
-            product is a complete, opinionated answer to a single question.
-          </p>
+          <Reveal delay={80}>
+            <h2 className="font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[52px] lg:text-[60px]">
+              Three products,{" "}
+              <span className="italic text-brand">one quiet</span> mind.
+            </h2>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="max-w-md text-[15px] leading-[1.6] text-ink-soft lg:justify-self-end">
+              Built on a shared foundation — voice, memory, restraint. Each
+              product is a complete, opinionated answer to a single question.
+            </p>
+          </Reveal>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
-          <MeeToryCard />
+          <Reveal delay={80} >
+            <MeeToryCard />
+          </Reveal>
 
           <div className="grid grid-cols-1 gap-5 lg:gap-6">
-            <VOChefCard />
-            <EllamlyCard />
+            <Reveal delay={160} >
+              <VOChefCard />
+            </Reveal>
+            <Reveal delay={240} >
+              <EllamlyCard />
+            </Reveal>
           </div>
         </div>
 
         <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3 lg:mt-6 lg:gap-6">
-          <MetricCard />
-          <WorkshopCard />
-          <PrivacyCard />
+          <Reveal delay={80} >
+            <MetricCard />
+          </Reveal>
+          <Reveal delay={160} >
+            <WorkshopCard />
+          </Reveal>
+          <Reveal delay={240} >
+            <PrivacyCard />
+          </Reveal>
         </div>
       </div>
     </section>
@@ -58,7 +77,7 @@ export default function SuiteSection() {
 function MeeToryCard() {
   return (
     <article
-      className="relative flex min-h-[440px] flex-col overflow-hidden rounded-3xl p-7 text-white sm:p-9 lg:min-h-[560px]"
+      className="transition-transform duration-300 hover:-translate-y-1 relative flex min-h-[440px] flex-col overflow-hidden rounded-3xl p-7 text-white sm:p-9 lg:min-h-[560px]"
       style={{
         background:
           "linear-gradient(135deg, #1f5cff 0%, #1a3fbf 60%, #15348f 100%)",
@@ -128,7 +147,7 @@ function MeeToryCard() {
 function VOChefCard() {
   return (
     <article
-      className="relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl p-7 text-white lg:min-h-[270px]"
+      className="transition-transform duration-300 hover:-translate-y-1 relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl p-7 text-white lg:min-h-[270px]"
       style={{
         background:
           "linear-gradient(135deg, #ff6a3d 0%, #ff8a4d 50%, #f5b069 100%)",
@@ -176,7 +195,7 @@ function VOChefCard() {
 function EllamlyCard() {
   return (
     <article
-      className="relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl p-7 text-white lg:min-h-[270px]"
+      className="transition-transform duration-300 hover:-translate-y-1 relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl p-7 text-white lg:min-h-[270px]"
       style={{
         background:
           "linear-gradient(135deg, #7c5cff 0%, #6a4eea 55%, #4b39c4 100%)",
@@ -227,7 +246,7 @@ function EllamlyCard() {
 
 function MetricCard() {
   return (
-    <article className="flex flex-col rounded-3xl border border-line bg-surface p-6">
+    <article className="transition-transform duration-300 hover:-translate-y-1 flex flex-col rounded-3xl border border-line bg-surface p-6">
       <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-brand">
         <Sparkles size={12} />
         Today
@@ -257,7 +276,7 @@ function MetricCard() {
 
 function WorkshopCard() {
   return (
-    <article className="flex flex-col justify-between rounded-3xl border-[2.5px] border-dashed border-line bg-surface/40 p-6">
+    <article className="transition-transform duration-300 hover:-translate-y-1 flex flex-col justify-between rounded-3xl border-[2.5px] border-dashed border-line bg-surface/40 p-6">
       <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-ink-soft">
         <Plus size={12} />
         In the workshop
@@ -276,7 +295,7 @@ function WorkshopCard() {
 
 function PrivacyCard() {
   return (
-    <article className="flex flex-col justify-between rounded-3xl bg-[#0b1020] p-6 text-white">
+    <article className="transition-transform duration-300 hover:-translate-y-1 flex flex-col justify-between rounded-3xl bg-[#0b1020] p-6 text-white">
       <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-[#7ce0a3]">
         <Shield size={12} />
         Privacy
