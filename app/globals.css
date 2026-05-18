@@ -89,6 +89,38 @@ body {
   }
 }
 
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.animate-float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hover-lift {
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-soft {
+    animation: none;
+  }
+  .hover-lift {
+    transition: none;
+  }
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
 /* ── Blog detail panel animations ── */
 @keyframes blog-slide-left {
   from { opacity: 0; transform: translateX(-18px); }

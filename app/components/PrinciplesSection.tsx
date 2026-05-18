@@ -1,4 +1,5 @@
 import { Brain, Compass, Shield, Waves, type LucideIcon } from "lucide-react";
+import Reveal from "./Reveal";
 
 type Principle = {
   overline: string;
@@ -47,25 +48,30 @@ export default function PrinciplesSection() {
   return (
     <section id="principles" className="relative">
       <div className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-28">
-        <div className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.18em] text-brand">
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
-          01 — Principles
-        </div>
+        <Reveal>
+          <div className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.18em] text-brand">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
+            01 — Principles
+          </div>
+        </Reveal>
 
-        <h2 className="mt-5 max-w-4xl font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[56px] lg:text-[68px]">
-          Four words we measure{" "}
-          <span className="italic text-brand">everything</span>{" "}
-          against.
-        </h2>
+        <Reveal delay={80}>
+          <h2 className="mt-5 max-w-4xl font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[56px] lg:text-[68px]">
+            Four words we measure{" "}
+            <span className="italic text-brand">everything</span>{" "}
+            against.
+          </h2>
+        </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-6">
           {PRINCIPLES.map((p, i) => (
-            <PrincipleCard
-              key={p.title}
-              principle={p}
-              index={i + 1}
-              total={PRINCIPLES.length}
-            />
+            <Reveal key={p.title} delay={150 + i * 90}>
+              <PrincipleCard
+                principle={p}
+                index={i + 1}
+                total={PRINCIPLES.length}
+              />
+            </Reveal>
           ))}
         </div>
       </div>
