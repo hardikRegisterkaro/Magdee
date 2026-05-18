@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import TableOfContents, { TocItem } from "@/app/components/blog/TableOfContents";
 import NewsletterMini from "@/app/components/blog/NewsletterMini";
 import MobileSidebarMenu from "@/app/components/blog/MobileSidebarMenu";
+import BlogFAQ from "@/app/components/blog/BlogFAQ";
 
 /* ─── Helpers ─────────────────────────────────────────────────────────── */
 
@@ -92,11 +93,6 @@ function wrapTables(html: string): string {
     .replace(/<\/table>/gi, "</table></div>");
 }
 
-function stripLeadingParagraphs(html: string): string {
-  // Remove leading <p> elements that appear before the first heading
-  return html.replace(/^(\s*<p[^>]*>[\s\S]*?<\/p>\s*)+(?=<h[2-6])/i, "").trimStart();
-}
-
 function buildSidebarSections(
   posts: { slug: string; title: string; category: { name: string }[] }[],
   currentSlug: string
@@ -158,9 +154,8 @@ export default async function BlogDetailPage({
 
   // Content processing
   const rawContent = post.content ?? "";
-  const strippedContent = stripLeadingParagraphs(rawContent);
-  const processedContent = wrapTables(injectHeadingIds(liftItalicQuotes(strippedContent)));
-  const tocItems = extractTocItems(strippedContent);
+  const processedContent = wrapTables(injectHeadingIds(liftItalicQuotes(rawContent)));
+  const tocItems = extractTocItems(rawContent);
   const readTimeMinutes = computeReadTime(rawContent);
 
   // Category
@@ -312,11 +307,27 @@ export default async function BlogDetailPage({
           <div className="h-px max-w-[730px] bg-[#e2e8f0]" />
           <div className="h-[32px]" />
 
+          {/* Featured image */}
+          {post.featuredImage && (
+            <div className="mb-8 max-w-182.5">
+              <img
+                src={post.featuredImage}
+                alt={post.title}
+                className="w-full rounded-2xl border border-[#e2e8f0] object-cover"
+              />
+            </div>
+          )}
+
           {/* ── Article body ── */}
           <div
             className="article-body max-w-[730px]"
             dangerouslySetInnerHTML={{ __html: processedContent }}
           />
+
+          {/* FAQ section */}
+          {post.faq_items?.length > 0 && (
+            <BlogFAQ items={post.faq_items} />
+          )}
 
           {/* 48px gap + divider + 24px */}
           <div className="h-[48px]" />
@@ -367,7 +378,7 @@ export default async function BlogDetailPage({
           <div className="h-[32px]" />
 
           {/* Helpful reaction row */}
-          <div className="flex max-w-[730px] items-center justify-center">
+          {/* <div className="flex max-w-[730px] items-center justify-center">
             <div className="inline-flex items-center gap-[12px] rounded-full border border-[#e2e8f0] bg-white py-[8px] pl-[18px] pr-[8px] shadow-[0px_2px_6px_0px_rgba(10,25,47,0.04)]">
               <span className="text-[13px] font-medium text-[#0a192f]">Was this helpful?</span>
               <div className="flex items-center gap-[6px]">
@@ -388,7 +399,7 @@ export default async function BlogDetailPage({
                 ))}
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="h-[64px]" />
         </main>

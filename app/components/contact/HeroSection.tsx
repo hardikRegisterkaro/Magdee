@@ -1,3 +1,6 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
 import ContactForm from "./ContactForm";
 import type { ContactCard } from "@/app/lib/fetchContactPage";
 
@@ -21,6 +24,8 @@ export default function ContactHero({ data }: Props) {
   const hours = data?.hours || "Mon-Fri · 09:00-19:00 IST";
   const cards = data?.contactCards?.length ? data.contactCards : DEFAULT_CARDS;
 
+  const { ref, visible } = useReveal(0.1);
+
   return (
     <section className="relative overflow-hidden">
       <div
@@ -32,16 +37,22 @@ export default function ContactHero({ data }: Props) {
         }}
       />
 
-      <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+      <div ref={ref} className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 items-start gap-12 pb-16 pt-16 sm:pt-20 lg:grid-cols-[1fr_1.05fr] lg:gap-16 lg:pb-24 lg:pt-24">
           {/* Left */}
           <div>
-            <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
+            <div
+              className={`reveal-up flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "50ms" }}
+            >
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
               {badge}
             </div>
 
-            <h1 className="mt-7 font-display text-[56px] font-semibold leading-[0.98] tracking-tight text-ink sm:text-[72px] lg:text-[88px]">
+            <h1
+              className={`reveal-up mt-7 font-display text-[56px] font-semibold leading-[0.98] tracking-tight text-ink sm:text-[72px] lg:text-[88px]${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "150ms" }}
+            >
               Say <em className="italic text-brand">hi</em>.
               <br />
               One of us
@@ -49,13 +60,19 @@ export default function ContactHero({ data }: Props) {
               reads it.
             </h1>
 
-            <p className="mt-7 max-w-136 text-[15px] leading-[1.7] text-ink-soft sm:text-[16px]">
+            <p
+              className={`reveal-up mt-7 max-w-136 text-[15px] leading-[1.7] text-ink-soft sm:text-[16px]${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "250ms" }}
+            >
               There&apos;s no support queue, no ticketing system, no chatbot.
               Three founders and a small team handle every email — usually
               within a working day.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div
+              className={`reveal-up mt-6 flex flex-wrap items-center gap-3${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "340ms" }}
+            >
               <span className="inline-flex items-center gap-2 rounded-full border border-[#bfe6cd] bg-[#e8f7ee] px-3 py-1.5 text-[10.5px] font-medium uppercase tracking-[0.16em] text-[#176c3a]">
                 <span className="relative inline-flex h-1.5 w-1.5">
                   <span className="absolute inset-0 animate-ping rounded-full bg-[#22a55b] opacity-60" />
@@ -72,9 +89,10 @@ export default function ContactHero({ data }: Props) {
               {cards.map((card, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3 rounded-2xl border border-line bg-white px-4 py-3.5"
+                  className={`group reveal-up flex items-start gap-3 rounded-2xl border border-line bg-white px-4 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/20 hover:shadow-[0_8px_24px_-8px_rgba(30,64,175,0.12)]${visible ? " is-visible" : ""}`}
+                  style={{ transitionDelay: `${440 + i * 80}ms` }}
                 >
-                  <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#f0f2f7] text-ink-soft">
+                  <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#f0f2f7] text-ink-soft transition-colors duration-200 group-hover:bg-brand/8 group-hover:text-brand">
                     <CardIcon index={i} />
                   </span>
                   <div className="min-w-0">
