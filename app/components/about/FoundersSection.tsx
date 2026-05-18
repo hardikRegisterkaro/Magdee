@@ -9,17 +9,10 @@ const AVATAR_COLORS = ["#3B4ED8", "#E8852A", "#7B42E8", "#16A34A", "#DC2626"];
 
 const FALLBACK_MEMBERS = [
   {
-    name: "Arjun Subramanian",
+    name: "Vivek",
     designation: "Product",
     bio: "Ex-product at a payments unicorn. Cooks better than he codes.",
     location: "COIMBATORE",
-    imgUrl: "",
-  },
-  {
-    name: "Saanvi Iyer",
-    designation: "Engineering",
-    bio: "Linguist-turned-ML engineer. Writes documentation like poetry.",
-    location: "MADURAI → COIMBATORE",
     imgUrl: "",
   },
   {
