@@ -193,9 +193,10 @@ export default async function BlogDetailPage({
 
         {/* ── LEFT SIDEBAR ─────────────────────────────────── */}
         <aside
-          className="blog-slide-left hidden w-[268px] shrink-0 flex-col gap-[20px] pb-[48px] pl-[32px] pr-[16px] pt-[32px] lg:flex"
+          className="blog-slide-left hidden w-[268px] shrink-0 flex-col pb-[48px] pl-[32px] pr-[16px] pt-[32px] lg:flex"
           style={{ animationDelay: "0ms" }}
         >
+          <div className="sticky top-[88px] flex flex-col gap-[20px]">
           {/* Nav sections */}
           {sidebarSections.map((section) => (
             <div key={section.label}>
@@ -217,6 +218,7 @@ export default async function BlogDetailPage({
               </div>
             </div>
           ))}
+          </div>
         </aside>
 
         {/* ── Hatch divider: left │ main ── */}

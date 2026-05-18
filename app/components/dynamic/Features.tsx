@@ -1,3 +1,6 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
 import {
   CloudOff,
   Globe,
@@ -14,19 +17,15 @@ import type { FeatureCard } from "@/app/lib/fetchServicePage";
 type Props = { features: FeatureCard[] };
 
 const ICONS: Record<string, LucideIcon> = {
-  Lock,
-  Globe,
-  CloudOff,
-  Mic,
-  ShieldCheck,
-  Sparkles,
-  Zap,
+  Lock, Globe, CloudOff, Mic, ShieldCheck, Sparkles, Zap,
 };
 
 export default function DynamicFeatures({ features }: Props) {
+  const { ref, visible } = useReveal(0.08);
+
   if (!features?.length) return null;
   return (
-    <section className="relative">
+    <section className="relative" ref={ref}>
       <span
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-line"
@@ -34,13 +33,13 @@ export default function DynamicFeatures({ features }: Props) {
       <div className="relative mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <ul className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {features.map((feat, i) => {
-            const Icon: ComponentType<SVGProps<SVGSVGElement>> =
-              ICONS[feat.iconName] ?? Sparkles;
+            const Icon: ComponentType<SVGProps<SVGSVGElement>> = ICONS[feat.iconName] ?? Sparkles;
             return (
               <li key={i}>
                 <a
                   href={feat.href || "#"}
-                  className="group block h-full rounded-2xl border border-line bg-surface p-6 transition-colors hover:border-ink/20"
+                  className={`reveal-up group block h-full rounded-2xl border border-line bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:border-ink/20 hover:shadow-[0_8px_24px_-8px_rgba(11,16,32,0.1)]${visible ? " is-visible" : ""}`}
+                  style={{ transitionDelay: `${60 + i * 90}ms` }}
                 >
                   <div className="flex items-start justify-between">
                     <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-ink text-white">
@@ -72,13 +71,7 @@ export default function DynamicFeatures({ features }: Props) {
 function ArrowIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-      <path
-        d="M3 8h10M9 4l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

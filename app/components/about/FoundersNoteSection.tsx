@@ -1,14 +1,26 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
+
 export default function FoundersNoteSection() {
+  const { ref, visible } = useReveal(0.08);
+
   return (
-    <section id="founders" className="relative bg-background">
+    <section id="founders" className="relative bg-background" ref={ref}>
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
-        <div className="rounded-3xl border border-line bg-white shadow-[0_4px_40px_-16px_rgba(15,23,42,0.1)]">
+        <div
+          className={`reveal-up rounded-3xl border border-line bg-white shadow-[0_4px_40px_-16px_rgba(15,23,42,0.1)]${visible ? " is-visible" : ""}`}
+          style={{ transitionDelay: "60ms" }}
+        >
           {/* Top accent line */}
           <div className="h-[3px] w-full bg-brand" />
 
           <div className="grid grid-cols-1 divide-y divide-line lg:grid-cols-[280px_1fr] lg:divide-x lg:divide-y-0">
             {/* Left — founder card */}
-            <div className="px-8 py-10">
+            <div
+              className={`reveal-left px-8 py-10${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "140ms" }}
+            >
               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
                 — Founder&apos;s Note
               </p>
@@ -58,9 +70,11 @@ export default function FoundersNoteSection() {
             </div>
 
             {/* Right — quote */}
-            <div className="flex flex-col justify-between px-8 py-10 lg:px-12 lg:py-12">
+            <div
+              className={`reveal-right flex flex-col justify-between px-8 py-10 lg:px-12 lg:py-12${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "260ms" }}
+            >
               <div>
-                {/* Quote marks */}
                 <svg width="32" height="24" viewBox="0 0 32 24" fill="none" aria-hidden>
                   <path d="M0 24V14.4C0 6.4 4.8 1.6 14.4 0l1.6 2.4C10.4 3.6 7.2 6.8 6.4 12H12V24H0ZM20 24V14.4C20 6.4 24.8 1.6 34.4 0L36 2.4C30.4 3.6 27.2 6.8 26.4 12H32V24H20Z" fill="#3B4ED8" />
                 </svg>
