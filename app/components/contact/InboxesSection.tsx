@@ -5,12 +5,12 @@ import { useReveal } from "@/app/hooks/useReveal";
 import type { Inbox } from "@/app/lib/fetchContactPage";
 
 const DEFAULT_INBOXES: Inbox[] = [
-  { label: "Product", email: "product@magdee.in", detail: "VOChef, Mee Tory, Ellamly — feedback, bugs, feature requests", personName: "Arjun", personInitial: "A" },
-  { label: "Press", email: "press@magdee.in", detail: "Interviews, embargoed news, press kit downloads", personName: "Saanvi", personInitial: "S" },
-  { label: "Partnerships", email: "partners@magdee.in", detail: "Integrations, distribution, enterprise inquiries", personName: "Arjun", personInitial: "A" },
+  { label: "Product", email: "product@magdee.in", detail: "VOChef, Mee Tory, Ellamly — feedback, bugs, feature requests", personName: "Vivek", personInitial: "V" },
+  { label: "Press", email: "press@magdee.in", detail: "Interviews, embargoed news, press kit downloads", personName: "Vikram", personInitial: "V" },
+  { label: "Partnerships", email: "partners@magdee.in", detail: "Integrations, distribution, enterprise inquiries", personName: "Vivek", personInitial: "V" },
   { label: "Careers", email: "careers@magdee.in", detail: "Job applications, internships, contract work", personName: "Vikram", personInitial: "V" },
-  { label: "Support", email: "support@magdee.in", detail: "Help with the apps, billing questions, account issues", personName: "Saanvi", personInitial: "S" },
-  { label: "Just Hello", email: "hello@magdee.in", detail: "Anything else — in Tamil, English, or Hindi", personName: "Arjun", personInitial: "A" },
+  { label: "Support", email: "support@magdee.in", detail: "Help with the apps, billing questions, account issues", personName: "Vikram", personInitial: "V" },
+  { label: "Just Hello", email: "hello@magdee.in", detail: "Anything else — in Tamil, English, or Hindi", personName: "Vivek", personInitial: "V" },
 ];
 
 const GAP_PX = 16;

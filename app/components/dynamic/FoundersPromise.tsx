@@ -38,11 +38,11 @@ export default function FoundersPromise() {
 
             <div className="mt-5 flex items-center gap-3">
               <span className="flex -space-x-2">
-                <InitialAvatar letter="A" bg="#2a4bff" />
-                <InitialAvatar letter="S" bg="#7c4bff" />
+                <InitialAvatar letter="V" bg="#2a4bff" />
+                {/* <InitialAvatar letter="S" bg="#7c4bff" /> */}
               </span>
               <p className="text-[13.5px] text-ink-soft">
-                <span className="font-medium text-ink">Arjun &amp; Saanvi</span>
+                <span className="font-medium text-ink">Vivek</span>
                 <span className="mx-1.5 text-muted">·</span>
                 Co-founders, MagDee
                 <span className="mx-1.5 text-muted">·</span>
