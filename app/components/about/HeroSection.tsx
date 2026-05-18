@@ -1,3 +1,6 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
 import type { AboutPageData } from "@/app/lib/fetchAboutPage";
 
 type Props = { heroSection?: AboutPageData["heroSection"] };
@@ -6,8 +9,10 @@ export default function AboutHero({ heroSection }: Props) {
   const badge = heroSection?.heroBadgeTitle || "Our Philosophy";
   const imgUrl = heroSection?.heroImgUrl;
 
+  const { ref, visible } = useReveal(0.05);
+
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden" ref={ref}>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -21,12 +26,18 @@ export default function AboutHero({ heroSection }: Props) {
         <div className="grid grid-cols-1 items-center gap-10 pb-16 pt-16 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:pb-28 lg:pt-24">
           {/* Left */}
           <div>
-            <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
+            <div
+              className={`reveal-up flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "50ms" }}
+            >
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
               {badge}
             </div>
 
-            <h1 className="mt-8 font-display text-[64px] font-semibold leading-[0.93] tracking-[-0.025em] text-ink sm:text-[80px] lg:text-[96px]">
+            <h1
+              className={`reveal-up mt-8 font-display text-[64px] font-semibold leading-[0.93] tracking-[-0.025em] text-ink sm:text-[80px] lg:text-[96px]${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "150ms" }}
+            >
               Patient.
               <br />
               Careful.
@@ -35,17 +46,20 @@ export default function AboutHero({ heroSection }: Props) {
               <span>strong.</span>
             </h1>
 
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div
+              className={`reveal-up mt-10 flex flex-col gap-3 sm:flex-row sm:items-center${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "280ms" }}
+            >
               <a
                 href="#story"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-3 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-3 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-all hover:bg-black active:scale-[0.97]"
               >
                 Read our story
                 <ArrowIcon />
               </a>
               <a
                 href="#founders"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-5 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-background"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-5 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-background active:scale-[0.97]"
               >
                 Meet the founders
                 <ArrowIcon />
@@ -53,8 +67,11 @@ export default function AboutHero({ heroSection }: Props) {
             </div>
           </div>
 
-          {/* Right — CMS image or Brand Mark card fallback */}
-          <div className="flex justify-center lg:justify-end">
+          {/* Right */}
+          <div
+            className={`reveal-right flex justify-center lg:justify-end${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "200ms" }}
+          >
             {imgUrl ? (
               <img
                 src={imgUrl}
@@ -94,7 +111,6 @@ export default function AboutHero({ heroSection }: Props) {
                   </div>
                 </div>
 
-                {/* Circular seal */}
                 <div className="absolute -bottom-8 -right-8 z-20 flex h-24 w-24 items-center justify-center rounded-full border-2 border-dashed border-brand/30 bg-white shadow-[0_8px_24px_-8px_rgba(30,64,175,0.2)]">
                   <svg viewBox="0 0 96 96" width="96" height="96" className="absolute inset-0" aria-hidden>
                     <defs>

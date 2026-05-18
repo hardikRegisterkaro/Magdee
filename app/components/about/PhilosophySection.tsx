@@ -1,3 +1,6 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
 import type { AboutPageData } from "@/app/lib/fetchAboutPage";
 
 type Props = { approachSection?: AboutPageData["approachSection"] };
@@ -11,19 +14,18 @@ const FALLBACK_PILLARS = [
 const ICONS = [<ClockIcon key="clock" />, <SearchIcon key="search" />, <EyeIcon key="eye" />];
 
 export default function PhilosophySection({ approachSection }: Props) {
-  const cards =
-    approachSection?.approachCards?.length
-      ? approachSection.approachCards
-      : FALLBACK_PILLARS;
+  const cards = approachSection?.approachCards?.length ? approachSection.approachCards : FALLBACK_PILLARS;
+  const { ref, visible } = useReveal(0.1);
 
   return (
-    <section className="relative">
+    <section className="relative" ref={ref}>
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {cards.map((card, i) => (
             <div
               key={i}
-              className="rounded-2xl border border-line bg-white px-7 py-6"
+              className={`reveal-up rounded-2xl border border-line bg-white px-7 py-6 transition-all duration-200 hover:-translate-y-1 hover:border-brand/20 hover:shadow-[0_8px_24px_-8px_rgba(30,64,175,0.12)]${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: `${80 + i * 100}ms` }}
             >
               <div className="flex items-center justify-between">
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#f0f2f7]">

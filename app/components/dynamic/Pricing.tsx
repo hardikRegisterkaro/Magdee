@@ -1,3 +1,6 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
 import type { ServicePageData } from "@/app/lib/fetchServicePage";
 
 type Props = { data: NonNullable<ServicePageData["pricingSection"]> };
@@ -8,9 +11,7 @@ function AccentHeading({ text }: { text: string }) {
     <>
       {parts.map((part, i) =>
         part.startsWith("*") && part.endsWith("*") ? (
-          <em key={i} className="italic text-brand">
-            {part.slice(1, -1)}
-          </em>
+          <em key={i} className="italic text-brand">{part.slice(1, -1)}</em>
         ) : (
           <span key={i}>{part}</span>
         )
@@ -20,32 +21,46 @@ function AccentHeading({ text }: { text: string }) {
 }
 
 export default function DynamicPricing({ data }: Props) {
+  const { ref, visible } = useReveal(0.08);
+
   return (
-    <section className="relative">
+    <section className="relative" ref={ref}>
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="flex flex-col items-center text-center">
           {data.tagText && (
-            <div className="flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-ink">
+            <div
+              className={`reveal-up flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-ink${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "50ms" }}
+            >
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-ink" />
               {data.tagText}
             </div>
           )}
 
           {data.heading && (
-            <h2 className="mt-6 font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[52px] lg:text-[60px]">
+            <h2
+              className={`reveal-up mt-6 font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[52px] lg:text-[60px]${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "140ms" }}
+            >
               <AccentHeading text={data.heading} />
             </h2>
           )}
 
           {data.subHeading && (
-            <p className="mt-6 max-w-[36rem] text-[15.5px] leading-[1.65] text-ink-soft sm:text-[16.5px]">
+            <p
+              className={`reveal-up mt-6 max-w-[36rem] text-[15.5px] leading-[1.65] text-ink-soft sm:text-[16.5px]${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "220ms" }}
+            >
               {data.subHeading}
             </p>
           )}
         </div>
 
         <div className="mt-14 flex justify-center">
-          <div className="w-full max-w-[520px] rounded-3xl border border-line bg-surface p-7 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.25)] sm:p-9">
+          <div
+            className={`reveal-up w-full max-w-[520px] rounded-3xl border border-line bg-surface p-7 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.25)] sm:p-9${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "300ms" }}
+          >
             <div className="flex items-start justify-between gap-4">
               <div>
                 {data.planLabel && (
@@ -79,10 +94,7 @@ export default function DynamicPricing({ data }: Props) {
               {data.billingNote && (
                 <span className="pb-2 text-[12px] leading-[1.35] text-ink-soft">
                   {data.billingNote.split("\n").map((line, i) => (
-                    <span
-                      key={i}
-                      className={i === 0 ? "block" : "block text-muted"}
-                    >
+                    <span key={i} className={i === 0 ? "block" : "block text-muted"}>
                       {line}
                     </span>
                   ))}
@@ -108,7 +120,7 @@ export default function DynamicPricing({ data }: Props) {
             {data.ctaText && (
               <a
                 href={data.ctaUrl || "#"}
-                className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3.5 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black"
+                className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3.5 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-all hover:bg-black active:scale-[0.97]"
               >
                 <AppleIcon />
                 {data.ctaText}
@@ -118,9 +130,7 @@ export default function DynamicPricing({ data }: Props) {
             {(data.launchDate || data.refundNote) && (
               <p className="mt-5 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
                 {data.launchDate && <span>{data.launchDate}</span>}
-                {data.launchDate && data.refundNote && (
-                  <span className="mx-2">·</span>
-                )}
+                {data.launchDate && data.refundNote && <span className="mx-2">·</span>}
                 {data.refundNote && <span>{data.refundNote}</span>}
               </p>
             )}
@@ -134,13 +144,7 @@ export default function DynamicPricing({ data }: Props) {
 function CheckIcon() {
   return (
     <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden>
-      <path
-        d="m2.5 6.2 2.3 2.3L9.5 3.8"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="m2.5 6.2 2.3 2.3L9.5 3.8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

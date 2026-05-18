@@ -1,3 +1,6 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
 import type { ServicePageData } from "@/app/lib/fetchServicePage";
 
 type Props = { data: NonNullable<ServicePageData["voiceListeningSection"]> };
@@ -8,9 +11,7 @@ function AccentHeading({ text }: { text: string }) {
     <>
       {parts.map((part, i) =>
         part.startsWith("*") && part.endsWith("*") ? (
-          <em key={i} className="italic text-brand">
-            {part.slice(1, -1)}
-          </em>
+          <em key={i} className="italic text-brand">{part.slice(1, -1)}</em>
         ) : (
           <span key={i}>{part}</span>
         )
@@ -20,12 +21,17 @@ function AccentHeading({ text }: { text: string }) {
 }
 
 export default function DynamicVoiceListening({ data }: Props) {
+  const { ref, visible } = useReveal(0.08);
+
   return (
-    <section className="relative">
+    <section className="relative" ref={ref}>
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          {/* Demo card / image */}
-          <div className="order-2 lg:order-1">
+          {/* Left — demo card / image */}
+          <div
+            className={`reveal-left order-2 lg:order-1${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "60ms" }}
+          >
             {data.imageUrl ? (
               <img
                 src={data.imageUrl}
@@ -58,8 +64,11 @@ export default function DynamicVoiceListening({ data }: Props) {
             )}
           </div>
 
-          {/* Copy */}
-          <div className="order-1 lg:order-2">
+          {/* Right — copy */}
+          <div
+            className={`reveal-right order-1 lg:order-2${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "220ms" }}
+          >
             {data.tagText && (
               <div className="flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-brand">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
@@ -84,7 +93,7 @@ export default function DynamicVoiceListening({ data }: Props) {
                 {data.stats.map((stat, i) => (
                   <li
                     key={i}
-                    className="rounded-xl border border-line bg-surface px-3.5 py-3"
+                    className="rounded-xl border border-line bg-surface px-3.5 py-3 transition-colors hover:border-brand/20 hover:bg-[#f0f4ff]"
                   >
                     <p className="font-display text-[20px] font-semibold tracking-[-0.01em] text-ink sm:text-[22px]">
                       {stat.value}

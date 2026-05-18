@@ -1,14 +1,20 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
+
 export default function FoundersPromise() {
+  const { ref, visible } = useReveal(0.08);
+
   return (
-    <section className="relative">
+    <section className="relative" ref={ref}>
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
-        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-start sm:gap-8">
+        <div
+          className={`reveal-up flex flex-col items-start gap-6 sm:flex-row sm:items-start sm:gap-8${visible ? " is-visible" : ""}`}
+          style={{ transitionDelay: "60ms" }}
+        >
           <div
             className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-white sm:h-[72px] sm:w-[72px]"
-            style={{
-              background:
-                "linear-gradient(135deg, #0A192F 0%, #1E3A8A 70%, #3B5BDB 100%)",
-            }}
+            style={{ background: "linear-gradient(135deg, #0A192F 0%, #1E3A8A 70%, #3B5BDB 100%)" }}
           >
             <ElephantIcon />
           </div>
@@ -72,12 +78,7 @@ function ElephantIcon() {
         strokeLinejoin="round"
       />
       <circle cx="18" cy="12" r="0.9" fill="currentColor" />
-      <path
-        d="M22 18c1.1 0 2-.9 2-2"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
+      <path d="M22 18c1.1 0 2-.9 2-2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
     </svg>
   );
 }
