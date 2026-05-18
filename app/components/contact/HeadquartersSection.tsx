@@ -1,3 +1,7 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
+
 interface HQData {
   badge?: string;
   companyName?: string;
@@ -36,6 +40,8 @@ export default function HeadquartersSection({ data }: Props) {
   const neighborhoodDescription = data?.neighborhoodDescription || "Race Course Road is one of the older streets in town — wide, tree-lined, never in a hurry. We're on the second floor, behind a heavy teak door, two doors down from a 40-year-old filter coffee shop. You'll smell us before you see us.";
   const mapImgUrl = data?.mapImgUrl || "";
 
+  const { ref, visible } = useReveal(0.1);
+
   const details = [
     { icon: <PhoneIcon />, label: "Phone", value: phone },
     { icon: <ClockIcon />, label: "Hours", value: officeHours },
@@ -45,11 +51,14 @@ export default function HeadquartersSection({ data }: Props) {
 
   return (
     <section className="relative bg-background">
-      <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+      <div ref={ref} className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Left — HQ card */}
-          <div className="relative">
-            <div className="overflow-hidden rounded-3xl border border-line bg-white shadow-[0_4px_40px_-16px_rgba(15,23,42,0.1)]">
+          <div
+            className={`reveal-left relative${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "80ms" }}
+          >
+            <div className="overflow-hidden rounded-3xl border border-line bg-white shadow-[0_4px_40px_-16px_rgba(15,23,42,0.1)] transition-shadow duration-300 hover:shadow-[0_8px_48px_-16px_rgba(15,23,42,0.16)]">
               <div className="h-0.75 w-full bg-brand" />
 
               <div className="px-7 py-8 sm:px-9 sm:py-10">
@@ -78,7 +87,7 @@ export default function HeadquartersSection({ data }: Props) {
                   {details.map((d, i) => (
                     <div
                       key={i}
-                      className="rounded-xl border border-line bg-surface px-4 py-3"
+                      className="rounded-xl border border-line bg-surface px-4 py-3 transition-colors duration-200 hover:border-brand/20 hover:bg-[#f0f4ff]"
                     >
                       <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
                         {d.icon}
@@ -96,7 +105,7 @@ export default function HeadquartersSection({ data }: Props) {
                     href={mapsUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-3 text-[14px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-3 text-[14px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_18px_36px_-14px_rgba(11,16,32,0.8)]"
                   >
                     <MapIcon />
                     Open in Maps
@@ -104,7 +113,7 @@ export default function HeadquartersSection({ data }: Props) {
                   </a>
                   <a
                     href="mailto:hello@magdee.in?subject=Visit%20Request"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-5 py-3 text-[14px] font-medium text-ink transition-colors hover:bg-background"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-5 py-3 text-[14px] font-medium text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/20 hover:bg-background"
                   >
                     Book a visit
                   </a>
@@ -114,7 +123,10 @@ export default function HeadquartersSection({ data }: Props) {
           </div>
 
           {/* Right — neighborhood + map */}
-          <div>
+          <div
+            className={`reveal-right${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "260ms" }}
+          >
             <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
               The Neighborhood
@@ -132,7 +144,7 @@ export default function HeadquartersSection({ data }: Props) {
               <img
                 src={mapImgUrl}
                 alt="Map"
-                className="mt-7 w-full rounded-3xl  object-cover lg:h-80"
+                className="mt-7 w-full rounded-3xl object-cover transition-shadow duration-300 hover:shadow-[0_8px_32px_-12px_rgba(15,23,42,0.14)] lg:h-80"
               />
             ) : (
               <div className="mt-7 flex items-center justify-center rounded-3xl border-2 border-dashed border-line bg-surface lg:h-80">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useReveal } from "@/app/hooks/useReveal";
 
 const CATEGORIES = [
   { label: "Product", email: "product@magdee.in", person: "Arjun" },
@@ -11,18 +12,32 @@ const CATEGORIES = [
   { label: "Just hello", email: "hello@magdee.in", person: "Arjun" },
 ];
 
+const COUNTRY_CODES = [
+  { code: "+91", flag: "🇮🇳", name: "India" },
+  { code: "+1",  flag: "🇺🇸", name: "USA / Canada" },
+  { code: "+44", flag: "🇬🇧", name: "UK" },
+  { code: "+61", flag: "🇦🇺", name: "Australia" },
+  { code: "+971",flag: "🇦🇪", name: "UAE" },
+  { code: "+65", flag: "🇸🇬", name: "Singapore" },
+  { code: "+49", flag: "🇩🇪", name: "Germany" },
+  { code: "+33", flag: "🇫🇷", name: "France" },
+];
+
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function ContactForm() {
   const [category, setCategory] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneCode, setPhoneCode] = useState("+91");
+  const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
   const active = CATEGORIES[category];
+  const { ref, visible } = useReveal(0.05);
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -39,7 +54,7 @@ export default function ContactForm() {
           companyName: company.trim() || undefined,
           message: message.trim(),
           serviceSelected: active.label,
-          phoneNo: "Not provided",
+          phoneNo: phone.trim() ? `${phoneCode} ${phone.trim()}` : "Not provided",
           region: "India",
           leadSource: "Contact Form",
         }),
@@ -47,7 +62,8 @@ export default function ContactForm() {
       const data = await res.json();
       if (data.success) {
         setStatus("success");
-        setName(""); setEmail(""); setCompany(""); setMessage(""); setCategory(0);
+        setName(""); setEmail(""); setPhoneCode("+91"); setPhone("");
+        setCompany(""); setMessage(""); setCategory(0);
       } else {
         setStatus("error");
         setErrorMsg(data.message || "Something went wrong. Please try again.");
@@ -60,8 +76,10 @@ export default function ContactForm() {
 
   return (
     <form
+      ref={ref as unknown as React.RefObject<HTMLFormElement>}
       onSubmit={handleSubmit}
-      className="relative w-full max-w-140 rounded-3xl border border-line bg-white px-6 py-7 shadow-[0_24px_64px_-20px_rgba(15,23,42,0.18)] sm:px-7 sm:py-7"
+      className={`reveal-right relative w-full max-w-140 rounded-3xl border border-line bg-white px-6 py-7 shadow-[0_24px_64px_-20px_rgba(15,23,42,0.18)] sm:px-7 sm:py-7${visible ? " is-visible" : ""}`}
+      style={{ transitionDelay: "200ms" }}
     >
       {/* Header */}
       <div className="flex items-start justify-between">
@@ -121,16 +139,39 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* Company */}
+      {/* Phone */}
       <div className="mt-4">
-        <Field
-          label="Company / Role"
-          optional
-          value={company}
-          onChange={setCompany}
-          placeholder="Where you work — or 'just curious'"
-          type="text"
-        />
+        <label className="block">
+          <div className="flex items-center gap-1.5">
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-soft">
+              Phone
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+              — Optional
+            </span>
+          </div>
+          <div className="mt-1.5 flex overflow-hidden rounded-lg border border-line bg-surface focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/15">
+            <select
+              value={phoneCode}
+              onChange={(e) => setPhoneCode(e.target.value)}
+              className="shrink-0 border-r border-line bg-[#f8fafc] px-2.5 py-2.5 font-mono text-[12px] text-ink focus:outline-none"
+              aria-label="Country code"
+            >
+              {COUNTRY_CODES.map((c) => (
+                <option key={c.code} value={c.code}>
+                  {c.flag} {c.code}
+                </option>
+              ))}
+            </select>
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="98765 43210"
+              className="min-w-0 flex-1 bg-surface px-3.5 py-2.5 text-[13.5px] text-ink placeholder:text-muted focus:outline-none"
+            />
+          </div>
+        </label>
       </div>
 
       {/* Message */}
@@ -156,7 +197,7 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Privacy notice */}
+      {/* Status messages */}
       {status === "error" && errorMsg && (
         <p className="mt-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-[12.5px] leading-normal text-red-600">
           {errorMsg}
@@ -168,6 +209,7 @@ export default function ContactForm() {
         </p>
       )}
 
+      {/* Privacy notice */}
       <div className="mt-4 flex items-start gap-2 rounded-lg border border-line bg-surface px-3 py-2.5 text-[12.5px] leading-normal text-ink-soft">
         <InfoIcon />
         <p>
@@ -186,7 +228,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-[13px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-[13px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-all duration-150 hover:bg-black active:scale-[0.97] disabled:opacity-60"
         >
           {status === "loading" ? "Sending…" : "Send message"}
           {status !== "loading" && <SendIcon />}

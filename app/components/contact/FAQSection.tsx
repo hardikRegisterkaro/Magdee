@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useReveal } from "@/app/hooks/useReveal";
 import type { FAQ } from "@/app/lib/fetchContactPage";
 
 const DEFAULT_FAQS: FAQ[] = [
@@ -25,13 +26,17 @@ export default function FAQSection({ data }: Props) {
   const FAQS = data?.faqs?.length ? data.faqs : DEFAULT_FAQS;
 
   const [openIndex, setOpenIndex] = useState<number>(0);
+  const { ref, visible } = useReveal(0.1);
 
   return (
     <section className="relative bg-background">
-      <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+      <div ref={ref} className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           {/* Left — heading */}
-          <div className="lg:sticky lg:top-24">
+          <div
+            className={`reveal-up lg:sticky lg:top-24${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "80ms" }}
+          >
             <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
               {badge}
@@ -53,7 +58,11 @@ export default function FAQSection({ data }: Props) {
             {FAQS.map((faq, i) => {
               const isOpen = openIndex === i;
               return (
-                <li key={i} className="rounded-2xl border border-line bg-white">
+                <li
+                  key={i}
+                  className={`reveal-up rounded-2xl border bg-white transition-colors duration-200${visible ? " is-visible" : ""} ${isOpen ? "border-brand/30" : "border-line hover:border-brand/20"}`}
+                  style={{ transitionDelay: `${180 + i * 90}ms` }}
+                >
                   <button
                     type="button"
                     onClick={() => setOpenIndex(isOpen ? -1 : i)}
@@ -67,22 +76,28 @@ export default function FAQSection({ data }: Props) {
                       {faq.question}
                     </span>
                     <span
-                      className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
+                      className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-200 ${
                         isOpen ? "bg-ink text-white" : "bg-[#f0f2f7] text-ink-soft"
                       }`}
                       aria-hidden
                     >
-                      {isOpen ? <CloseIcon /> : <PlusIcon />}
+                      <ChevronIcon open={isOpen} />
                     </span>
                   </button>
 
-                  {isOpen && (
+                  <div
+                    className="overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out"
+                    style={{
+                      maxHeight: isOpen ? "300px" : "0px",
+                      opacity: isOpen ? 1 : 0,
+                    }}
+                  >
                     <div className="px-6 pb-6">
                       <div className="pl-8.5 text-[14.5px] leading-[1.7] text-ink-soft">
                         {faq.answer}
                       </div>
                     </div>
-                  )}
+                  </div>
                 </li>
               );
             })}
@@ -93,18 +108,22 @@ export default function FAQSection({ data }: Props) {
   );
 }
 
-function PlusIcon() {
+function ChevronIcon({ open }: { open: boolean }) {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M12 5v14M5 12h14" />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M18 6L6 18M6 6l12 12" />
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className="transition-transform duration-300"
+      style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
+    >
+      <path d="M6 9l6 6 6-6" />
     </svg>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useReveal } from "@/app/hooks/useReveal";
 import type { Inbox } from "@/app/lib/fetchContactPage";
 
 const DEFAULT_INBOXES: Inbox[] = [
@@ -30,6 +31,8 @@ export default function InboxesSection({ data }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeDot, setActiveDot] = useState(0);
   const [paused, setPaused] = useState(false);
+
+  const { ref: sectionRef, visible } = useReveal(0.1);
 
   function getCardWidth(track: HTMLDivElement) {
     const first = track.firstElementChild as HTMLElement | null;
@@ -89,10 +92,13 @@ export default function InboxesSection({ data }: Props) {
 
   return (
     <section className="relative">
-      <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+      <div ref={sectionRef} className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         {/* Header */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-          <div>
+          <div
+            className={`reveal-up${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "80ms" }}
+          >
             <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
               {badge}
@@ -105,7 +111,10 @@ export default function InboxesSection({ data }: Props) {
             </h2>
           </div>
 
-          <div className="flex items-center lg:justify-end">
+          <div
+            className={`reveal-up flex items-center lg:justify-end${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "200ms" }}
+          >
             <p className="max-w-136 text-[15px] leading-[1.7] text-ink-soft lg:text-[16px]">
               {description}
             </p>
@@ -113,7 +122,10 @@ export default function InboxesSection({ data }: Props) {
         </div>
 
         {/* Cards strip */}
-        <div className="relative mt-12 lg:mt-16">
+        <div
+          className={`reveal-up relative mt-12 lg:mt-16${visible ? " is-visible" : ""}`}
+          style={{ transitionDelay: "320ms" }}
+        >
           <div
             ref={trackRef}
             onMouseEnter={() => setPaused(true)}
@@ -126,10 +138,10 @@ export default function InboxesSection({ data }: Props) {
               <a
                 key={i}
                 href={`mailto:${inbox.email}`}
-                className="group relative flex w-[88%] shrink-0 snap-start flex-col rounded-2xl border border-line bg-white p-6 transition-shadow hover:shadow-[0_8px_28px_-12px_rgba(15,23,42,0.12)] sm:w-[48%] lg:w-[calc((100%-2rem)/3)]"
+                className="group relative flex w-[88%] shrink-0 snap-start flex-col rounded-2xl border border-line bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:border-brand/20 hover:shadow-[0_12px_32px_-10px_rgba(30,64,175,0.14)] sm:w-[48%] lg:w-[calc((100%-2rem)/3)]"
               >
                 <div className="flex items-center justify-between">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#f0f2f7] text-ink-soft">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#f0f2f7] text-ink-soft transition-colors duration-200 group-hover:bg-brand/8 group-hover:text-brand">
                     <InboxIcon />
                   </span>
                   <span className="font-mono text-[11px] tracking-[0.06em] text-muted">
@@ -178,7 +190,7 @@ export default function InboxesSection({ data }: Props) {
                 onClick={() => scrollToCard(i)}
                 aria-label={`Go to inbox ${i + 1}`}
                 aria-current={activeDot === i ? "true" : undefined}
-                className={`h-2 rounded-full transition-all ${
+                className={`h-2 rounded-full transition-all duration-300 ${
                   activeDot === i ? "w-8 bg-brand" : "w-2 bg-line hover:bg-ink/30"
                 }`}
               />
@@ -201,7 +213,7 @@ function InboxIcon() {
 
 function ArrowUpRightIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9aa3b2" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="transition-colors group-hover:stroke-ink">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9aa3b2" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="transition-colors duration-200 group-hover:stroke-brand">
       <path d="M7 17L17 7M8 7h9v9" />
     </svg>
   );

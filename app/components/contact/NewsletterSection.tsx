@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useReveal } from "@/app/hooks/useReveal";
 
 interface Props {
   data?: {
@@ -18,6 +19,7 @@ export default function NewsletterSection({ data }: Props) {
   const mailTo = data?.email || "hello@magdee.in";
 
   const [email, setEmail] = useState("");
+  const { ref, visible } = useReveal(0.1);
 
   function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,10 +32,11 @@ export default function NewsletterSection({ data }: Props) {
 
   return (
     <section className="relative bg-background">
-      <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+      <div ref={ref} className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div
-          className="rounded-3xl px-8 py-12 sm:px-12 lg:px-14 lg:py-14"
+          className={`reveal-up rounded-3xl px-8 py-12 sm:px-12 lg:px-14 lg:py-14${visible ? " is-visible" : ""}`}
           style={{
+            transitionDelay: "80ms",
             background:
               "linear-gradient(106.7deg, #0A192F 0%, #1E3A8A 38.46%, #6D5BE2 76.92%)",
           }}
@@ -70,13 +73,13 @@ export default function NewsletterSection({ data }: Props) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@somewhere.in"
-                  className="mt-2 w-full rounded-2xl border border-white/15 bg-white/8 px-5 py-4 text-[14.5px] text-white placeholder:text-white/45 focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/15"
+                  className="mt-2 w-full rounded-2xl border border-white/15 bg-white/8 px-5 py-4 text-[14.5px] text-white placeholder:text-white/45 transition-colors duration-200 focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/15"
                 />
               </div>
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2.5 rounded-2xl bg-white px-5 py-4 text-[15px] font-medium text-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.25)] transition-opacity hover:opacity-90"
+                className="inline-flex items-center justify-center gap-2.5 rounded-2xl bg-white px-5 py-4 text-[15px] font-medium text-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.25)] transition-all duration-150 hover:opacity-90 hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.3)] active:scale-[0.97]"
               >
                 <SendIcon />
                 Quarterly note, please
