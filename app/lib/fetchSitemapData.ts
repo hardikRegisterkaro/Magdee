@@ -1,4 +1,4 @@
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001";
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://magdee-coral.vercel.app";
 
 export interface SitemapEntry {
   id: string;

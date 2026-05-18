@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { fetchSitemapData } from "./lib/fetchSitemapData";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "magdee-coral.vercel.app";
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://magdee-coral.vercel.app";
 
 export const revalidate = 86400;
 
@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/contact-us`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE}/blog`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
     // blog post sitemap lives at /blog/sitemap.xml
-    { url: `${SITE}/blog/sitemap.xml`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
+    { url: `${SITE}/blog-sitemap.xml`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
   ];
 
   const serviceRoutes: MetadataRoute.Sitemap = services.map((s) => ({
