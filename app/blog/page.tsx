@@ -40,6 +40,7 @@ type ApiPost = {
   excerpt: string | null;
   publishedAt: string | null;
   readTimeMinutes: number;
+  featuredImage: string | null;
   category: { id: string; name: string; slug: string; color: string }[];
 };
 
@@ -137,67 +138,87 @@ export default async function BlogListingPage() {
                   >
                     {dateShort}
                   </span>
+
+                  {/* Featured image — below date, desktop only */}
+                  <div
+                    className="blog-fade-up hidden overflow-hidden rounded-xl sm:block"
+                    style={{ animationDelay: `${320 + i * 55}ms` }}
+                  >
+                    {post.featuredImage ? (
+                      <img
+                        src={post.featuredImage}
+                        alt={post.title}
+                        className="h-27.5 w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      />
+                    ) : (
+                      <div
+                        className="flex h-27.5 w-full items-center justify-center transition-transform duration-500 group-hover:scale-[1.04]"
+                        style={{ background: hexToRgba(color, 0.08) }}
+                      >
+                        <span
+                          className="font-mono text-[32px] font-bold uppercase tracking-tight opacity-30"
+                          style={{ color }}
+                        >
+                          {post.title.slice(0, 2)}
+                        </span>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Content column */}
-                <div className="relative flex-1 pb-6 sm:py-8 sm:pl-10">
-                  {/* Meta */}
-                  <div
-                    className="blog-fade-up flex items-center gap-2.5"
-                    style={{ animationDelay: `${320 + i * 55}ms` }}
-                  >
-                    {cat && (
-                      <span
-                        className="inline-flex items-center rounded-full border px-2 py-0.5 font-mono text-[9px] font-bold tracking-[1.3px]"
-                        style={{
-                          background: categoryBg,
-                          borderColor: categoryBorder,
-                          color,
-                        }}
-                      >
-                        {cat.name.toUpperCase()}
+                <div className="relative flex flex-1 items-start pb-6 sm:py-8 sm:pl-10">
+                  {/* Text */}
+                  <div className="flex-1 min-w-0">
+                    {/* Meta */}
+                    <div
+                      className="blog-fade-up flex items-center gap-2.5"
+                      style={{ animationDelay: `${320 + i * 55}ms` }}
+                    >
+                      {cat && (
+                        <span
+                          className="inline-flex items-center rounded-full border px-2 py-0.5 font-mono text-[9px] font-bold tracking-[1.3px]"
+                          style={{
+                            background: categoryBg,
+                            borderColor: categoryBorder,
+                            color,
+                          }}
+                        >
+                          {cat.name.toUpperCase()}
+                        </span>
+                      )}
+                      <span className="font-mono text-[9.5px] font-bold tracking-[1.3px] text-muted">
+                        {readTime}
                       </span>
+                    </div>
+
+                    {/* Title */}
+                    <h2
+                      className="blog-fade-up mt-2.5 text-[17px] font-bold leading-6 tracking-[-0.3px] text-ink transition-colors duration-300 group-hover:text-brand sm:text-[20px] sm:leading-7 sm:tracking-[-0.4px]"
+                      style={{ animationDelay: `${340 + i * 55}ms` }}
+                    >
+                      {post.title}
+                    </h2>
+
+                    {/* Excerpt */}
+                    {post.excerpt && (
+                      <p
+                        className="blog-fade-up mt-2 max-w-150 text-[13px] leading-5.5 text-ink-soft sm:text-[14px] sm:leading-6"
+                        style={{ animationDelay: `${360 + i * 55}ms` }}
+                      >
+                        {post.excerpt}
+                      </p>
                     )}
-                    <span className="font-mono text-[9.5px] font-bold tracking-[1.3px] text-muted">
-                      {readTime}
-                    </span>
+
+                    {/* Read more — reveals on hover */}
+                    <div className="mt-3 flex translate-y-1 items-center gap-1.5 text-[12.5px] font-semibold text-brand opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                      Read more
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </div>
                   </div>
 
-                  {/* Title */}
-                  <h2
-                    className="blog-fade-up mt-2.5 text-[17px] font-bold leading-6 tracking-[-0.3px] text-ink transition-colors duration-300 group-hover:text-brand sm:text-[20px] sm:leading-7 sm:tracking-[-0.4px]"
-                    style={{ animationDelay: `${340 + i * 55}ms` }}
-                  >
-                    {post.title}
-                  </h2>
-
-                  {/* Excerpt */}
-                  {post.excerpt && (
-                    <p
-                      className="blog-fade-up mt-2 max-w-150 text-[13px] leading-5.5 text-ink-soft sm:text-[14px] sm:leading-6"
-                      style={{ animationDelay: `${360 + i * 55}ms` }}
-                    >
-                      {post.excerpt}
-                    </p>
-                  )}
-
-                  {/* Read more — reveals on hover */}
-                  <div className="mt-3 flex translate-y-1 items-center gap-1.5 text-[12.5px] font-semibold text-brand opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                    Read more
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </div>
                 </div>
 
                 {/* Row bottom border */}

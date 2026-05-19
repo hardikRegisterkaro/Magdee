@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useReveal } from "@/app/hooks/useReveal";
 import type { ServicePageData } from "@/app/lib/fetchServicePage";
 
@@ -27,6 +27,14 @@ function IntegrationCard({
   item: Integration;
   onReadMore: () => void;
 }) {
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const [isClamped, setIsClamped] = useState(false);
+
+  useEffect(() => {
+    const el = textRef.current;
+    if (el) setIsClamped(el.scrollHeight > el.clientHeight);
+  }, [item.whatItDoes]);
+
   return (
     <div className="flex flex-col h-full rounded-2xl bg-surface border border-line p-5 shadow-[0_4px_20px_-4px_rgba(11,16,32,0.07)] hover:shadow-[0_8px_32px_-8px_rgba(11,16,32,0.13)] transition-shadow">
       {/* Logo + status row */}
@@ -58,18 +66,20 @@ function IntegrationCard({
         {item.platformName}
       </p>
 
-      {/* What it does — clamped to 2 lines, read more expands via modal */}
+      {/* What it does — clamped to 2 lines, read more only when actually truncated */}
       {item.whatItDoes && (
         <div className="flex-1 flex flex-col justify-between">
-          <p className="text-[13px] leading-[1.6] text-ink-soft line-clamp-2">
+          <p ref={textRef} className="text-[13px] leading-[1.6] text-ink-soft line-clamp-2">
             {item.whatItDoes}
           </p>
-          <button
-            onClick={onReadMore}
-            className="mt-2 self-start text-[12px] font-medium text-brand hover:underline focus:outline-none cursor-pointer"
-          >
-            Read more
-          </button>
+          {isClamped && (
+            <button
+              onClick={onReadMore}
+              className="mt-2 self-start text-[12px] font-medium text-brand hover:underline focus:outline-none cursor-pointer"
+            >
+              Read more
+            </button>
+          )}
         </div>
       )}
     </div>
