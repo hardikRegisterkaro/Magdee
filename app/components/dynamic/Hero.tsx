@@ -1,3 +1,6 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
 import type { ServicePageData } from "@/app/lib/fetchServicePage";
 import Image from "next/image";
 
@@ -9,9 +12,7 @@ function AccentHeading({ text }: { text: string }) {
     <>
       {parts.map((part, i) =>
         part.startsWith("*") && part.endsWith("*") ? (
-          <em key={i} className="italic text-brand">
-            {part.slice(1, -1)}
-          </em>
+          <em key={i} className="italic text-brand">{part.slice(1, -1)}</em>
         ) : (
           <span key={i}>{part}</span>
         )
@@ -21,8 +22,10 @@ function AccentHeading({ text }: { text: string }) {
 }
 
 export default function DynamicHero({ data }: Props) {
+  const { ref, visible } = useReveal(0.05);
+
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden" ref={ref}>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -32,10 +35,13 @@ export default function DynamicHero({ data }: Props) {
         }}
       />
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 items-start gap-10 pb-12 pt-12 sm:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-20 lg:pt-20">
+        <div className="grid grid-cols-1 items-center gap-10 pb-12 pt-12 sm:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-20 lg:pt-20">
           <div className="lg:order-1">
             {data.versionTag && (
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#bfe6cd] bg-[#e8f7ee] px-3 py-1.5 text-[11.5px] font-medium uppercase tracking-[0.14em] text-[#176c3a]">
+              <span
+                className={`reveal-up inline-flex items-center gap-2 rounded-full border border-[#bfe6cd] bg-[#e8f7ee] px-3 py-1.5 text-[11.5px] font-medium uppercase tracking-[0.14em] text-[#176c3a]${visible ? " is-visible" : ""}`}
+                style={{ transitionDelay: "40ms" }}
+              >
                 <span className="relative inline-flex h-1.5 w-1.5">
                   <span className="absolute inset-0 animate-ping rounded-full bg-[#22a55b] opacity-60" />
                   <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-[#22a55b]" />
@@ -45,35 +51,50 @@ export default function DynamicHero({ data }: Props) {
             )}
 
             {data.subHeading && (
-              <div className="mt-7 flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
+              <div
+                className={`reveal-up mt-7 flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.16em] text-accent${visible ? " is-visible" : ""}`}
+                style={{ transitionDelay: "100ms" }}
+              >
                 <span className="h-px w-8 bg-accent" />
                 {data.subHeading}
               </div>
             )}
 
             {data.title && (
-              <h1 className="mt-5 font-display text-[64px] font-semibold leading-[0.95] tracking-[-0.02em] text-ink sm:text-[88px] lg:text-[112px]">
+              <h1
+                className={`reveal-up mt-5 font-display text-[64px] font-semibold leading-[0.95] tracking-[-0.02em] text-ink sm:text-[88px] lg:text-[112px]${visible ? " is-visible" : ""}`}
+                style={{ transitionDelay: "160ms" }}
+              >
                 {data.title}
               </h1>
             )}
 
             {data.heading && (
-              <h2 className="mt-8 font-display text-[32px] font-semibold leading-[1.05] tracking-[-0.015em] text-ink sm:text-[40px] lg:text-[44px]">
+              <h2
+                className={`reveal-up mt-8 font-display text-[32px] font-semibold leading-[1.05] tracking-[-0.015em] text-ink sm:text-[40px] lg:text-[44px]${visible ? " is-visible" : ""}`}
+                style={{ transitionDelay: "200ms" }}
+              >
                 <AccentHeading text={data.heading} />
               </h2>
             )}
 
             {data.description && (
-              <p className="mt-6 max-w-[34rem] text-[16px] leading-[1.6] text-ink-soft sm:text-[17px]">
+              <p
+                className={`reveal-up mt-6 max-w-[34rem] text-[16px] leading-[1.6] text-ink-soft sm:text-[17px]${visible ? " is-visible" : ""}`}
+                style={{ transitionDelay: "260ms" }}
+              >
                 {data.description}
               </p>
             )}
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div
+              className={`reveal-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "320ms" }}
+            >
               {data.ctaPrimaryText && (
                 <a
                   href={data.ctaPrimaryUrl || "#"}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-3 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-3 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-all hover:bg-black active:scale-[0.97]"
                 >
                   <AppleIcon />
                   {data.ctaPrimaryText}
@@ -82,7 +103,7 @@ export default function DynamicHero({ data }: Props) {
               {data.ctaSecondaryText && (
                 <a
                   href={data.ctaSecondaryUrl || "#"}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-5 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-background"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-5 py-3 text-[15px] font-medium text-ink transition-all hover:bg-background active:scale-[0.97]"
                 >
                   <PlayIcon />
                   {data.ctaSecondaryText}
@@ -91,7 +112,10 @@ export default function DynamicHero({ data }: Props) {
             </div>
 
             {(data.ratingScore || data.ratingCount) && (
-              <div className="mt-7 flex items-center gap-3">
+              <div
+                className={`reveal-up mt-7 flex items-center gap-3${visible ? " is-visible" : ""}`}
+                style={{ transitionDelay: "380ms" }}
+              >
                 <Stars rating={Number(data.ratingScore) || 5} />
                 {data.ratingScore && (
                   <span className="text-[14px] font-semibold text-ink">{data.ratingScore}</span>
@@ -104,14 +128,17 @@ export default function DynamicHero({ data }: Props) {
           </div>
 
           {data.phoneMockupImageUrl && (
-            <div className="flex justify-center lg:order-2 lg:justify-end">
+            <div
+              className={`reveal-right flex justify-center lg:order-2 lg:justify-end${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "200ms" }}
+            >
               <Image
                 src={data.phoneMockupImageUrl}
                 alt="App screenshot"
-                width={420}
+                width={500}
                 height={840}
                 unoptimized
-                className="h-auto w-full max-w-[340px] lg:max-w-[420px] object-contain drop-shadow-2xl"
+                className="h-auto w-full max-w-[340px] object-contain drop-shadow-2xl lg:max-w-[480px]"
               />
             </div>
           )}
@@ -145,19 +172,13 @@ function Star({ fill }: { fill: "full" | "half" | "empty" }) {
             <stop offset="50%" stopColor="#e6e8ef" />
           </linearGradient>
         </defs>
-        <path
-          d="M8 1.5 9.9 5.6l4.6.6-3.3 3.2.8 4.5L8 11.8 3.9 14l.8-4.5L1.4 6.2l4.6-.6L8 1.5Z"
-          fill="url(#half)"
-        />
+        <path d="M8 1.5 9.9 5.6l4.6.6-3.3 3.2.8 4.5L8 11.8 3.9 14l.8-4.5L1.4 6.2l4.6-.6L8 1.5Z" fill="url(#half)" />
       </svg>
     );
   }
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
-      <path
-        d="M8 1.5 9.9 5.6l4.6.6-3.3 3.2.8 4.5L8 11.8 3.9 14l.8-4.5L1.4 6.2l4.6-.6L8 1.5Z"
-        fill={color}
-      />
+      <path d="M8 1.5 9.9 5.6l4.6.6-3.3 3.2.8 4.5L8 11.8 3.9 14l.8-4.5L1.4 6.2l4.6-.6L8 1.5Z" fill={color} />
     </svg>
   );
 }

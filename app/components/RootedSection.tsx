@@ -149,7 +149,7 @@ function FoundersCard() {
             </span>
           </div>
           <div>
-            <p className="text-[14px] font-medium text-ink">Arjun &amp; Saanvi</p>
+            <p className="text-[14px] font-medium text-ink">Vivek</p>
             <p className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-ink-soft">
               Co-founders, MagDee
             </p>

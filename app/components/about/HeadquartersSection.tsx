@@ -1,3 +1,6 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
 import type { AboutPageData } from "@/app/lib/fetchAboutPage";
 
 type Props = { aboutSection?: AboutPageData["aboutSection"] };
@@ -37,12 +40,17 @@ export default function HeadquartersSection({ aboutSection }: Props) {
         "Three founders. One floor above a filter coffee shop. Eleven degrees north of the equator. A two-minute walk to where one co-founder learned to weave a saree, and four minutes from where another debugged his first compiler.",
       ];
 
+  const { ref, visible } = useReveal(0.08);
+
   return (
-    <section className="relative">
+    <section className="relative" ref={ref}>
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left */}
-          <div>
+          <div
+            className={`reveal-left${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "80ms" }}
+          >
             <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
               {badgeText}
@@ -62,7 +70,7 @@ export default function HeadquartersSection({ aboutSection }: Props) {
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="flex min-w-[80px] flex-col gap-1.5 rounded-xl border border-line bg-white px-4 py-3.5"
+                  className="flex min-w-[80px] flex-col gap-1.5 rounded-xl border border-line bg-white px-4 py-3.5 transition-colors hover:border-brand/20 hover:bg-[#f0f4ff]"
                 >
                   <span className="font-display text-[26px] font-semibold tracking-[-0.02em] text-ink">
                     {String(stat.statValue)}
@@ -75,26 +83,31 @@ export default function HeadquartersSection({ aboutSection }: Props) {
             </div>
           </div>
 
-          {/* Right — image or placeholder */}
-          {aboutSection?.aboutImgUrl ? (
-            <div className="overflow-hidden rounded-3xl lg:h-[420px]">
-              <img
-                src={aboutSection.aboutImgUrl}
-                alt="Headquarters"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          ) : (
-            <div className="flex items-center justify-center rounded-3xl border-2 border-dashed border-line bg-surface lg:h-[420px]">
-              <div className="flex flex-col items-center gap-3 py-16 text-center lg:py-0">
-                <ImagePlaceholderIcon />
-                <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-                  Image placeholder
-                </p>
-                <p className="text-[13px] text-muted">Postcard card goes here</p>
+          {/* Right */}
+          <div
+            className={`reveal-right${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "240ms" }}
+          >
+            {aboutSection?.aboutImgUrl ? (
+              <div className="overflow-hidden rounded-3xl lg:h-[420px]">
+                <img
+                  src={aboutSection.aboutImgUrl}
+                  alt="Headquarters"
+                  className="h-full w-full object-cover"
+                />
               </div>
-            </div>
-          )}
+            ) : (
+              <div className="flex items-center justify-center rounded-3xl border-2 border-dashed border-line bg-surface lg:h-[420px]">
+                <div className="flex flex-col items-center gap-3 py-16 text-center lg:py-0">
+                  <ImagePlaceholderIcon />
+                  <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                    Image placeholder
+                  </p>
+                  <p className="text-[13px] text-muted">Postcard card goes here</p>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

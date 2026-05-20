@@ -26,7 +26,7 @@ export default async function AboutPage() {
       <AboutHero heroSection={data?.heroSection} />
       <PhilosophySection approachSection={data?.approachSection} />
       <HeadquartersSection aboutSection={data?.aboutSection} />
-      <FoundersNoteSection />
+      <FoundersNoteSection data={data?.foundersNoteSection} />
       <FoundersSection teamSection={data?.teamSection} />
       <ByTheNumbersSection />
       <ContactSection />

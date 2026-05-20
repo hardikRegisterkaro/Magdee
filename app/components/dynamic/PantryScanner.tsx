@@ -1,3 +1,6 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
 import type { ServicePageData } from "@/app/lib/fetchServicePage";
 
 type Props = { data: NonNullable<ServicePageData["pantryScannerSection"]> };
@@ -8,9 +11,7 @@ function AccentHeading({ text }: { text: string }) {
     <>
       {parts.map((part, i) =>
         part.startsWith("*") && part.endsWith("*") ? (
-          <em key={i} className="italic text-brand">
-            {part.slice(1, -1)}
-          </em>
+          <em key={i} className="italic text-brand">{part.slice(1, -1)}</em>
         ) : (
           <span key={i}>{part}</span>
         )
@@ -20,11 +21,17 @@ function AccentHeading({ text }: { text: string }) {
 }
 
 export default function DynamicPantryScanner({ data }: Props) {
+  const { ref, visible } = useReveal(0.08);
+
   return (
-    <section className="relative">
+    <section className="relative" ref={ref}>
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div>
+          {/* Left copy */}
+          <div
+            className={`reveal-left${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "60ms" }}
+          >
             {data.tagText && (
               <div className="flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.16em] text-brand">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
@@ -67,7 +74,11 @@ export default function DynamicPantryScanner({ data }: Props) {
             )}
           </div>
 
-          <div className="flex items-center justify-center rounded-2xlp-8">
+          {/* Right image */}
+          <div
+            className={`reveal-right flex items-center justify-center rounded-2xl${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "240ms" }}
+          >
             {data.imageUrl ? (
               <img
                 src={data.imageUrl}
@@ -87,14 +98,7 @@ export default function DynamicPantryScanner({ data }: Props) {
 function CheckIcon() {
   return (
     <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden>
-      <path
-        d="m2.5 6.2 2.3 2.3L9.5 3.8"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="m2.5 6.2 2.3 2.3L9.5 3.8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
-

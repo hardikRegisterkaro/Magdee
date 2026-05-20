@@ -9,8 +9,9 @@ import DynamicPantryScanner from "@/app/components/dynamic/PantryScanner";
 import DynamicVoiceListening from "@/app/components/dynamic/VoiceListening";
 import DynamicHowItWorks from "@/app/components/dynamic/HowItWorks";
 import DynamicPricing from "@/app/components/dynamic/Pricing";
+import DynamicIntegrations from "@/app/components/dynamic/Integrations";
 const FinalCTA = dynamic(() => import("../components/VOChef/FinalCTA"));
-const FoundersPromise = dynamic(() => import("../components/VOChef/FoundersPromise"));
+const FoundersPromise = dynamic(() => import("../components/dynamic/FoundersPromise"));
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -51,8 +52,12 @@ export default async function ServiceSlugPage({ params }: Props) {
         <DynamicHowItWorks data={page.howItWorksSection} />
       )}
 
-      {page.pricingSection && (
+      {page.pricingSection && (page.pricingSection.plans?.length ?? 0) > 0 && (
         <DynamicPricing data={page.pricingSection} />
+      )}
+
+      {page.integrationsSection && (page.integrationsSection.integrations?.length ?? 0) > 0 && (
+        <DynamicIntegrations data={page.integrationsSection} />
       )}
 
        <FinalCTA />

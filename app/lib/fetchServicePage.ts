@@ -69,17 +69,29 @@ export interface ServicePageData {
     tagText: string;
     heading: string;
     subHeading: string;
-    planLabel: string;
-    planName: string;
-    price: string;
-    currency: string;
-    billingNote: string;
-    badge: string;
-    features: string[];
-    ctaText: string;
-    ctaUrl: string;
-    launchDate: string;
-    refundNote: string;
+    plans: Array<{
+      planLabel: string;
+      planName: string;
+      price: string;
+      currency: string;
+      billingNote: string;
+      badge: string;
+      features: string[];
+      ctaText: string;
+      ctaUrl: string;
+      launchDate: string;
+      refundNote: string;
+    }>;
+  };
+  integrationsSection?: {
+    heading: string;
+    subHeading: string;
+    integrations: Array<{
+      platformName: string;
+      imageUrl: string;
+      status: string;
+      whatItDoes: string;
+    }>;
   };
 }
 

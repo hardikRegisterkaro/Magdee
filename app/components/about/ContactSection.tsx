@@ -1,8 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useReveal } from "@/app/hooks/useReveal";
 
 type Status = "idle" | "loading" | "success" | "error";
+
+
+
 
 export default function ContactSection() {
   const [email, setEmail] = useState("");
@@ -37,18 +41,24 @@ export default function ContactSection() {
     }
   }
 
+  const { ref, visible } = useReveal(0.08);
+
   return (
-    <section className="relative bg-background">
+    <section className="relative bg-background" ref={ref}>
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div
-          className="rounded-3xl px-8 py-12 sm:px-12 lg:px-14 lg:py-14"
+          className={`reveal-up rounded-3xl px-8 py-12 sm:px-12 lg:px-14 lg:py-14${visible ? " is-visible" : ""}`}
           style={{
+            transitionDelay: "60ms",
             background: "linear-gradient(135deg, #3B4ED8 0%, #6B5CE7 60%, #8B6CF0 100%)",
           }}
         >
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
             {/* Left */}
-            <div>
+            <div
+              className={`reveal-left${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: "180ms" }}
+            >
               <p className="font-mono text-[10.5px] font-medium uppercase tracking-[0.18em] text-white/50">
                 — Come Say Hi
               </p>
@@ -118,17 +128,7 @@ export default function ContactSection() {
 
 function MailIcon() {
   return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <rect x="2" y="4" width="20" height="16" rx="3" />
       <path d="M2 7l10 7 10-7" />
     </svg>
@@ -137,20 +137,8 @@ function MailIcon() {
 
 function ArrowIcon() {
   return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      aria-hidden
-    >
-      <path
-        d="M2.5 7h9M8 3.5 11.5 7 8 10.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+      <path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

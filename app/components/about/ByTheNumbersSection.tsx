@@ -1,3 +1,7 @@
+"use client";
+
+import { useReveal } from "@/app/hooks/useReveal";
+
 const STATS = [
   {
     icon: <GridIcon />,
@@ -20,15 +24,21 @@ const STATS = [
 ];
 
 export default function ByTheNumbersSection() {
+  const { ref, visible } = useReveal(0.08);
+
   return (
     <section
       className="relative overflow-hidden"
       style={{ background: "#060f1e" }}
+      ref={ref}
     >
       <div className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         {/* Header */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-          <div>
+          <div
+            className={`reveal-left${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "60ms" }}
+          >
             <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-white/50">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-white/50" />
               04 — By the Numbers
@@ -39,7 +49,10 @@ export default function ByTheNumbersSection() {
               <em className="italic text-[#8AB1FF]">honestly</em>.
             </h2>
           </div>
-          <div className="flex items-center lg:justify-end">
+          <div
+            className={`reveal-right flex items-center lg:justify-end${visible ? " is-visible" : ""}`}
+            style={{ transitionDelay: "200ms" }}
+          >
             <p className="max-w-[38rem] text-[15px] leading-[1.7] text-white/55 lg:text-[16px]">
               No &ldquo;founded-by-ex-FAANG&rdquo; page. No fundraising rounds
               dressed up as milestones. Just the actual numbers behind a small,
@@ -48,13 +61,16 @@ export default function ByTheNumbersSection() {
           </div>
         </div>
 
-        {/* Divider */}
         <hr className="mt-12 border-white/10 lg:mt-16" />
 
         {/* Stats grid */}
         <div className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-3 lg:mt-16">
           {STATS.map((stat, i) => (
-            <div key={i} className="flex flex-col">
+            <div
+              key={i}
+              className={`reveal-up flex flex-col${visible ? " is-visible" : ""}`}
+              style={{ transitionDelay: `${320 + i * 100}ms` }}
+            >
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/8 text-white/70">
                 {stat.icon}
               </span>

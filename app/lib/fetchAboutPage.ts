@@ -48,6 +48,16 @@ export interface AboutPageData {
     teamDescription: string;
     teamMemberCards: TeamMemberCard[];
   };
+  foundersNoteSection?: {
+    founderName: string;
+    founderDesignation: string;
+    founderLocation: string;
+    founderEmail: string;
+    founderCoordinates: string;
+    quote: string;
+    documentNote: string;
+    documentNo: string;
+  };
 }
 
 export const fetchAboutPage = cache(async (): Promise<AboutPageData | null> => {
