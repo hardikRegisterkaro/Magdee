@@ -101,7 +101,7 @@ export async function fetchServicePage(
   try {
     const res = await fetch(
       `${CMS_BASE_URL}/api/services/client/${slug}`,
-      { next: { revalidate: 60 } }
+      { next: { tags: ["service-list", `service-${slug}`], revalidate: 3600 } }
     );
     if (!res.ok) return null;
     const json = await res.json();
