@@ -1,8 +1,46 @@
 "use client";
 
+import { useState } from "react";
 import { useReveal } from "@/app/hooks/useReveal";
 
+type Status = "idle" | "loading" | "success" | "error";
+
+
+
+
 export default function ContactSection() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/registrations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.trim(),
+          pageSource: "contact",
+          pageUrl: "/about",
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setErrorMsg(data.message || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Please try again.");
+    }
+  }
+
   const { ref, visible } = useReveal(0.08);
 
   return (
@@ -38,26 +76,49 @@ export default function ContactSection() {
             </div>
 
             {/* Right */}
-            <div
-              className={`reveal-right flex flex-col gap-3${visible ? " is-visible" : ""}`}
-              style={{ transitionDelay: "300ms" }}
-            >
-              <a
-                href="mailto:hello@magdee.in"
-                className="inline-flex items-center gap-3 rounded-2xl bg-white px-6 py-4 text-[15px] font-medium text-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.25)] transition-all hover:opacity-90 active:scale-[0.97]"
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+              <label className="relative block">
+                <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-ink-soft">
+                  <MailIcon />
+                </span>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@somewhere.in"
+                  className="w-full rounded-2xl bg-white py-4 pl-14 pr-5 text-[15px] font-medium text-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.25)] placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-white/30"
+                />
+              </label>
+
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-4 text-[15px] font-medium text-white transition-colors hover:bg-white/15 disabled:opacity-60"
               >
-                <MailIcon />
-                hello@magdee.in
-              </a>
+                {status === "loading" ? "Subscribing…" : "Keep me in the loop"}
+                {status !== "loading" && <ArrowIcon />}
+              </button>
+
+              {status === "success" && (
+                <p className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-[12.5px] leading-normal text-white">
+                  You&apos;re on the list. Talk soon.
+                </p>
+              )}
+              {status === "error" && errorMsg && (
+                <p className="rounded-lg border border-red-300/40 bg-red-500/15 px-3 py-2 text-[12.5px] leading-normal text-red-100">
+                  {errorMsg}
+                </p>
+              )}
 
               <a
                 href="mailto:hello@magdee.in?subject=Hiring%20Inquiry"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-4 text-[15px] font-medium text-white transition-all hover:bg-white/15 active:scale-[0.97]"
+                className="mt-1 inline-flex items-center gap-1.5 text-[12.5px] font-medium text-white/70 transition-colors hover:text-white"
               >
-                We&apos;re hiring
+                Or write to us about hiring
                 <ArrowIcon />
               </a>
-            </div>
+            </form>
           </div>
         </div>
       </div>

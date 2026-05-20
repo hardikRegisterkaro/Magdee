@@ -1,13 +1,42 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+
+type Status = "idle" | "loading" | "success" | "error";
 
 export default function NewsletterMini() {
+  const pathname = usePathname() || "/blog";
   const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
-    setEmail("");
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/registrations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.trim(),
+          pageSource: "blog",
+          pageUrl: pathname,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setErrorMsg(data.message || "Something went wrong.");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error.");
+    }
   }
 
   return (
@@ -22,6 +51,7 @@ export default function NewsletterMini() {
         <div className="flex w-[180px] items-center rounded-[7px] border border-[#e2e8f0] bg-white px-[9px] py-[7px]">
           <input
             type="email"
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@somewhere.in"
@@ -30,13 +60,22 @@ export default function NewsletterMini() {
         </div>
         <button
           type="submit"
-          className="flex w-[180px] items-center justify-center gap-[6px] rounded-[7px] bg-[#0a192f] px-[10px] py-[8px] text-[12px] font-semibold text-white transition-colors hover:bg-black"
+          disabled={status === "loading"}
+          className="flex w-[180px] items-center justify-center gap-[6px] rounded-[7px] bg-[#0a192f] px-[10px] py-[8px] text-[12px] font-semibold text-white transition-colors hover:bg-black disabled:opacity-60"
         >
           <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
             <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" />
           </svg>
-          Subscribe
+          {status === "loading" ? "Subscribing…" : "Subscribe"}
         </button>
+        {status === "success" && (
+          <p className="text-[10.5px] leading-snug text-[#0f9d6e]">
+            Subscribed. See you next quarter.
+          </p>
+        )}
+        {status === "error" && errorMsg && (
+          <p className="text-[10.5px] leading-snug text-red-600">{errorMsg}</p>
+        )}
       </form>
     </div>
   );
