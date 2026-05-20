@@ -11,21 +11,43 @@ interface Props {
   };
 }
 
+type Status = "idle" | "loading" | "success" | "error";
+
 export default function NewsletterSection({ data }: Props) {
   const badge = data?.badge || "Stay quietly informed";
   const heading = data?.heading || "We email about once a quarter.";
   const description = data?.description || "No drip campaigns, no 'thought leadership', no marketing automation. Just a short note when something genuine has shipped or changed.";
-  const mailTo = data?.email || "hello@magdee.in";
 
   const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
-    const subject = encodeURIComponent("Quarterly note, please");
-    const body = encodeURIComponent(
-      `Hi MagDee,\n\nPlease add me to the quarterly note.\n\nEmail: ${email}`
-    );
-    window.location.href = `mailto:${mailTo}?subject=${subject}&body=${body}`;
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/registrations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.trim(),
+          pageSource: "contact",
+          pageUrl: "/contact-us",
+        }),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setErrorMsg(result.message || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Please try again.");
+    }
   }
 
   return (
@@ -76,11 +98,27 @@ export default function NewsletterSection({ data }: Props) {
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2.5 rounded-2xl bg-white px-5 py-4 text-[15px] font-medium text-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.25)] transition-opacity hover:opacity-90"
+                disabled={status === "loading"}
+                className="inline-flex items-center justify-center gap-2.5 rounded-2xl bg-white px-5 py-4 text-[15px] font-medium text-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.25)] transition-opacity hover:opacity-90 disabled:opacity-60"
               >
-                <SendIcon />
-                Quarterly note, please
+                {status === "loading" ? "Subscribing…" : (
+                  <>
+                    <SendIcon />
+                    Quarterly note, please
+                  </>
+                )}
               </button>
+
+              {status === "success" && (
+                <p className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-[12.5px] leading-normal text-white">
+                  You&apos;re on the list. See you in a quarter.
+                </p>
+              )}
+              {status === "error" && errorMsg && (
+                <p className="rounded-lg border border-red-300/40 bg-red-500/15 px-3 py-2 text-[12.5px] leading-normal text-red-100">
+                  {errorMsg}
+                </p>
+              )}
 
               <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/45">
                 One-click unsubscribe <span className="mx-1.5">·</span> No marketing
