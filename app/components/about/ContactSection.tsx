@@ -23,7 +23,7 @@ export default function ContactSection() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: email.trim(),
-          pageSource: "contact",
+          pageSource: "about",
           pageUrl: "/about",
         }),
       });
