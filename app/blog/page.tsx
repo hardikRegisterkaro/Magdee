@@ -52,7 +52,7 @@ export default async function BlogListingPage() {
   let posts: ApiPost[] = [];
   try {
     const res = await fetch(`${BACKEND}/api/post/client/all-blog`, {
-      cache: "no-store",
+      next: { tags: ["blog-list"], revalidate: 3600 },
     });
     if (res.ok) {
       const data = await res.json();

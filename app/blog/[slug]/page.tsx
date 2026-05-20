@@ -138,9 +138,11 @@ export default async function BlogDetailPage({
 
   const [postRes, allRes] = await Promise.all([
     fetch(`${BACKEND}/api/post/client/detail-blog?slug=${encodeURIComponent(slug)}`, {
-      cache: "no-store",
+      next: { tags: ["blog-list", `blog-${slug}`], revalidate: 3600 },
     }),
-    fetch(`${BACKEND}/api/post/client/all-blog`, { cache: "no-store" }),
+    fetch(`${BACKEND}/api/post/client/all-blog`, {
+      next: { tags: ["blog-list"], revalidate: 3600 },
+    }),
   ]);
 
   if (!postRes.ok) notFound();
