@@ -140,7 +140,7 @@ export default async function BlogDetailPage({
     fetch(`${BACKEND}/api/post/client/detail-blog?slug=${encodeURIComponent(slug)}`, {
       next: { tags: ["blog-list", `blog-${slug}`], revalidate: 3600 },
     }),
-    fetch(`${BACKEND}/api/post/client/all-blog`, {
+    fetch(`${BACKEND}/api/post/client/blog-meta`, {
       next: { tags: ["blog-list"], revalidate: 3600 },
     }),
   ]);
