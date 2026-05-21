@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import Link from "next/link";
 
 /* ─── Hatch pattern ── */
 const HATCH_STYLE: CSSProperties = {
@@ -44,19 +45,41 @@ type ApiPost = {
   category: { id: string; name: string; slug: string; color: string }[];
 };
 
+type Pagination = {
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+};
+
+const POSTS_PER_PAGE = 10;
+
 /* ─── Page ───────────────────────────────────────────────────────────── */
 
-export default async function BlogListingPage() {
+export default async function BlogListingPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { page: pageParam } = await searchParams;
+  const page = Math.max(1, parseInt(pageParam ?? "1"));
   const BACKEND = process.env.BACKEND_API_URL ?? "http://localhost:3000";
 
   let posts: ApiPost[] = [];
+  let pagination: Pagination = {
+    currentPage: 1, totalPages: 1, totalCount: 0,
+    hasNextPage: false, hasPrevPage: false,
+  };
   try {
-    const res = await fetch(`${BACKEND}/api/post/client/all-blog`, {
-      next: { tags: ["blog-list"], revalidate: 3600 },
-    });
+    const res = await fetch(
+      `${BACKEND}/api/post/client/all-blog?page=${page}&limit=${POSTS_PER_PAGE}`,
+      { next: { tags: ["blog-list"], revalidate: 3600 } }
+    );
     if (res.ok) {
       const data = await res.json();
       posts = data.posts ?? [];
+      if (data.pagination) pagination = data.pagination;
     }
   } catch {
     // render empty list on error
@@ -227,6 +250,74 @@ export default async function BlogListingPage() {
             );
           })}
         </div>
+
+        {/* ── Pagination ── */}
+        {pagination.totalPages > 1 && (
+          <div className="flex items-center justify-between px-4 py-10 sm:px-10">
+            <span className="font-mono text-[10.5px] font-bold tracking-[1.5px] text-muted">
+              PAGE {pagination.currentPage} / {pagination.totalPages}
+            </span>
+
+            <div className="flex items-center gap-2">
+              {pagination.hasPrevPage && (
+                <Link
+                  href={`/blog?page=${pagination.currentPage - 1}`}
+                  className="flex items-center gap-1.5 rounded-lg border border-line px-4 py-2 font-mono text-[11px] font-bold tracking-[1.2px] text-ink-soft transition-colors duration-200 hover:border-brand hover:text-brand"
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                  </svg>
+                  PREV
+                </Link>
+              )}
+
+              {/* Page numbers */}
+              <div className="flex items-center gap-1">
+                {Array.from({ length: pagination.totalPages }, (_, i) => i + 1)
+                  .filter((p) => {
+                    const cur = pagination.currentPage;
+                    return p === 1 || p === pagination.totalPages || Math.abs(p - cur) <= 1;
+                  })
+                  .reduce<(number | "…")[]>((acc, p, idx, arr) => {
+                    if (idx > 0 && typeof arr[idx - 1] === "number" && (p as number) - (arr[idx - 1] as number) > 1) {
+                      acc.push("…");
+                    }
+                    acc.push(p);
+                    return acc;
+                  }, [])
+                  .map((p, idx) =>
+                    p === "…" ? (
+                      <span key={`ellipsis-${idx}`} className="px-1 font-mono text-[11px] text-muted">…</span>
+                    ) : (
+                      <Link
+                        key={p}
+                        href={`/blog?page=${p}`}
+                        className={`flex h-8 w-8 items-center justify-center rounded-lg font-mono text-[11px] font-bold tracking-[0.5px] transition-colors duration-200 ${
+                          p === pagination.currentPage
+                            ? "bg-brand text-white"
+                            : "border border-line text-ink-soft hover:border-brand hover:text-brand"
+                        }`}
+                      >
+                        {p}
+                      </Link>
+                    )
+                  )}
+              </div>
+
+              {pagination.hasNextPage && (
+                <Link
+                  href={`/blog?page=${pagination.currentPage + 1}`}
+                  className="flex items-center gap-1.5 rounded-lg border border-line px-4 py-2 font-mono text-[11px] font-bold tracking-[1.2px] text-ink-soft transition-colors duration-200 hover:border-brand hover:text-brand"
+                >
+                  NEXT
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="h-20" />
       </div>
