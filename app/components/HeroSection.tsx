@@ -1,12 +1,7 @@
 import { Sparkle } from "lucide-react";
 import PhoneMockup from "./PhoneMockup";
 import Reveal from "./Reveal";
-
-const PRODUCTS = [
-  { name: "VOChef", status: "Live now", active: true },
-  { name: "Mee Tory", status: "Coming soon", active: false },
-  { name: "Ellamly", status: "Coming very soon", active: false },
-];
+import ProductCards from "./ProductCards";
 
 const STRIP_ITEMS = [
   "Voice-first",
@@ -94,34 +89,7 @@ export default function HeroSection() {
               </div>
             </Reveal>
 
-            <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {PRODUCTS.map((p, i) => (
-                <Reveal key={p.name} delay={400 + i * 80}>
-                  <button
-                    type="button"
-                    className={`flex w-full items-center justify-between rounded-2xl border bg-surface px-4 py-3 text-left transition-colors ${
-                      p.active
-                        ? "border-brand shadow-[0_0_0_3px_rgba(42,75,255,0.08)]"
-                        : "border-line hover:border-ink/20"
-                    }`}
-                  >
-                    <span>
-                      <span className="block text-[14px] font-semibold text-ink">
-                        {p.name}
-                      </span>
-                      <span className="mt-0.5 block text-[10.5px] font-medium uppercase tracking-[0.14em] text-muted">
-                        {p.status}
-                      </span>
-                    </span>
-                    <span
-                      className={`ml-3 inline-block h-2 w-2 rounded-full ${
-                        p.active ? "bg-brand" : "bg-line"
-                      }`}
-                    />
-                  </button>
-                </Reveal>
-              ))}
-            </div>
+            <ProductCards />
           </div>
 
           <div className="lg:order-2">
