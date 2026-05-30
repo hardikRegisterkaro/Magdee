@@ -1,4 +1,5 @@
 import PhoneMockup from "../PhoneMockup";
+import { VOCHEF_PLAY_STORE_URL } from "../../lib/links";
 
 export default function VOChefHero() {
   return (
@@ -22,7 +23,7 @@ export default function VOChefHero() {
               </span>
               Live
               <span className="text-[#9bc6ab]">·</span>
-              v1.2 on iOS
+              v1.2 on Android
             </span>
 
             <div className="mt-7 flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
@@ -49,10 +50,12 @@ export default function VOChefHero() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
-                href="#ios"
+                href={VOCHEF_PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener"
                 className="inline-flex items-center rounded-lg justify-center gap-2 bg-ink px-5 py-3 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black"
               >
-                <AppleIcon /> Download on iOS
+                <AndroidIcon /> Download on Android
               </a>
               <a
                 href="#demo"
@@ -60,14 +63,6 @@ export default function VOChefHero() {
               >
                 <PlayIcon /> Watch 90-sec demo
               </a>
-            </div>
-
-            <div className="mt-7 flex items-center gap-3">
-              <Stars rating={4.9} />
-              <span className="text-[14px] font-semibold text-ink">4.9</span>
-              <span className="text-[13.5px] text-ink-soft">
-                · 1,240 ratings on App Store
-              </span>
             </div>
           </div>
 
@@ -80,51 +75,10 @@ export default function VOChefHero() {
   );
 }
 
-function Stars({ rating }: { rating: number }) {
-  const full = Math.floor(rating);
-  const hasHalf = rating - full >= 0.5;
+function AndroidIcon() {
   return (
-    <span className="inline-flex items-center gap-0.5" aria-label={`${rating} out of 5 stars`}>
-      {Array.from({ length: 5 }).map((_, i) => {
-        const fillType = i < full ? "full" : i === full && hasHalf ? "half" : "empty";
-        return <Star key={i} fill={fillType} />;
-      })}
-    </span>
-  );
-}
-
-function Star({ fill }: { fill: "full" | "half" | "empty" }) {
-  const color = fill === "empty" ? "#e6e8ef" : "#f5a524";
-  if (fill === "half") {
-    return (
-      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
-        <defs>
-          <linearGradient id="half">
-            <stop offset="50%" stopColor="#f5a524" />
-            <stop offset="50%" stopColor="#e6e8ef" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M8 1.5 9.9 5.6l4.6.6-3.3 3.2.8 4.5L8 11.8 3.9 14l.8-4.5L1.4 6.2l4.6-.6L8 1.5Z"
-          fill="url(#half)"
-        />
-      </svg>
-    );
-  }
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
-      <path
-        d="M8 1.5 9.9 5.6l4.6.6-3.3 3.2.8 4.5L8 11.8 3.9 14l.8-4.5L1.4 6.2l4.6-.6L8 1.5Z"
-        fill={color}
-      />
-    </svg>
-  );
-}
-
-function AppleIcon() {
-  return (
-    <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor" aria-hidden>
-      <path d="M11.4 8.5c0-1.9 1.6-2.8 1.6-2.8-.9-1.3-2.3-1.5-2.8-1.5-1.2-.1-2.3.7-2.9.7-.6 0-1.5-.7-2.5-.7-1.3 0-2.5.7-3.1 1.9-1.4 2.3-.4 5.8 1 7.7.7.9 1.5 2 2.5 1.9 1 0 1.4-.6 2.6-.6s1.6.6 2.6.6c1.1 0 1.8-.9 2.4-1.9.8-1.1 1.1-2.2 1.2-2.2-.1 0-2.4-.9-2.6-3.1ZM9.5 2.9c.5-.6.9-1.5.8-2.4-.7 0-1.6.5-2.1 1.1-.5.5-.9 1.4-.8 2.3.8.1 1.6-.4 2.1-1Z" />
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M17.523 15.341a1.06 1.06 0 1 1 0-2.118 1.06 1.06 0 0 1 0 2.118m-11.046 0a1.06 1.06 0 1 1 0-2.118 1.06 1.06 0 0 1 0 2.118m11.42-6.05 2.115-3.66a.44.44 0 0 0-.762-.44l-2.142 3.706A13.1 13.1 0 0 0 12 7.81c-1.875 0-3.65.412-5.108 1.087L4.75 5.191a.44.44 0 0 0-.762.44l2.115 3.66C2.474 11.265.241 14.768 0 18.86h24c-.241-4.093-2.474-7.595-6.103-9.569" />
     </svg>
   );
 }

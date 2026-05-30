@@ -7,6 +7,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import Reveal from "./Reveal";
+import { VOCHEF_PLAY_STORE_URL } from "../lib/links";
 
 const MEETORY_FEATURES = [
   "Voice-first hands-free",
@@ -15,7 +16,11 @@ const MEETORY_FEATURES = [
   "Adaptive meal planning",
 ];
 
-const CHART_BARS = [40, 55, 50, 80, 65, 90, 70];
+const NUMBERS = [
+  { value: "20+", label: "languages for recipes and voice" },
+  { value: "10", label: "dietary modes plus custom rules" },
+  { value: "3", label: "ways in — photo, voice or basket" },
+];
 
 export default function SuiteSection() {
   return (
@@ -181,10 +186,12 @@ function VOChefCard() {
           pace, and what you actually crave.
         </p>
         <a
-          href="/vochef"
+          href={VOCHEF_PLAY_STORE_URL}
+          target="_blank"
+          rel="noopener"
           className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[13.5px] font-medium text-ink transition-colors hover:bg-white/90"
         >
-          Try VOChef on iOS
+          Try VOChef on Android
           <ArrowRight size={14} />
         </a>
       </div>
@@ -249,27 +256,21 @@ function MetricCard() {
     <article className="transition-transform duration-300 hover:-translate-y-1 flex flex-col rounded-3xl border border-line bg-surface p-6">
       <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-brand">
         <Sparkles size={12} />
-        Today
+        VOChef · By the numbers
       </div>
-      <p className="mt-5 font-display text-[44px] font-semibold leading-none tracking-[-0.02em] text-ink">
-        12.4k
-      </p>
-      <p className="mt-2 text-[13px] text-ink-soft">
-        meals cooked with VOChef this week
-      </p>
-      <div className="mt-6 flex items-end gap-1.5">
-        {CHART_BARS.map((h, i) => (
-          <span
-            key={i}
-            className="flex-1 rounded-md"
-            style={{
-              height: `${h * 0.45}px`,
-              background:
-                "linear-gradient(180deg, #2a4bff 0%, #7aa0ff 100%)",
-            }}
-          />
+
+      <ul className="mt-6 flex flex-1 flex-col gap-5">
+        {NUMBERS.map((n) => (
+          <li key={n.label} className="flex items-baseline gap-4">
+            <span className="w-[64px] shrink-0 font-display text-[36px] font-semibold leading-none tracking-[-0.02em] text-ink sm:text-[40px]">
+              {n.value}
+            </span>
+            <span className="text-[13px] leading-[1.45] text-ink-soft">
+              {n.label}
+            </span>
+          </li>
         ))}
-      </div>
+      </ul>
     </article>
   );
 }

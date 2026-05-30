@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { VOCHEF_PLAY_STORE_URL } from "../lib/links";
 
 type Product = {
   name: string;
@@ -16,10 +17,10 @@ const PRODUCTS: Product[] = [
 
 type Props = {
   active?: Product["name"];
-  appStoreHref?: string;
+  playStoreHref?: string;
 };
 
-export default function ProductSubNav({ active, appStoreHref = "#ios" }: Props) {
+export default function ProductSubNav({ active, playStoreHref = VOCHEF_PLAY_STORE_URL }: Props) {
   const pathname = usePathname();
   const activeName =
     active ??
@@ -95,10 +96,12 @@ export default function ProductSubNav({ active, appStoreHref = "#ios" }: Props) 
 
         <div className="hidden shrink-0 sm:block">
           <a
-            href={appStoreHref}
+            href={playStoreHref}
+            target="_blank"
+            rel="noopener"
             className="inline-flex items-center gap-1.5 text-[13.5px] font-medium text-brand transition-colors hover:text-[#1f3ce8]"
           >
-            View on App Store
+            View on Google Play
             <ForwardArrow />
           </a>
         </div>

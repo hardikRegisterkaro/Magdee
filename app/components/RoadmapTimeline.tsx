@@ -27,7 +27,7 @@ const MILESTONES: Milestone[] = [
     year: "2025",
     status: "shipped",
     title: "VOChef",
-    body: "Public release on iOS. Tamil + English.",
+    body: "Public release on Android. Tamil + English.",
     icon: ChefHat,
   },
   {

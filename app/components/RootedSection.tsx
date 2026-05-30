@@ -120,7 +120,7 @@ function FoundersCard() {
     <article className="transition-transform duration-300 hover:-translate-y-1 flex flex-col justify-between rounded-3xl border border-line bg-surface p-7 sm:p-9">
       <div>
         <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
-          Founders&apos; note · 2025
+          Founders&apos; note · 2026
         </p>
         <blockquote className="mt-4 font-display text-[22px] font-medium leading-[1.35] tracking-[-0.01em] text-ink sm:text-[24px]">
           “We named the company after the elephant — patient, careful with
@@ -139,19 +139,21 @@ function FoundersCard() {
               className="flex h-10 w-10 items-center justify-center rounded-full font-display text-[13px] font-semibold text-white ring-2 ring-surface"
               style={{ background: "#2a4bff" }}
             >
-              A
+              D
             </span>
             <span
               className="flex h-10 w-10 items-center justify-center rounded-full font-display text-[13px] font-semibold text-white ring-2 ring-surface"
               style={{ background: "#7C5CFF" }}
             >
-              S
+              V
             </span>
           </div>
           <div>
-            <p className="text-[14px] font-medium text-ink">Vivek</p>
+            <p className="text-[14px] font-medium text-ink">
+              Deepa <span className="text-ink-soft">·</span> Vivek
+            </p>
             <p className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-ink-soft">
-              Co-founders, MagDee
+              Founder &amp; Director · Co-founder
             </p>
           </div>
         </div>

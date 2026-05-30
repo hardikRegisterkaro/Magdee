@@ -9,7 +9,7 @@ const DEFAULT_FAQS: FAQ[] = [
   { question: "Do you offer enterprise pricing?", answer: "Yes — for teams above 25 seats. Write to partners@magdee.in with a rough headcount and use case. We'll send a quote within a working day, no demo gauntlet required." },
   { question: "Can I visit the Coimbatore office?", answer: "Absolutely — we love visitors. Mail hello@magdee.in with a date, and we'll either confirm or suggest one that works. Filter coffee on us." },
   { question: "Are you hiring?", answer: "Quietly, always. If you're a builder who values craft over churn, send a note and a portfolio (or a project, or a thing you wrote) to careers@magdee.in. We read every one." },
-  { question: "Will you ship to my country / language?", answer: "Today: India + iOS + Tamil/English/Hindi. On the roadmap: more languages first, more platforms second. Tell us where you are — we keep a quiet list and write to people in the order they asked." },
+  { question: "Will you ship to my country / language?", answer: "Today: India + Android + Tamil/English/Hindi. On the roadmap: more languages first, more platforms second. Tell us where you are — we keep a quiet list and write to people in the order they asked." },
 ];
 
 interface Props {

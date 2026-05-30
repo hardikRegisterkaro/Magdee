@@ -1,6 +1,7 @@
 import { Sparkle } from "lucide-react";
 import PhoneMockup from "./PhoneMockup";
 import Reveal from "./Reveal";
+import { VOCHEF_PLAY_STORE_URL } from "../lib/links";
 
 const PRODUCTS = [
   { name: "VOChef", status: "Live now", active: true },
@@ -79,10 +80,12 @@ export default function HeroSection() {
             <Reveal delay={300}>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <a
-                  href="#ios"
+                  href={VOCHEF_PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noopener"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(42,75,255,0.7)] transition-colors hover:bg-[#1f3ce8]"
                 >
-                  Try VOChef on iOS
+                  Try VOChef on Android
                   <ArrowIcon />
                 </a>
                 <a
