@@ -23,10 +23,10 @@ export default function NavbarClient({ menu }: { menu: MainMenuItem[] }) {
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
         <a href="/" className="shrink-0" aria-label="MagDee — home">
           <Image
-            src="/logo.svg"
+            src="/Magdee_logo.png"
             alt="MagDee"
-            width={120}
-            height={36}
+            width={3074}
+            height={799}
             priority
             unoptimized
             className="h-8 w-auto"

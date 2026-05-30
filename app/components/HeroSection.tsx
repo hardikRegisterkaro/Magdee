@@ -4,9 +4,9 @@ import Reveal from "./Reveal";
 import { VOCHEF_PLAY_STORE_URL } from "../lib/links";
 
 const PRODUCTS = [
-  { name: "VOChef", status: "Live now", active: true },
-  { name: "Mee Tory", status: "Coming soon", active: false },
-  { name: "Ellamly", status: "Coming very soon", active: false },
+  { name: "VOChef", href: "/vochef", status: "Live now", active: true },
+  { name: "Meetory", href: "/meetory", status: "Coming soon", active: false },
+  { name: "Ellamly", href: "/ellamly", status: "Coming very soon", active: false },
 ];
 
 const STRIP_ITEMS = [
@@ -42,7 +42,7 @@ export default function HeroSection() {
               </span>
               VoChef is live
               <span className="text-line">·</span>
-              Mee Tory in beta
+              Meetory in beta
               <span className="ml-1 inline-flex items-center gap-1 text-brand">
                 See all
                 <ArrowIcon />
@@ -100,8 +100,8 @@ export default function HeroSection() {
             <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
               {PRODUCTS.map((p, i) => (
                 <Reveal key={p.name} delay={400 + i * 80}>
-                  <button
-                    type="button"
+                  <a
+                    href={p.href}
                     className={`flex w-full items-center justify-between rounded-2xl border bg-surface px-4 py-3 text-left transition-colors ${
                       p.active
                         ? "border-brand shadow-[0_0_0_3px_rgba(42,75,255,0.08)]"
@@ -121,7 +121,7 @@ export default function HeroSection() {
                         p.active ? "bg-brand" : "bg-line"
                       }`}
                     />
-                  </button>
+                  </a>
                 </Reveal>
               ))}
             </div>

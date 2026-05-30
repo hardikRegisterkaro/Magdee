@@ -10,15 +10,29 @@ import DynamicVoiceListening from "@/app/components/dynamic/VoiceListening";
 import DynamicHowItWorks from "@/app/components/dynamic/HowItWorks";
 import DynamicPricing from "@/app/components/dynamic/Pricing";
 import DynamicIntegrations from "@/app/components/dynamic/Integrations";
+import MeetoryComingSoon from "@/app/components/Meetory/ComingSoon";
 const FinalCTA = dynamic(() => import("../components/VOChef/FinalCTA"));
 const FoundersPromise = dynamic(() => import("../components/dynamic/FoundersPromise"));
+
+const COMING_SOON_FALLBACKS: Record<string, { meta: Metadata; render: () => React.ReactElement }> = {
+  meetory: {
+    meta: {
+      title: "Meetory — meeting intelligence in your language",
+      description:
+        "Meetory is an AI meeting assistant for multilingual teams. Joins your calls, transcribes 10+ languages, and turns conversations into summaries you can find next Tuesday. Private beta opens Q2 2026.",
+    },
+    render: () => <MeetoryComingSoon />,
+  },
+};
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const page = await fetchServicePage(slug);
-  if (!page) return {};
+  if (!page) {
+    return COMING_SOON_FALLBACKS[slug]?.meta ?? {};
+  }
   return {
     title: page.metaTitle ?? page.heroSection.heading,
     description: page.metaDescription ?? page.heroSection.description,
@@ -29,7 +43,11 @@ export default async function ServiceSlugPage({ params }: Props) {
   const { slug } = await params;
   const page = await fetchServicePage(slug);
 
-  if (!page) notFound();
+  if (!page) {
+    const fallback = COMING_SOON_FALLBACKS[slug];
+    if (fallback) return fallback.render();
+    notFound();
+  }
 
   return (
     <>

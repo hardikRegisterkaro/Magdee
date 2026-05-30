@@ -11,7 +11,7 @@ type Product = {
 
 const PRODUCTS: Product[] = [
   { name: "VOChef", href: "/vochef", status: "LIVE" },
-  { name: "Mee Tory", href: "/mee-tory", status: "BETA" },
+  { name: "Meetory", href: "/meetory", status: "BETA" },
   { name: "Ellamly", href: "/ellamly", status: "SOON" },
 ];
 

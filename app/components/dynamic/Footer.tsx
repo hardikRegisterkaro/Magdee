@@ -34,14 +34,14 @@ export default async function DynamicFooter() {
                 MagDee
               </span> */}
               <Image
-                          src="/logo.svg"
-                          alt="MagDee"
-                          width={120}
-                          height={36}
-                          priority
-                          unoptimized
-                          className="h-8 w-auto"
-                        />
+                src="/Magdee_logo.png"
+                alt="MagDee"
+                width={3074}
+                height={799}
+                priority
+                unoptimized
+                className="h-8 w-auto"
+              />
             </div>
 
             {address?.value && (

@@ -10,10 +10,10 @@ import Reveal from "./Reveal";
 import { VOCHEF_PLAY_STORE_URL } from "../lib/links";
 
 const MEETORY_FEATURES = [
-  "Voice-first hands-free",
-  "Smart pantry inventory",
-  "Tamil + English + Hindi",
-  "Adaptive meal planning",
+  "Joins Meet, Zoom, Teams",
+  "Transcribes 10+ languages",
+  "Summary + action items",
+  "Searchable meeting memory",
 ];
 
 const NUMBERS = [
@@ -121,11 +121,12 @@ function MeeToryCard() {
 
       <div className="relative mt-auto pt-16">
         <h3 className="font-display text-[48px] font-semibold leading-none tracking-[-0.02em] sm:text-[56px]">
-          Mee Tory
+          Meetory
         </h3>
         <p className="mt-5 max-w-md text-[15px] leading-[1.55] text-white/85">
-          The quiet observer that turns standups, syncs, and 1:1s into
-          decisions you can find next Tuesday.
+          The AI meeting assistant for multilingual teams. Joins your call,
+          captures every word in the language people actually spoke, turns it
+          into summaries and action items you can find next Tuesday.
         </p>
 
         <ul className="mt-6 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
@@ -138,7 +139,7 @@ function MeeToryCard() {
         </ul>
 
         <a
-          href="/mee-tory"
+          href="/meetory"
           className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[14px] font-medium text-ink transition-colors hover:bg-white/90"
         >
           Request beta access

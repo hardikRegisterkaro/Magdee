@@ -2,7 +2,6 @@
 
 import {
   ChefHat,
-  Hexagon,
   Mic,
   Sparkle,
   Zap,
@@ -31,18 +30,10 @@ const MILESTONES: Milestone[] = [
     icon: ChefHat,
   },
   {
-    quarter: "Q1",
-    year: "2026",
-    status: "in-flight",
-    title: "VOChef Pantry",
-    body: "Receipt-scan inventory, family meal planning, Hindi support.",
-    icon: Hexagon,
-  },
-  {
     quarter: "Q2",
     year: "2026",
     status: "in-flight",
-    title: "Mee Tory Beta",
+    title: "Meetory Beta",
     body: "Private beta for Indian SMB teams. Slack + Meet integrations.",
     icon: Mic,
   },
