@@ -85,7 +85,7 @@ function MeeToryCard() {
       className="transition-transform duration-300 hover:-translate-y-1 relative flex min-h-[440px] flex-col overflow-hidden rounded-3xl p-7 text-white sm:p-9 lg:min-h-[560px]"
       style={{
         background:
-          "linear-gradient(135deg, #1f5cff 0%, #1a3fbf 60%, #15348f 100%)",
+          "linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-mid) 55%, var(--color-brand-dark) 100%)",
       }}
     >
       <span
@@ -140,7 +140,7 @@ function MeeToryCard() {
 
         <a
           href="/meetory"
-          className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[14px] font-medium text-ink transition-colors hover:bg-white/90"
+          className="cta-magnetic mt-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[14px] font-medium text-ink hover:bg-white/90"
         >
           Request beta access
           <ArrowRight size={14} />
@@ -190,7 +190,7 @@ function VOChefCard() {
           href={VOCHEF_PLAY_STORE_URL}
           target="_blank"
           rel="noopener"
-          className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[13.5px] font-medium text-ink transition-colors hover:bg-white/90"
+          className="cta-magnetic mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[13.5px] font-medium text-ink hover:bg-white/90"
         >
           Try VOChef on Android
           <ArrowRight size={14} />
@@ -242,7 +242,7 @@ function EllamlyCard() {
         </p>
         <a
           href="/ellamly"
-          className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[13.5px] font-medium text-ink transition-colors hover:bg-white/90"
+          className="cta-magnetic mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[13.5px] font-medium text-ink hover:bg-white/90"
         >
           Get notified at launch
           <ArrowRight size={14} />
@@ -297,7 +297,7 @@ function WorkshopCard() {
 
 function PrivacyCard() {
   return (
-    <article className="transition-transform duration-300 hover:-translate-y-1 flex flex-col justify-between rounded-3xl bg-[#0b1020] p-6 text-white">
+    <article className="transition-transform duration-300 hover:-translate-y-1 flex flex-col justify-between rounded-3xl bg-ink p-6 text-white">
       <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-[#7ce0a3]">
         <Shield size={12} />
         Privacy
@@ -308,8 +308,7 @@ function PrivacyCard() {
         </h4>
         <a
           href="#security"
-          className="mt-6 inline-flex items-center gap-2 text-[13px] font-medium hover:text-white"
-          style={{ color: "#8AB1FF" }}
+          className="mt-6 inline-flex items-center gap-2 text-[13px] font-medium text-brand-soft hover:text-white"
         >
           Read the security model
           <ArrowRight size={13} />

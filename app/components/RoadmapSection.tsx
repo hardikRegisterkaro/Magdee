@@ -9,14 +9,8 @@ export default function RoadmapSection() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div className="lg:sticky lg:top-24 lg:self-start">
             <Reveal>
-              <div
-                className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.18em]"
-                style={{ color: "#003B8B" }}
-              >
-                <span
-                  className="inline-block h-1.5 w-1.5 rounded-full"
-                  style={{ background: "#003B8B" }}
-                />
+              <div className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.18em] text-brand-dark">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand-dark" />
                 04 — Roadmap
               </div>
             </Reveal>
@@ -25,9 +19,7 @@ export default function RoadmapSection() {
               <h2 className="mt-5 font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[52px] lg:text-[60px]">
                 The slow,
                 <br />
-                <span className="italic" style={{ color: "#003B8B" }}>
-                  honest
-                </span>{" "}
+                <span className="italic text-gold">honest</span>{" "}
                 plan.
               </h2>
             </Reveal>

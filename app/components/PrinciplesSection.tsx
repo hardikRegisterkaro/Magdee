@@ -97,7 +97,7 @@ function PrincipleCard({
       style={{ background: principle.gradient }}
     >
       <div className="flex items-start justify-between">
-        <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-brand text-white shadow-[0_10px_24px_-12px_rgba(42,75,255,0.55)]">
+        <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-brand text-white shadow-[0_10px_24px_-12px_rgba(30,64,175,0.55)]">
           <Icon size={18} strokeWidth={2} />
         </span>
         <span className="font-mono text-[10.5px] tracking-[0.16em] text-ink-soft/70">

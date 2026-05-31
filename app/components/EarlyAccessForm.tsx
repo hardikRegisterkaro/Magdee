@@ -3,12 +3,12 @@
 import { ArrowRight, Check, Mail } from "lucide-react";
 import { useState } from "react";
 
-const PRODUCTS = ["VOChef", "Meetory", "Ellamly"] as const;
+const PRODUCTS = ["Meetory", "VOChef", "Ellamly"] as const;
 type Product = (typeof PRODUCTS)[number];
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function EarlyAccessForm() {
-  const [selected, setSelected] = useState<Set<Product>>(new Set(["VOChef"]));
+  const [selected, setSelected] = useState<Set<Product>>(new Set(["Meetory"]));
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -73,10 +73,9 @@ export default function EarlyAccessForm() {
               onClick={() => toggle(p)}
               className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors ${
                 active
-                  ? "text-white"
+                  ? "bg-brand-dark text-white"
                   : "border border-line bg-surface text-ink-soft hover:text-ink"
               }`}
-              style={active ? { background: "#003B8B" } : undefined}
             >
               {active && <Check size={12} strokeWidth={2.5} />}
               {p}
@@ -106,8 +105,7 @@ export default function EarlyAccessForm() {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[14px] font-medium text-white transition-colors hover:opacity-90 disabled:opacity-60"
-          style={{ background: "#003B8B" }}
+          className="cta-magnetic inline-flex items-center justify-center gap-2 rounded-full bg-brand-dark px-5 py-3 text-[14px] font-medium text-white hover:opacity-90 disabled:opacity-60"
         >
           {status === "loading" ? "Joining…" : "Join"}
           {status !== "loading" && <ArrowRight size={14} />}

@@ -42,7 +42,7 @@ export default function Pricing() {
                   Lifetime
                 </h3>
               </div>
-              <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[#dfe2ff] bg-[#eef1ff] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-brand">
+              <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[color:var(--color-gold-soft)] bg-gold-bg px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-gold">
                 <StarIcon />
                 Most people
               </span>
@@ -50,7 +50,7 @@ export default function Pricing() {
 
             <div className="mt-7 flex items-end gap-3">
               <span className="font-display text-[64px] font-semibold leading-none tracking-[-0.03em] text-ink sm:text-[76px]">
-                <span className="mr-1 align-[0.12em] text-[42px] font-medium text-ink-soft sm:text-[52px]">
+                <span className="mr-1 align-[0.12em] text-[42px] font-medium text-gold sm:text-[52px]">
                   ₹
                 </span>
                 1,499
@@ -78,7 +78,7 @@ export default function Pricing() {
               href={VOCHEF_PLAY_STORE_URL}
               target="_blank"
               rel="noopener"
-              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3.5 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] transition-colors hover:bg-black"
+              className="cta-magnetic mt-7 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3.5 text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(11,16,32,0.7)] hover:bg-black"
             >
               <AndroidIcon />
               Download VOChef on Android

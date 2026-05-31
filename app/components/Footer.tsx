@@ -2,8 +2,8 @@ const COLUMNS = [
   {
     title: "Products",
     links: [
-      { label: "VOChef", href: "/vochef" },
       { label: "Meetory", href: "/meetory" },
+      { label: "VOChef", href: "/vochef" },
       { label: "Ellamly", href: "/ellamly" },
       { label: "Pantry (soon)", href: "#pantry" },
     ],

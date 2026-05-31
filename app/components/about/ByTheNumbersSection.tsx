@@ -7,7 +7,7 @@ const STATS = [
     icon: <GridIcon />,
     value: "3",
     label: "AI Products",
-    detail: "VOChef · Meetory · Ellamly",
+    detail: "Meetory · VOChef · Ellamly",
   },
   {
     icon: <PinIcon />,

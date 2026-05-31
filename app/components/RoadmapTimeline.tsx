@@ -66,7 +66,7 @@ const STATUS_STYLES: Record<
   },
   "in-flight": {
     label: "In flight",
-    pill: "bg-[#e2ebff] text-[#003B8B]",
+    pill: "bg-[#e2ebff] text-brand-dark",
   },
   planned: {
     label: "Planned",
@@ -136,7 +136,7 @@ export default function RoadmapTimeline() {
         style={{
           height: `${Math.max(progressPx - 8, 0)}px`,
           background:
-            "linear-gradient(180deg, rgba(0,59,139,0.85) 0%, rgba(0,59,139,0.55) 100%)",
+            "linear-gradient(180deg, rgba(10,52,101,0.85) 0%, rgba(10,52,101,0.55) 100%)",
           transition: "height 700ms cubic-bezier(0.22, 1, 0.36, 1)",
         }}
       />
@@ -176,16 +176,15 @@ function MilestoneRow({
   const isLit = isActive || isPassed;
   const nodeStyle: React.CSSProperties = isActive
     ? {
-        background: "#003B8B",
-        borderColor: "#003B8B",
+        background: "var(--color-brand-dark)",
+        borderColor: "var(--color-brand-dark)",
         color: "#ffffff",
         transform: "scale(1.08)",
-        boxShadow: "0 0 0 6px rgba(0,59,139,0.12)",
       }
     : isPassed
       ? {
-          background: "#003B8B",
-          borderColor: "#003B8B",
+          background: "var(--color-brand-dark)",
+          borderColor: "var(--color-brand-dark)",
           color: "#ffffff",
         }
       : {
@@ -209,11 +208,13 @@ function MilestoneRow({
     >
       <span
         ref={nodeRef}
-        className="absolute left-0 top-0 inline-flex h-9 w-9 items-center justify-center rounded-full border-[1.5px]"
+        className={`absolute left-0 top-0 inline-flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] ${
+          isActive ? "animate-ring-pulse" : ""
+        }`}
         style={{
           ...nodeStyle,
           transition:
-            "background 500ms ease, border-color 500ms ease, color 500ms ease, transform 500ms cubic-bezier(0.22,1,0.36,1), box-shadow 500ms ease",
+            "background 500ms ease, border-color 500ms ease, color 500ms ease, transform 500ms cubic-bezier(0.22,1,0.36,1)",
         }}
       >
         <Icon size={15} strokeWidth={1.75} />

@@ -6,11 +6,16 @@
   --color-ink: #0b1020;
   --color-ink-soft: #4b5468;
   --color-muted: #8a92a6;
-  --color-line: #e6e8ef;
+  --color-line: #dbdde6;
   --color-brand: #1E40AF;
   --color-brand-soft: #6a73ff;
+  --color-brand-mid: #1651A9;
+  --color-brand-dark: #0A3465;
   --color-accent: #ff6a3d;
   --color-warm: #f7e6cf;
+  --color-gold: #B89A2A;
+  --color-gold-soft: #D4AF37;
+  --color-gold-bg: #FBF6E3;
   --font-sans: var(--font-sans-display), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-display: var(--font-sans-display), ui-sans-serif, system-ui, sans-serif;
 }
@@ -145,6 +150,60 @@ body {
     transition: none;
   }
   .hover-lift:hover {
+    transform: none;
+  }
+}
+
+/* ── Hero headline accent reveal ──────────────────────────────────────
+   Used on the italic accent word in the hero. Starts gold, settles
+   on brand-blue ~1.5s after page load. */
+@keyframes headline-accent {
+  0%   { transform: scale(0.94) translateY(4px); opacity: 0; color: var(--color-gold); }
+  60%  { transform: scale(1.02) translateY(0);   opacity: 1; color: var(--color-gold); }
+  100% { transform: scale(1)    translateY(0);   opacity: 1; color: var(--color-brand); }
+}
+.animate-headline-accent {
+  display: inline-block;
+  animation: headline-accent 900ms 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity, color;
+}
+
+/* ── Active roadmap milestone pulse ──────────────────────────────── */
+@keyframes ring-pulse {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(10, 52, 101, 0.12); }
+  50%      { box-shadow: 0 0 0 10px rgba(10, 52, 101, 0.04); }
+}
+.animate-ring-pulse {
+  animation: ring-pulse 2400ms ease-in-out infinite;
+}
+
+/* ── Magnetic CTA hover ──────────────────────────────────────────── */
+.cta-magnetic {
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 250ms ease,
+              background-color 250ms ease;
+  will-change: transform;
+}
+.cta-magnetic:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px -14px rgba(30, 64, 175, 0.7),
+              0 0 0 4px rgba(30, 64, 175, 0.10);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-headline-accent,
+  .animate-ring-pulse {
+    animation: none;
+  }
+  .animate-headline-accent {
+    color: var(--color-brand);
+    opacity: 1;
+    transform: none;
+  }
+  .cta-magnetic {
+    transition: none;
+  }
+  .cta-magnetic:hover {
     transform: none;
   }
 }

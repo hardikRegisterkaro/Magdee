@@ -30,7 +30,7 @@ export default function RootedSection() {
               className="italic bg-clip-text text-transparent"
               style={{
                 backgroundImage:
-                  "linear-gradient(135deg, #0053D0 14.29%, #1651A9 50%, #0A3465 85.71%)",
+                  "linear-gradient(135deg, var(--color-brand) 14.29%, var(--color-brand-mid) 50%, var(--color-brand-dark) 85.71%)",
                 paddingRight: "0.08em",
               }}
             >
@@ -68,9 +68,9 @@ function HeadquartersCard() {
       className="transition-transform duration-300 hover:-translate-y-1 relative flex flex-col justify-between overflow-hidden rounded-3xl p-7 text-white sm:p-8"
       style={{
         background:
-          "linear-gradient(135deg, #0053D0 14.29%, #1651A9 50%, #0A3465 85.71%)",
+          "linear-gradient(135deg, var(--color-brand) 14.29%, var(--color-brand-mid) 50%, var(--color-brand-dark) 85.71%)",
         boxShadow:
-          "0 30px 60px -25px rgba(10, 52, 101, 0.45), 0 10px 30px -15px rgba(0, 83, 208, 0.3)",
+          "0 30px 60px -25px rgba(10, 52, 101, 0.45), 0 10px 30px -15px rgba(30, 64, 175, 0.3)",
       }}
     >
       <span
@@ -137,13 +137,13 @@ function FoundersCard() {
           <div className="flex -space-x-2">
             <span
               className="flex h-10 w-10 items-center justify-center rounded-full font-display text-[13px] font-semibold text-white ring-2 ring-surface"
-              style={{ background: "#2a4bff" }}
+              style={{ background: "var(--color-brand)" }}
             >
               D
             </span>
             <span
               className="flex h-10 w-10 items-center justify-center rounded-full font-display text-[13px] font-semibold text-white ring-2 ring-surface"
-              style={{ background: "#7C5CFF" }}
+              style={{ background: "var(--color-gold)" }}
             >
               V
             </span>

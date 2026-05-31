@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 
 const OUTPUT_ITEMS = [
   { label: "Decision", body: "Ship v0.4 Fri", dot: "#16a34a" },
-  { label: "Owner", body: "Priya · auth fix", dot: "#2a4bff" },
+  { label: "Owner", body: "Priya · auth fix", dot: "var(--color-brand)" },
   { label: "Reminder", body: "Anjali birthday", dot: "#a78bfa" },
 ];
 
@@ -115,9 +115,9 @@ function CoreCard() {
       className="transition-transform duration-300 hover:-translate-y-1 relative flex aspect-square flex-col items-center justify-between overflow-hidden rounded-3xl p-7 text-white sm:p-8"
       style={{
         background:
-          "linear-gradient(135deg, #0053D0 14.29%, #1651A9 50%, #0A3465 85.71%)",
+          "linear-gradient(135deg, var(--color-brand) 14.29%, var(--color-brand-mid) 50%, var(--color-brand-dark) 85.71%)",
         boxShadow:
-          "0 30px 60px -25px rgba(10, 52, 101, 0.55), 0 10px 30px -15px rgba(0, 83, 208, 0.4)",
+          "0 30px 60px -25px rgba(10, 52, 101, 0.55), 0 10px 30px -15px rgba(30, 64, 175, 0.4)",
       }}
     >
       <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/80">
