@@ -23,13 +23,13 @@ function QuoteText({ text }: { text: string }) {
 }
 
 const DEFAULTS = {
-  founderName:        "Vivek",
-  founderDesignation: "Co-Founder, Product",
-  founderLocation:    "Coimbatore, Tamil Nadu",
-  founderEmail:       "vivek@magdee.in",
-  founderCoordinates: "11.0168° N · 76.9558° E",
+  founderName:        "Deepa",
+  founderDesignation: "Founder & Director",
+  founderLocation:    "Trichy, Tamil Nadu",
+  founderEmail:       "deepa@magdee.ai",
+  founderCoordinates: "",
   quote:              "We named the company after the elephant — patient, careful with what it carries, and quietly stronger than it looks.",
-  documentNote:       "Founders' Note · MagDee Technologies · 2025",
+  documentNote:       "Founders' Note · MagDee Technologies · 2026",
   documentNo:         "Document No. MD-2026-001",
 };
 
@@ -93,10 +93,12 @@ export default function FoundersNoteSection({ data }: Props) {
                   <MailIcon />
                   <span className="font-mono text-[10px] uppercase tracking-[0.1em]">{d.founderEmail}</span>
                 </div>
-                <div className="flex items-center gap-2 text-[11.5px] text-ink-soft">
-                  <GlobeIcon />
-                  <span className="font-mono text-[10px] uppercase tracking-[0.1em]">{d.founderCoordinates}</span>
-                </div>
+                {d.founderCoordinates && (
+                  <div className="flex items-center gap-2 text-[11.5px] text-ink-soft">
+                    <GlobeIcon />
+                    <span className="font-mono text-[10px] uppercase tracking-[0.1em]">{d.founderCoordinates}</span>
+                  </div>
+                )}
               </div>
 
               <hr className="mt-7 border-line" />

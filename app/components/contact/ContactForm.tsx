@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useReveal } from "@/app/hooks/useReveal";
 
 const CATEGORIES = [
-  { label: "Product", email: "product@magdee.in", person: "Vivek" },
-  { label: "Press", email: "press@magdee.in", person: "Vikram" },
-  { label: "Partnerships", email: "partners@magdee.in", person: "Vivek" },
-  { label: "Careers", email: "careers@magdee.in", person: "Vikram" },
-  { label: "Support", email: "support@magdee.in", person: "Vikram" },
-  { label: "Just hello", email: "hello@magdee.in", person: "Vivek" },
+  { label: "Product", email: "product@magdee.ai", person: "Vivek" },
+  { label: "Press", email: "press@magdee.ai", person: "Vikram" },
+  { label: "Partnerships", email: "partners@magdee.ai", person: "Vivek" },
+  { label: "Careers", email: "careers@magdee.ai", person: "Vikram" },
+  { label: "Support", email: "support@magdee.ai", person: "Vikram" },
+  { label: "Just hello", email: "hello@magdee.ai", person: "Vivek" },
 ];
 
 const COUNTRY_CODES = [

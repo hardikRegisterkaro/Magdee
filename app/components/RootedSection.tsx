@@ -42,7 +42,7 @@ export default function RootedSection() {
 
         <Reveal delay={160}>
           <p className="mx-auto mt-6 max-w-2xl text-center text-[15px] leading-[1.6] text-ink-soft sm:text-[16px]">
-            We&apos;re a small team in Coimbatore writing software that takes its
+            We&apos;re a small team in Trichy writing software that takes its
             time. India taught us to live among many languages, many constraints,
             many ways of doing the same thing — and to make beautiful things
             inside them.
@@ -93,10 +93,10 @@ function HeadquartersCard() {
           — Headquarters
         </p>
         <h3 className="mt-1 font-display text-[36px] font-semibold leading-none tracking-[-0.02em] sm:text-[40px]">
-          Coimbatore
+          Trichy
         </h3>
         <p className="mt-2 text-[13.5px] text-white/80">
-          Tamil Nadu, India · 11°N 77°E
+          Tamil Nadu, India
         </p>
 
         <ul className="mt-6 space-y-2">

@@ -112,7 +112,7 @@ export default function ContactSection() {
               )}
 
               <a
-                href="mailto:hello@magdee.in?subject=Hiring%20Inquiry"
+                href="mailto:hello@magdee.ai?subject=Hiring%20Inquiry"
                 className="mt-1 inline-flex items-center gap-1.5 text-[12.5px] font-medium text-white/70 transition-colors hover:text-white"
               >
                 Or write to us about hiring

@@ -23,12 +23,12 @@ function AccentHeading({ text }: { text: string }) {
 const FALLBACK_STATS = [
   { statTitle: "Founded", statValue: "2025" },
   { statTitle: "Languages\nSpoken Daily", statValue: "03" },
-  { statTitle: "Latitude", statValue: "11°N" },
+  { statTitle: "Time\nZone", statValue: "IST" },
   { statTitle: "Coffees\nBrewed", statValue: "∞" },
 ];
 
 export default function HeadquartersSection({ aboutSection }: Props) {
-  const badgeText = aboutSection?.aboutBadgeTitle || "02 — Headquarters · Coimbatore";
+  const badgeText = aboutSection?.aboutBadgeTitle || "02 — Headquarters · Trichy";
   const heading = aboutSection?.aboutHeading || "Software with a *sense of place*.";
   const description = aboutSection?.aboutDescription || "";
   const stats = aboutSection?.aboutStats?.length ? aboutSection.aboutStats : FALLBACK_STATS;
@@ -36,8 +36,8 @@ export default function HeadquartersSection({ aboutSection }: Props) {
   const paragraphs = description
     ? description.split(/\n\n+/).filter(Boolean)
     : [
-        "We chose Coimbatore — a working city with deep textile and engineering roots — because it teaches you to make things that hold up. Patient AI is what happens when craft culture meets a noisy industry that's forgotten how to slow down.",
-        "Three founders. One floor above a filter coffee shop. Eleven degrees north of the equator. A two-minute walk to where one co-founder learned to weave a saree, and four minutes from where another debugged his first compiler.",
+        "We chose Trichy — a temple city with deep engineering roots from BHEL and the Cauvery delta — because it teaches you to make things that hold up. Patient AI is what happens when craft culture meets a noisy industry that's forgotten how to slow down.",
+        "Two founders. One floor above a filter coffee shop. A short walk from the Rockfort temple, and minutes from where one co-founder first learned to weave a saree.",
       ];
 
   const { ref, visible } = useReveal(0.08);

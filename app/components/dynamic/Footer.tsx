@@ -92,7 +92,7 @@ export default async function DynamicFooter() {
                 <span className="inline-block h-3 w-3 border border-line bg-surface" />
                 <span className="inline-block h-3 w-3" style={{ background: "#0f9d6e" }} />
               </span>
-              {info?.value || "Made in India · Designed in Coimbatore"}
+              {info?.value || "Made in India · Designed in Trichy"}
             </div>
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft">
               {copyright?.value || "© 2026 MagDee Technologies"}

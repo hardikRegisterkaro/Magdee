@@ -12,7 +12,7 @@ const STATS = [
   {
     icon: <PinIcon />,
     value: "01",
-    label: "Coimbatore HQ",
+    label: "Trichy HQ",
     detail: "One floor, ten desks, three filter coffee machines.",
   },
   {

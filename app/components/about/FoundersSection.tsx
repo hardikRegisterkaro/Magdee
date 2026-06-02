@@ -9,17 +9,17 @@ const AVATAR_COLORS = ["#3B4ED8", "#E8852A", "#7B42E8", "#16A34A", "#DC2626"];
 
 const FALLBACK_MEMBERS = [
   {
-    name: "Vivek",
-    designation: "Product",
-    bio: "Ex-product at a payments unicorn. Cooks better than he codes.",
-    location: "COIMBATORE",
+    name: "Deepa",
+    designation: "Founder & Director",
+    bio: "Founder of MagDee. Sets the direction; protects the patience.",
+    location: "TRICHY",
     imgUrl: "",
   },
   {
-    name: "Vikram Pillai",
-    designation: "Design",
-    bio: "Designed for two well-known apps you've probably used.",
-    location: "KOCHI → COIMBATORE",
+    name: "Vivek",
+    designation: "Co-founder, Product",
+    bio: "Ex-product at a payments unicorn. Cooks better than he codes.",
+    location: "TRICHY",
     imgUrl: "",
   },
 ];

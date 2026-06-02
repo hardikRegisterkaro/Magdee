@@ -5,10 +5,10 @@ import ContactForm from "./ContactForm";
 import type { ContactCard } from "@/app/lib/fetchContactPage";
 
 const DEFAULT_CARDS: ContactCard[] = [
-  { label: "Email Us", value: "hello@magdee.in", detail: "One of us within 24 hrs" },
-  { label: "Visit Us", value: "Coimbatore HQ", detail: "By appointment only" },
-  { label: "Or in Tamil", value: "வணக்கம்", detail: "vanakkam@magdee.in" },
-  { label: "Press Inbox", value: "press@magdee.in", detail: "Embargoed inquiries welcome" },
+  { label: "Email Us", value: "hello@magdee.ai", detail: "One of us within 24 hrs" },
+  { label: "Visit Us", value: "Trichy HQ", detail: "By appointment only" },
+  { label: "Or in Tamil", value: "வணக்கம்", detail: "vanakkam@magdee.ai" },
+  { label: "Press Inbox", value: "press@magdee.ai", detail: "Embargoed inquiries welcome" },
 ];
 
 interface Props {

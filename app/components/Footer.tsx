@@ -58,7 +58,7 @@ export default function Footer() {
             </div>
             <p className="mt-4 max-w-[18rem] text-[13.5px] leading-[1.55] text-ink-soft">
               MagDee Technologies Pvt. Ltd. — a small studio building patient
-              AI products from Coimbatore, Tamil Nadu.
+              AI products from Trichy, Tamil Nadu.
             </p>
             <div className="mt-5 flex items-center gap-2">
               <SocialLink href="https://x.com" label="X (Twitter)">
@@ -102,7 +102,7 @@ export default function Footer() {
                 <span className="inline-block h-3 w-3 border border-line bg-surface" />
                 <span className="inline-block h-3 w-3" style={{ background: "#0f9d6e" }} />
               </span>
-              Made in India · Designed in Coimbatore
+              Made in India · Designed in Trichy
             </div>
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft">
               © 2026 MagDee Technologies

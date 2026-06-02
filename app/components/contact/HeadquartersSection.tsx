@@ -30,14 +30,12 @@ function renderNeighborhoodHeading(text: string) {
 export default function HeadquartersSection({ data }: Props) {
   const badge = data?.badge || "03 — Headquarters";
   const companyName = data?.companyName || "MagDee Technologies Pvt. Ltd.";
-  const address = data?.address || "Floor 2, No. 47, Race Course Road\nRS Puram, Coimbatore — 641 002\nTamil Nadu, India";
-  const mapsUrl = data?.mapsUrl || "https://maps.google.com/?q=11.0168,76.9558";
-  const phone = data?.phone || "+91 422 4567 890";
+  const address = data?.address || "Thillai Nagar\nTiruchirappalli — 620 018\nTamil Nadu, India";
+  const mapsUrl = data?.mapsUrl || "https://maps.google.com/?q=11.15,78.40";
+  const phone = data?.phone || "+91 431 4567 890";
   const officeHours = data?.hours || "Mon-Fri · 9-7 IST";
-  const lat = data?.lat || "11.0168° N";
-  const long = data?.long || "76.9558° E";
   const neighborhoodHeading = data?.neighborhoodHeading || "Above the *filter coffee* shop.";
-  const neighborhoodDescription = data?.neighborhoodDescription || "Race Course Road is one of the older streets in town — wide, tree-lined, never in a hurry. We're on the second floor, behind a heavy teak door, two doors down from a 40-year-old filter coffee shop. You'll smell us before you see us.";
+  const neighborhoodDescription = data?.neighborhoodDescription || "Thillai Nagar is one of the older streets in town — wide, tree-lined, never in a hurry. We're on the second floor, behind a heavy teak door, two doors down from a 40-year-old filter coffee shop. You'll smell us before you see us.";
   const mapImgUrl = data?.mapImgUrl || "";
 
   const { ref, visible } = useReveal(0.1);
@@ -45,8 +43,6 @@ export default function HeadquartersSection({ data }: Props) {
   const details = [
     { icon: <PhoneIcon />, label: "Phone", value: phone },
     { icon: <ClockIcon />, label: "Hours", value: officeHours },
-    { icon: <PinIcon />, label: "Lat", value: lat },
-    { icon: <GlobeIcon />, label: "Long", value: long },
   ];
 
   return (
@@ -70,7 +66,7 @@ export default function HeadquartersSection({ data }: Props) {
                 <h2 className="mt-5 font-display text-[40px] font-semibold leading-[1.05] tracking-tight text-ink sm:text-[48px]">
                   Find us in
                   <br />
-                  Coimbatore.
+                  Trichy.
                 </h2>
 
                 <address className="mt-6 not-italic text-[14px] leading-[1.7] text-ink-soft">
@@ -112,7 +108,7 @@ export default function HeadquartersSection({ data }: Props) {
                     <ArrowIcon />
                   </a>
                   <a
-                    href="mailto:hello@magdee.in?subject=Visit%20Request"
+                    href="mailto:hello@magdee.ai?subject=Visit%20Request"
                     className="inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-5 py-3 text-[14px] font-medium text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/20 hover:bg-background"
                   >
                     Book a visit
@@ -177,24 +173,6 @@ function ClockIcon() {
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <circle cx="12" cy="12" r="9" />
       <path d="M12 7v5l3 3" />
-    </svg>
-  );
-}
-
-function PinIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-      <circle cx="12" cy="9" r="2.5" />
-    </svg>
-  );
-}
-
-function GlobeIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <circle cx="12" cy="12" r="10" />
-      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
     </svg>
   );
 }

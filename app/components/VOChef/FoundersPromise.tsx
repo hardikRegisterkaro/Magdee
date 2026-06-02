@@ -36,11 +36,11 @@ export default function FoundersPromise() {
                 {/* <InitialAvatar letter="S" bg="#7c4bff" /> */}
               </span>
               <p className="text-[13.5px] text-ink-soft">
-                <span className="font-medium text-ink">Vivek</span>
+                <span className="font-medium text-ink">Deepa &amp; Vivek</span>
                 <span className="mx-1.5 text-muted">·</span>
-                Co-founders, MagDee
+                Founders, MagDee
                 <span className="mx-1.5 text-muted">·</span>
-                Coimbatore
+                Trichy
               </p>
             </div>
           </div>

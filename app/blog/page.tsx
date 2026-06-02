@@ -125,7 +125,7 @@ export default async function BlogListingPage({
             style={{ animationDelay: "160ms" }}
           >
             Engineering notes, product thinking, and studio dispatches — from the team building
-            patient AI in Coimbatore.
+            patient AI in Trichy.
           </p>
 
           <div
