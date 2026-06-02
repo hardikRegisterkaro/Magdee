@@ -2,6 +2,7 @@ import MeetoryAppMockup from "./MeetoryAppMockup";
 import Reveal from "./Reveal";
 import HeroMarquee from "./HeroMarquee";
 import { VOCHEF_PLAY_STORE_URL } from "../lib/links";
+import ProductCards from "./ProductCards";
 
 const STRIP_ITEMS = [
   "Multilingual by default",
@@ -90,6 +91,8 @@ export default function HeroSection() {
                 </a>
               </div>
             </Reveal>
+
+            <ProductCards />
           </div>
 
           <div className="lg:order-2">
