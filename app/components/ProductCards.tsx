@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { VOCHEF_PLAY_STORE_URL } from "../lib/links";
 
 interface Product {
   name: string;
@@ -11,41 +12,42 @@ interface Product {
     badgeColor: string;
     title: string;
     description: string;
-    cta?: { label: string; href: string };
+    cta?: { label: string; href: string; external?: boolean };
     note?: string;
   };
 }
 
 const PRODUCTS: Product[] = [
   {
-    name: "VOChef",
-    status: "Live now",
+    name: "Meetory",
+    status: "Private beta · Q2 2026",
     active: true,
     popup: {
-      badge: "LIVE ON IOS",
+      badge: "PRIVATE BETA · Q2 2026",
+      badgeColor: "#1E40AF",
+      title: "Meetory beta opens Q2 2026",
+      description:
+        "An AI meeting assistant for multilingual teams. Joins your call, transcribes 10+ languages (including code-switching), and turns every conversation into summaries, action items, and searchable history.",
+      cta: { label: "Request beta access →", href: "/meetory" },
+      note: "First wave of invites goes out in the order people asked.",
+    },
+  },
+  {
+    name: "VOChef",
+    status: "Live on Android",
+    active: false,
+    popup: {
+      badge: "LIVE ON ANDROID",
       badgeColor: "#16a34a",
       title: "VOChef is live 🎉",
       description:
         "Your voice-first AI chef assistant is ready to use. Hands stay on the spoon — the screen stays clean. Ask it anything about cooking, get step-by-step guidance, and cook smarter.",
-      cta: { label: "Try VOChef on iOS →", href: "#ios" },
-    },
-  },
-  {
-    name: "Mee Tory",
-    status: "Coming soon",
-    active: false,
-    popup: {
-      badge: "COMING SOON",
-      badgeColor: "#b45309",
-      title: "Mee Tory is on its way",
-      description:
-        "We're putting the finishing touches on Mee Tory. It's going to be worth the wait — stay tuned for the launch announcement.",
-      note: "No ETA yet — we'll announce when it's ready.",
+      cta: { label: "Get it on Google Play →", href: VOCHEF_PLAY_STORE_URL, external: true },
     },
   },
   {
     name: "Ellamly",
-    status: "Coming very soon",
+    status: "Coming late 2026",
     active: false,
     popup: {
       badge: "IN DEVELOPMENT",
@@ -200,6 +202,8 @@ export default function ProductCards() {
               {active.popup.cta && (
                 <a
                   href={active.popup.cta.href}
+                  target={active.popup.cta.external ? "_blank" : undefined}
+                  rel={active.popup.cta.external ? "noopener" : undefined}
                   className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-[13px] font-semibold text-white transition-opacity hover:opacity-90"
                   style={{ background: active.popup.badgeColor }}
                 >

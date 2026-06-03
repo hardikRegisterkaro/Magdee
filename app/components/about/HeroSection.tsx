@@ -80,23 +80,27 @@ export default function AboutHero({ heroSection }: Props) {
               />
             ) : (
               <div className="relative">
-                <div className="relative z-10 w-75 rounded-3xl border border-line bg-white px-10 pb-14 pt-10 shadow-[0_24px_64px_-20px_rgba(15,23,42,0.18)] sm:w-85">
+                <div className="relative z-10 w-75 rounded-3xl border border-line bg-gold-bg/40 px-10 pb-12 pt-10 shadow-[0_24px_64px_-20px_rgba(15,23,42,0.18)] sm:w-85">
                   <div className="flex flex-col items-center">
-                    <svg viewBox="0 0 80 36" width="120" height="56" className="text-ink" aria-hidden>
-                      <path
-                        d="M4 28 C 12 8, 24 8, 32 24 S 52 32, 60 12 S 76 12, 76 28"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <div
+                      className="relative overflow-hidden"
+                      style={{
+                        width: "170px",
+                        height: "170px",
+                        backgroundImage: "url(/Magdee_logo.png)",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "auto 100%",
+                        backgroundPosition: "left center",
+                      }}
+                      role="img"
+                      aria-label="MagDee — the M from the wordmark, with the elephant nested inside"
+                    />
+
 
                     <div className="mt-6 flex w-full flex-col gap-2 border-t border-line pt-5">
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-                          — The Mark
+                          — The Mark · MagDee
                         </span>
                       </div>
                       <div className="flex items-center justify-between">
@@ -122,12 +126,12 @@ export default function AboutHero({ heroSection }: Props) {
                       </textPath>
                     </text>
                   </svg>
-                  <svg viewBox="0 0 80 36" width="32" height="14" className="relative z-10 text-brand" aria-hidden>
+                  <svg viewBox="0 0 32 32" width="28" height="28" className="relative z-10 text-brand" aria-hidden>
                     <path
-                      d="M4 28 C 12 8, 24 8, 32 24 S 52 32, 60 12 S 76 12, 76 28"
+                      d="M8 24 L8 8 L16 18 L24 8 L24 24"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="5"
+                      strokeWidth="3.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />

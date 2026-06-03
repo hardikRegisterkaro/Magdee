@@ -105,53 +105,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <ProductStrip />
-
       <HeroMarquee items={STRIP_ITEMS} />
     </section>
-  );
-}
-
-const PRODUCTS = [
-  { name: "Meetory", href: "/meetory", status: "Private beta · Q2 2026", active: true },
-  { name: "VOChef", href: "/vochef", status: "Live on Android", active: false },
-  { name: "Ellamly", href: "/ellamly", status: "Coming late 2026", active: false },
-];
-
-function ProductStrip() {
-  return (
-    <div className="border-t border-line bg-surface/50">
-      <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 gap-2 py-4 sm:grid-cols-3 sm:gap-3 sm:py-5">
-          {PRODUCTS.map((p) => (
-            <a
-              key={p.name}
-              href={p.href}
-              className={`group flex items-center justify-between gap-3 rounded-xl px-3 py-2 transition-colors ${
-                p.active
-                  ? "bg-surface ring-1 ring-brand/20 shadow-[0_0_0_3px_rgba(30,64,175,0.06)]"
-                  : "hover:bg-surface"
-              }`}
-            >
-              <span className="flex items-center gap-2.5 min-w-0">
-                <span
-                  className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                    p.active ? "bg-brand" : "bg-line"
-                  }`}
-                />
-                <span className="truncate text-[13.5px] font-semibold text-ink">
-                  {p.name}
-                </span>
-                <span className="truncate text-[11px] font-medium uppercase tracking-[0.14em] text-muted">
-                  · {p.status}
-                </span>
-              </span>
-              <ArrowIcon />
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }
 
