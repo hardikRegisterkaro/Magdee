@@ -1,4 +1,4 @@
-import PhoneMockup from "../PhoneMockup";
+import Image from "next/image";
 import { VOCHEF_PLAY_STORE_URL } from "../../lib/links";
 
 export default function VOChefHero() {
@@ -67,7 +67,17 @@ export default function VOChefHero() {
           </div>
 
           <div className="order-1 lg:order-2 lg:sticky lg:top-24">
-            <PhoneMockup />
+            <div className="relative mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px]">
+              <Image
+                src="/screenshots/vochef_01_scan_android.png"
+                alt="VOChef Android home screen — tap to scan with camera or add ingredients by name"
+                width={1356}
+                height={2602}
+                priority
+                unoptimized
+                className="block h-auto w-full drop-shadow-[0_40px_80px_rgba(15,23,42,0.25)]"
+              />
+            </div>
           </div>
         </div>
       </div>

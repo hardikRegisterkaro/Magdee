@@ -38,8 +38,8 @@ export default function FinalCTA() {
             className={`reveal-up mt-6 max-w-[40rem] text-[15px] leading-[1.6] text-white/70 sm:text-[16px]${visible ? " is-visible" : ""}`}
             style={{ transitionDelay: "240ms" }}
           >
-            10 minutes to set up. 30 days to fall in love. 30 days to walk away
-            if you don&apos;t.
+            Free, with fair daily limits. No card, no subscription. 10 minutes
+            to set up — and a fresh quota every midnight.
           </p>
 
           <div
@@ -53,7 +53,7 @@ export default function FinalCTA() {
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-[15px] font-medium text-ink shadow-[0_14px_30px_-14px_rgba(0,0,0,0.5)] transition-all hover:bg-white/90 active:scale-[0.97]"
             >
               <AndroidIcon />
-              Get VOChef for ₹1,499
+              Get VOChef — free on Android
             </a>
             <a
               href="#features"

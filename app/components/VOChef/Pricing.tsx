@@ -1,17 +1,17 @@
 import { VOCHEF_PLAY_STORE_URL } from "../../lib/links";
 
 const FEATURES = [
-  "Unlimited recipes, hands-free cooking",
-  "Pantry scanner with Indian ingredient library",
-  "Tamil + English + Hindi voice",
-  "Offline mode for saved recipes",
-  "All future updates, free forever",
-  "30-day full refund — no questions",
+  "Snap-a-photo recipe scan + voice-guided Cook Mode",
+  "Voice readout in 20+ languages",
+  "10 dietary modes + free-text restrictions",
+  "AI substitutions, scaling 1× to 8×, shopping lists",
+  "Daily caps on scans, chats & guided recipes",
+  "Caps reset at midnight — every day a fresh quota",
 ];
 
 export default function Pricing() {
   return (
-    <section className="relative">
+    <section id="access" className="relative">
       <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="flex flex-col items-center text-center">
           <div className="flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-ink">
@@ -20,14 +20,15 @@ export default function Pricing() {
           </div>
 
           <h2 className="mt-6 font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[52px] lg:text-[60px]">
-            One tier, <span className="italic text-brand">paid once</span>.
+            Free for everyone.
             <br />
-            No subscriptions.
+            <span className="italic text-brand">With fair daily limits.</span>
           </h2>
 
           <p className="mt-6 max-w-[36rem] text-[15.5px] leading-[1.65] text-ink-soft sm:text-[16.5px]">
-            You get VOChef forever. Updates and new languages roll in
-            automatically — no upsells.
+            No subscription. No card. No upsells. Daily caps on photo scans,
+            voice chats, and guided recipes — transparent in the app bar,
+            reset every midnight.
           </p>
         </div>
 
@@ -39,25 +40,25 @@ export default function Pricing() {
                   VOChef
                 </p>
                 <h3 className="mt-1.5 font-display text-[26px] font-semibold tracking-[-0.01em] text-ink sm:text-[28px]">
-                  Lifetime
+                  Free tier
                 </h3>
               </div>
-              <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[color:var(--color-gold-soft)] bg-gold-bg px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-gold">
-                <StarIcon />
-                Most people
+              <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#dcf5e6] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-[#0f9d6e]">
+                <span className="relative inline-flex h-1.5 w-1.5">
+                  <span className="absolute inset-0 animate-ping rounded-full bg-[#0f9d6e] opacity-60" />
+                  <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-[#0f9d6e]" />
+                </span>
+                Live · Free
               </span>
             </div>
 
             <div className="mt-7 flex items-end gap-3">
-              <span className="font-display text-[64px] font-semibold leading-none tracking-[-0.03em] text-ink sm:text-[76px]">
-                <span className="mr-1 align-[0.12em] text-[42px] font-medium text-gold sm:text-[52px]">
-                  ₹
-                </span>
-                1,499
+              <span className="font-display text-[64px] font-semibold leading-none tracking-[-0.03em] text-brand sm:text-[76px]">
+                FREE
               </span>
               <span className="pb-2 text-[12px] leading-[1.35] text-ink-soft">
-                <span className="block">one-time</span>
-                <span className="block text-muted">no subscription</span>
+                <span className="block">with fair daily limits</span>
+                <span className="block text-muted">no card, no subscription</span>
               </span>
             </div>
 
@@ -87,7 +88,7 @@ export default function Pricing() {
             <p className="mt-5 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
               iOS version planned.
               <span className="mx-2">·</span>
-              30-day refund.
+              Paid tiers coming when usage demands it.
             </p>
           </div>
         </div>
@@ -106,14 +107,6 @@ function CheckIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </svg>
-  );
-}
-
-function StarIcon() {
-  return (
-    <svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor" aria-hidden>
-      <path d="M6 1l1.5 3.2L11 4.7 8.3 7.1 9 10.5 6 8.8 3 10.5l.7-3.4L1 4.7l3.5-.5L6 1z" />
     </svg>
   );
 }
