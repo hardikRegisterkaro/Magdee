@@ -21,13 +21,13 @@ export default function FoundersPromise() {
             </div>
 
             <p className="mt-3 max-w-[60ch] text-[16px] leading-[1.6] text-ink sm:text-[17px]">
-              We named the company after the elephant — patient, careful with
-              what it carries, and{" "}
+              We chose the elephant.{" "}
               <span className="italic font-semibold text-brand">
-                quietly stronger than it looks
-              </span>
-              . That promise applies to every product we ship, including this
-              one.
+                Not for its size — for how it walks.
+              </span>{" "}
+              Patient. Careful with what it carries. Quietly stronger than it
+              looks. That standard applies to every product we ship, including
+              this one.
             </p>
 
             <div className="mt-5 flex items-center gap-3">

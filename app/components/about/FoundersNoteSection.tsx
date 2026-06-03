@@ -28,7 +28,7 @@ const DEFAULTS = {
   founderLocation:    "Trichy, Tamil Nadu",
   founderEmail:       "deepa@magdee.ai",
   founderCoordinates: "",
-  quote:              "We named the company after the elephant — patient, careful with what it carries, and quietly stronger than it looks.",
+  quote:              "We chose the elephant. Not for its size — for how it walks. Patient. Careful with what it carries. Quietly stronger than it looks.",
   documentNote:       "Founders' Note · MagDee Technologies · 2026",
   documentNo:         "Document No. MD-2026-001",
 };

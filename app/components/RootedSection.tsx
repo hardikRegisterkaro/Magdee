@@ -123,12 +123,11 @@ function FoundersCard() {
           Founders&apos; note · 2026
         </p>
         <blockquote className="mt-4 font-display text-[22px] font-medium leading-[1.35] tracking-[-0.01em] text-ink sm:text-[24px]">
-          “We named the company after the elephant — patient, careful with
-          what it carries, and{" "}
+          “We chose the elephant.{" "}
           <span className="italic text-brand">
-            quietly stronger than it looks.
-          </span>
-          ”
+            Not for its size — for how it walks.
+          </span>{" "}
+          Patient. Careful with what it carries. Quietly stronger than it looks.”
         </blockquote>
       </div>
 
