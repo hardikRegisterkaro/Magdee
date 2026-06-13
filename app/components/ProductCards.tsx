@@ -46,16 +46,17 @@ const PRODUCTS: Product[] = [
     },
   },
   {
-    name: "Ellamly",
+    name: "Decodory",
     status: "Coming late 2026",
     active: false,
     popup: {
       badge: "IN DEVELOPMENT",
       badgeColor: "#6d28d9",
-      title: "Ellamly is being built",
+      title: "Decodory is being built",
       description:
-        "Ellamly is still in early development. We're crafting something thoughtful and different — the kind of product that takes time to get right.",
-      note: "Early access details will be shared with our newsletter subscribers first.",
+        "Decode the tech behind everyday life. Solve real-world puzzles — a tea stall during evening rush, a hospital ER, a busy bank — and discover the IT concepts hidden inside them. No code. No jargon. Just decode.",
+      cta: { label: "Join the waitlist →", href: "/decodory" },
+      note: "One puzzle a day. Calibrated against working engineers, not CS freshmen.",
     },
   },
 ];

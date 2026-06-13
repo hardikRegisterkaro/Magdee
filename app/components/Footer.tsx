@@ -4,7 +4,7 @@ const COLUMNS = [
     links: [
       { label: "Meetory", href: "/meetory" },
       { label: "VOChef", href: "/vochef" },
-      { label: "Ellamly", href: "/ellamly" },
+      { label: "Decodory", href: "/decodory" },
       { label: "Pantry (soon)", href: "#pantry" },
     ],
   },

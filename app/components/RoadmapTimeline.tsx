@@ -3,7 +3,7 @@
 import {
   ChefHat,
   Mic,
-  Sparkle,
+  Puzzle,
   Zap,
   type LucideIcon,
 } from "lucide-react";
@@ -41,9 +41,9 @@ const MILESTONES: Milestone[] = [
     quarter: "Q3",
     year: "2026",
     status: "planned",
-    title: "Ellamly",
-    body: "Ambient companion launch. Three languages at v1.",
-    icon: Sparkle,
+    title: "Decodory",
+    body: "Daily IT puzzles for working engineers. Real-world stories. Hidden tech.",
+    icon: Puzzle,
   },
   {
     quarter: "Q4",

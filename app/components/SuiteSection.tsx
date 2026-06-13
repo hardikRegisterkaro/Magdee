@@ -3,6 +3,7 @@ import {
   Check,
   Mic,
   Plus,
+  Puzzle,
   Shield,
   Sparkles,
 } from "lucide-react";
@@ -58,7 +59,7 @@ export default function SuiteSection() {
               <VOChefCard />
             </Reveal>
             <Reveal delay={240} >
-              <EllamlyCard />
+              <DecodoryCard />
             </Reveal>
           </div>
         </div>
@@ -200,7 +201,7 @@ function VOChefCard() {
   );
 }
 
-function EllamlyCard() {
+function DecodoryCard() {
   return (
     <article
       className="transition-transform duration-300 hover:-translate-y-1 relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl p-7 text-white lg:min-h-[270px]"
@@ -221,10 +222,10 @@ function EllamlyCard() {
       <div className="relative flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 backdrop-blur">
-            <Sparkles size={16} />
+            <Puzzle size={16} />
           </span>
           <span className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/85">
-            Your everyday AI companion
+            Real-world stories · Hidden tech
           </span>
         </div>
         <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/85 backdrop-blur">
@@ -234,17 +235,18 @@ function EllamlyCard() {
 
       <div className="relative">
         <h3 className="font-display text-[44px] font-semibold leading-none tracking-[-0.02em] sm:text-[52px]">
-          Ellamly
+          Decodory
         </h3>
         <p className="mt-3 max-w-md text-[14.5px] leading-[1.55] text-white/90">
-          Ambient intelligence for the small, daily decisions — weather,
-          errands, EMIs — in your language, on your terms.
+          Solve real-world puzzles — a tea stall, a hospital ER, a busy
+          bank — and discover the IT concepts hidden inside them. No code.
+          No jargon. Just decode.
         </p>
         <a
-          href="/ellamly"
+          href="/decodory"
           className="cta-magnetic mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[13.5px] font-medium text-ink hover:bg-white/90"
         >
-          Get notified at launch
+          Join the waitlist
           <ArrowRight size={14} />
         </a>
       </div>

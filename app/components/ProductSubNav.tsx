@@ -12,7 +12,7 @@ type Product = {
 const PRODUCTS: Product[] = [
   { name: "VOChef", href: "/vochef", status: "LIVE" },
   { name: "Meetory", href: "/meetory", status: "BETA" },
-  { name: "Ellamly", href: "/ellamly", status: "SOON" },
+  { name: "Decodory", href: "/decodory", status: "SOON" },
 ];
 
 type Props = {

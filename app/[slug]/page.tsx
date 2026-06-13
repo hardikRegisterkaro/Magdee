@@ -11,6 +11,7 @@ import DynamicHowItWorks from "@/app/components/dynamic/HowItWorks";
 import DynamicPricing from "@/app/components/dynamic/Pricing";
 import DynamicIntegrations from "@/app/components/dynamic/Integrations";
 import MeetoryComingSoon from "@/app/components/Meetory/ComingSoon";
+import DecodoryComingSoon from "@/app/components/Decodory/ComingSoon";
 const FinalCTA = dynamic(() => import("../components/VOChef/FinalCTA"));
 const FoundersPromise = dynamic(() => import("../components/dynamic/FoundersPromise"));
 
@@ -22,6 +23,14 @@ const COMING_SOON_FALLBACKS: Record<string, { meta: Metadata; render: () => Reac
         "Meetory is an AI meeting assistant for multilingual teams. Joins your calls, transcribes 10+ languages, and turns conversations into summaries you can find next Tuesday. Private beta opens Q2 2026.",
     },
     render: () => <MeetoryComingSoon />,
+  },
+  decodory: {
+    meta: {
+      title: "Decodory — decode the tech behind everyday life",
+      description:
+        "Solve real-world puzzles — a tea stall, a hospital ER, a busy bank — and discover the IT concepts hidden inside them. No code. No jargon. Daily puzzles for working engineers, launching late 2026.",
+    },
+    render: () => <DecodoryComingSoon />,
   },
 };
 

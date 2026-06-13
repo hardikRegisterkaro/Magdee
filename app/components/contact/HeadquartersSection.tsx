@@ -30,12 +30,12 @@ function renderNeighborhoodHeading(text: string) {
 export default function HeadquartersSection({ data }: Props) {
   const badge = data?.badge || "03 — Headquarters";
   const companyName = data?.companyName || "MagDee Technologies Pvt. Ltd.";
-  const address = data?.address || "Thillai Nagar\nTiruchirappalli — 620 018\nTamil Nadu, India";
+  const address = data?.address || "Tiruchirappalli — 621 210\nTamil Nadu, India";
   const mapsUrl = data?.mapsUrl || "https://maps.google.com/?q=11.15,78.40";
-  const phone = data?.phone || "+91 431 4567 890";
+  const phone = data?.phone || "+91 8310334025";
   const officeHours = data?.hours || "Mon-Fri · 9-7 IST";
-  const neighborhoodHeading = data?.neighborhoodHeading || "Above the *filter coffee* shop.";
-  const neighborhoodDescription = data?.neighborhoodDescription || "Thillai Nagar is one of the older streets in town — wide, tree-lined, never in a hurry. We're on the second floor, behind a heavy teak door, two doors down from a 40-year-old filter coffee shop. You'll smell us before you see us.";
+  const neighborhoodHeading = data?.neighborhoodHeading || "Made in *Tamil Nadu.*";
+  const neighborhoodDescription = data?.neighborhoodDescription || "Trichy is a working city that takes its time. Temple bells in the morning, filter coffee through the day, BHEL engineers walking home at five. We chose it for the patience it asks of every product we ship — and because the city itself never seems to be in a hurry.";
   const mapImgUrl = data?.mapImgUrl || "";
 
   const { ref, visible } = useReveal(0.1);

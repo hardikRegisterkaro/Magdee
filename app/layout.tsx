@@ -13,7 +13,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "MagDee — Intelligence, gently engineered",
   description:
-    "Meetory, VOChef, and Ellamly — three AI products from Trichy. Meeting intelligence in your language, voice-first cooking, and ambient daily-life AI.",
+    "Meetory, VOChef, and Decodory — three products from Trichy. Meeting intelligence in your language, voice-first cooking, and real-world puzzles that decode the tech behind everyday life.",
 };
 
 export default function RootLayout({

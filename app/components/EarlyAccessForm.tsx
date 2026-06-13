@@ -3,7 +3,7 @@
 import { ArrowRight, Check, Mail } from "lucide-react";
 import { useState } from "react";
 
-const PRODUCTS = ["Meetory", "VOChef", "Ellamly"] as const;
+const PRODUCTS = ["Meetory", "VOChef", "Decodory"] as const;
 type Product = (typeof PRODUCTS)[number];
 type Status = "idle" | "loading" | "success" | "error";
 

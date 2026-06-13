@@ -37,7 +37,7 @@ export default function HeadquartersSection({ aboutSection }: Props) {
     ? description.split(/\n\n+/).filter(Boolean)
     : [
         "We chose Trichy — a temple city with deep engineering roots from BHEL and the Cauvery delta — because it teaches you to make things that hold up. Patient AI is what happens when craft culture meets a noisy industry that's forgotten how to slow down.",
-        "Two founders. One floor above a filter coffee shop. A short walk from the Rockfort temple, and minutes from where one co-founder first learned to weave a saree.",
+        "Two founders. A city that takes its time — temple bells in the morning, filter coffee through the day, BHEL engineers walking home at five. The kind of place that teaches you to make things that last.",
       ];
 
   const { ref, visible } = useReveal(0.08);
@@ -203,8 +203,8 @@ function TrichyPostcard() {
             — A note
           </p>
           <p className="mt-5 font-display text-[20px] font-medium leading-[1.4] text-ink sm:text-[22px]">
-            From the second floor,<br />
-            above the filter coffee shop.
+            Posted from Trichy.<br />
+            Old city. Quiet software.
           </p>
           <p className="mt-4 font-display text-[15px] italic leading-[1.5] text-ink-soft sm:text-[16px]">
             With patience, with craft, and the long view.

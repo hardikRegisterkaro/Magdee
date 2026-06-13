@@ -5,7 +5,7 @@ import { useReveal } from "@/app/hooks/useReveal";
 import type { Inbox } from "@/app/lib/fetchContactPage";
 
 const DEFAULT_INBOXES: Inbox[] = [
-  { label: "Product", email: "product@magdee.ai", detail: "Meetory, VOChef, Ellamly — feedback, bugs, feature requests", personName: "Vivek", personInitial: "V" },
+  { label: "Product", email: "product@magdee.ai", detail: "Meetory, VOChef, Decodory — feedback, bugs, feature requests", personName: "Vivek", personInitial: "V" },
   { label: "Press", email: "press@magdee.ai", detail: "Interviews, embargoed news, press kit downloads", personName: "Vikram", personInitial: "V" },
   { label: "Partnerships", email: "partners@magdee.ai", detail: "Integrations, distribution, enterprise inquiries", personName: "Vivek", personInitial: "V" },
   { label: "Careers", email: "careers@magdee.ai", detail: "Job applications, internships, contract work", personName: "Vikram", personInitial: "V" },
