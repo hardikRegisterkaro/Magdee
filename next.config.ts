@@ -1,11 +1,18 @@
 import type { NextConfig } from "next";
 
-const LEGAL_ALIASES = [
+// Aliases that REDIRECT to /terms — browser URL updates to /terms.
+const LEGAL_REDIRECT_ALIASES = [
   "/privacy",
   "/privacy-policy",
-  "/privacy-policy-2",
   "/terms-and-conditions",
   "/terms-of-service",
+];
+
+// Aliases that REWRITE to /terms — browser URL stays as the original path.
+// Use this when an external party (Play Store listing, partner contract, etc.)
+// expects to keep seeing the literal URL.
+const LEGAL_REWRITE_ALIASES = [
+  "/privacy-policy-2",
 ];
 
 const nextConfig: NextConfig = {
@@ -18,10 +25,16 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    return LEGAL_ALIASES.map((source) => ({
+    return LEGAL_REDIRECT_ALIASES.map((source) => ({
       source,
       destination: "/terms",
       permanent: true,
+    }));
+  },
+  async rewrites() {
+    return LEGAL_REWRITE_ALIASES.map((source) => ({
+      source,
+      destination: "/terms",
     }));
   },
 };
